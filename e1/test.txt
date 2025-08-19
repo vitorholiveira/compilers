@@ -1,0 +1,15 @@
+tipo
+var
+senao
+decimal
+se
+inteiro
+retorna
+enquanto
+com
+<=
+>=
+==
+!=
+:=
+->
