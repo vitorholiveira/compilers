@@ -1,0 +1,1 @@
+flex scanner.l ; gcc lex.yy.c -c ; gcc main.c -c ; gcc main.o lex.yy.o -o e1 ; cat test.txt | ./e1
