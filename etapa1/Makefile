@@ -17,7 +17,7 @@ $(MAIN_OBJ): $(MAIN_SRC)
 	@$(CC) -c $(MAIN_SRC)
 
 $(LEX_OBJ): $(LEX_SRC)
-	flex $(LEX_SRC)
+	@flex $(LEX_SRC)
 	@$(CC) -c $(LEX_GEN)
 
 clean:
