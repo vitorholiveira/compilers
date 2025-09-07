@@ -10,5 +10,6 @@ int main (int argc, char **argv)
 {
   int ret = yyparse();
   yylex_destroy();
+  printf("Terminou com status: %d\n", ret);
   return ret;
 }

@@ -4,6 +4,7 @@ int yylex(void);
 void yyerror (char const *mensagem);
 
 %}
+%define parse.trace
 %define parse.error verbose 
 %token TK_TIPO
 %token TK_VAR
@@ -26,9 +27,9 @@ void yyerror (char const *mensagem);
 %token TK_ER
 
 %%
-programa: %empty;
 
+programa:  TK_TIPO ';';
 %%
-void yyerror (char const *mensagem){
-    printf("O erro encontrado foi %s\n", mensagem);
-}   
+void yyerror(const char *msg) {
+    fprintf(stderr, "Erro na linha: %s\n", msg);
+}
