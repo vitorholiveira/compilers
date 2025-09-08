@@ -28,5 +28,11 @@ $(LEX_C): $(LEX_SRC) $(YACC_H)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
+# Limpa os arquivos 
 clean:
 	rm -f $(TARGET) *.o lex.yy.c parser.tab.c parser.tab.h parser.output
+
+# Roda o teste automaticamente
+run: $(TARGET)
+	cat arquivo_teste.txt | ./$(TARGET)
+
