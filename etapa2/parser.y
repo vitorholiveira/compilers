@@ -70,7 +70,7 @@ metros
 */
 
 parametros_funcao: %empty; 
-parametros_funcao: TK_COM ',' lista_params ;
+parametros_funcao: TK_COM lista_params ;
 parametros_funcao: lista_params; // sem token opcional TK_COM
 
 /*
@@ -79,7 +79,7 @@ parametros_funcao: lista_params; // sem token opcional TK_COM
  ken TK_INTEIRO ou do token TK_DECIMAL
 */
 
-lista_params: param;
+lista_params: lista_params ',' param | param;
 param: TK_ID TK_ATRIB opcao_param;
 opcao_param: TK_INTEIRO | TK_DECIMAL;
 
@@ -161,7 +161,25 @@ termino_retorno: TK_DECIMAL | TK_INTEIRO;
  construção iterativa para controle estruturado de
  fluxo.
 */
-fluxo_controle: %empty;
+
+fluxo_controle: fluxo_condicional | fluxo_iterativo;
+
+/*
+ A condicional consiste no token TK_SE seguido 
+ de uma expressão entre parênteses e então por 
+ um bloco de comandos obrigatório
+*/
+
+fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos fluxo_condicional_else;
+fluxo_condicional_else: %empty | TK_SENAO bloco_de_comandos
+
+/*
+ Temos apenas uma construção de repetição que é o 
+ token TK_ENQUANTO seguido de uma expressão entre 
+ parênteses e de um bloco de comandos.
+*/
+
+fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos;
 
 // EXPRESSOES
 /*
@@ -172,23 +190,55 @@ fluxo_controle: %empty;
  tradicional.
 */
 
-expressao: '(' expressao ')' | operando operador;
+/* Nível mais alto: operador OR '|' */
+expr_or: expr_or '|' expr_and | expr_and;
 
-/*
- Os operandos podem ser
- identificadores, literais e chamada de função ou
- outras expressões, podendo portanto ser formadas
- recursivamente pelo emprego de operadores.
-*/
-operando: expressao | TK_ID | TK_LI_DECIMAL | TK_LI_INTEIRO | declaracao_funcao;
+/* Nível AND '&' */
+expr_and: expr_and '&' expr_eq | expr_eq;
 
+/* Nível de igualdade ==, != */
+expr_eq: expr_eq TK_OC_EQ expr_rel
+    | expr_eq TK_OC_NE expr_rel
+    | expr_rel;
 
-operador: %empty | unario_prefixado | binario_prefixado;
-unario_prefixado: '+' | '-' | '!'; // soma, inverter sinal, negação lógica
-binario_prefixado: '*' aux_atrib | '/' aux_atrib | '%' aux_atrib | '+' aux_atrib | '-' aux_atrib;
-aux_atrib: %empty | TK_ATRIB; // Pequeno truque para definir os operadores compostos de maneira simples
+/* Nível relacional <, >, <=, >= */
+expr_rel: expr_rel '<' expr_add
+    | expr_rel '>' expr_add
+    | expr_rel TK_OC_LE expr_add
+    | expr_rel TK_OC_GE expr_add
+    | expr_add;
 
-%%
+/* Nível adição e subtração binária +, - com operadores compostos */
+expr_add: expr_add '+' expr_mul aux_atrib
+    | expr_add '-' expr_mul aux_atrib
+    | expr_mul;
+
+/* Nível multiplicação, divisão e resto * / % com operadores compostos */
+expr_mul: expr_mul '*' expr_unario aux_atrib
+    | expr_mul '/' expr_unario aux_atrib
+    | expr_mul '%' expr_unario aux_atrib
+    | expr_unario;
+
+/* Operadores unários prefixados */
+expr_unario: '+' expr_unario
+    | '-' expr_unario
+    | '!' expr_unario
+    | expr_prim;
+
+/* Operandos: identificadores, literais, chamada de função, parênteses */
+expr_prim: TK_ID
+    | TK_LI_INTEIRO
+    | TK_LI_DECIMAL
+    | chamada_funcao
+    | '(' expressao ')'   /* força precedência */
+    ;
+
+/* Truque para operadores compostos */
+aux_atrib: %empty | TK_ATRIB;
+
+/* Expressão principal apontando para o nível mais alto */
+expressao: expr_or;
+
 void yyerror(const char *msg) {
     fprintf(stderr, "Erro na linha: %s\n", msg);
 }
