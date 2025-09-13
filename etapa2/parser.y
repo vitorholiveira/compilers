@@ -117,7 +117,7 @@ literal pode ser ou o token TK_LI_INTEIRO ou o
 token TK_LI_DECIMAL.
 */
 
-declaracao_variavel: TK_VAR TK_ID TK_ATRIB TK_TIPO opcao_tipo;
+declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo;
 opcao_tipo: TK_INTEIRO | TK_DECIMAL;
 
 // Outra possível inicializacao
