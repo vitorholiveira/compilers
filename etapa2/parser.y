@@ -156,19 +156,21 @@ comando_retorno: TK_RETORNA expressao TK_ATRIB termino_retorno;
 termino_retorno: TK_DECIMAL | TK_INTEIRO;
 
 /*
-Comandos de Controle de Fluxo: A linguagem possui
-uma construção condicional e uma construção iterativa
-para controle estruturado de fluxo. A condicional
-consiste no token TK_SE seguido de uma expressão entre
-parênteses e então por um bloco de comandos obrigatório.
-Após este bloco, podemos opcionalmente ter o token TK_SENAO
-que, quando aparece, é seguido obrigatoriamente por um
-bloco de comandos. Temos apenas uma construção de repetição
-que é o token TK_ENQUANTO seguido de uma expressão entre
-parênteses e de um bloco de comandos.
+ A condicional consiste no token TK_SE seguido 
+ de uma expressão entre parênteses e então por 
+ um bloco de comandos obrigatório
 */
-fluxo_controle: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_comandos;
-construcao_repeticao: TK_ENQUANTO '(' expressao ')' bloco_de_comandos;
+
+fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos fluxo_condicional_else;
+fluxo_condicional_else: %empty | TK_SENAO bloco_de_comandos
+
+/*
+ Temos apenas uma construção de repetição que é o 
+ token TK_ENQUANTO seguido de uma expressão entre 
+ parênteses e de um bloco de comandos.
+*/
+
+fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos;
 
 // EXPRESSOES
 /*
