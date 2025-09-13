@@ -59,8 +59,8 @@ por uma lista opcional de parâmetros seguido do
 token TK_ATRIB.
 */
 
-declaracao_funcao: TK_ID TK_SETA corpo_funcao parametros_funcao TK_ATRIB;
-corpo_funcao: TK_DECIMAL | TK_INTEIRO;
+declaracao_funcao: TK_ID TK_SETA opcao_funcao parametros_funcao TK_ATRIB;
+opcao_funcao: TK_DECIMAL | TK_INTEIRO;
 
 /*
 A lista de parâmetros, quando
@@ -70,7 +70,7 @@ metros
 */
 
 parametros_funcao: %empty; 
-parametros_funcao: TK_COM ',' lista_params ;
+parametros_funcao: TK_COM lista_params ;
 parametros_funcao: lista_params; // sem token opcional TK_COM
 
 /*
@@ -79,7 +79,7 @@ parametros_funcao: lista_params; // sem token opcional TK_COM
  ken TK_INTEIRO ou do token TK_DECIMAL
 */
 
-lista_params: param;
+lista_params: param | lista_params ',' param;
 param: TK_ID TK_ATRIB opcao_param;
 opcao_param: TK_INTEIRO | TK_DECIMAL;
 
