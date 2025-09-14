@@ -1,1 +1,3 @@
 *.o
+*/parser.tab*
+*/lex.yy*
