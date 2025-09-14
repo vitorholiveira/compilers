@@ -1,1 +1,0 @@
-oi -> decimal com e1 := inteiro, e2 := decimal := [var e1 := decimal com 2 var e2 -> inteiro com 3.5 se (e1+e2 > 5) []];

@@ -1,0 +1,11 @@
+var a := inteiro,
+var b := inteiro,
+var c := inteiro,
+
+func -> decimal e1 := decimal, e2 := decimal := [
+    se (e1 > e2) [
+        retorna e1 := decimal
+    ] senao [
+        retorna e2 := decimal
+    ]
+];
