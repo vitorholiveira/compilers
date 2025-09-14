@@ -1,7 +1,7 @@
 CC    = gcc
 LEX   = flex
 YACC  = bison
-CFLAGS = -Wall -g
+CFLAGS = -w -g
 
 LEX_SRC  = scanner.l
 YACC_SRC = parser.y

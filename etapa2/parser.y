@@ -152,8 +152,7 @@ uma expressão. Uma chamada de função pode
 existir sem argumentos.
 */
 
-chamada_funcao: TK_ID '(' argumentos ')';
-argumentos: %empty;
+chamada_funcao: TK_ID '(' argumentos ')' | TK_ID '('')';
 argumentos: expressao ',' argumentos | expressao;
 
 /*
