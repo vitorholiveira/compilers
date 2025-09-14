@@ -29,9 +29,6 @@ com                   { return TK_COM; }
 ->                    { return TK_SETA; }
 var                   { return TK_VAR; }
 [_a-z][_a-z0-9]*      { return TK_ID; }
+\n                    { yylineno++; }
 .                     { return TK_ER; }
 %%
-
-int get_line_number() {
-    return yylineno;
-}

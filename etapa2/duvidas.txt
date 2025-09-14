@@ -1,0 +1,2 @@
+TK_COM na função é necessário?
+a := inteiro com 2.5          => isso pode? declarei a como inteiro mas inicializei com decimal
