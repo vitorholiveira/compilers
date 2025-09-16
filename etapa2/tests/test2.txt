@@ -11,7 +11,7 @@ func1 -> inteiro com e1 := decimal, e2 := decimal := [
 ],
 
 func -> inteiro com e1 := decimal, e2 := decimal := [
-    func1(e1,e2)
+    func1(e1,e2,)
     se (e1 > e2) [
         retorna e1 := decimal
     ] senao [
