@@ -7,7 +7,6 @@ extern int yylineno;
 %}
 %define parse.trace
 %define parse.error verbose 
-%token TK_TIPO
 %token TK_VAR
 %token TK_SENAO
 %token TK_DECIMAL
@@ -25,7 +24,6 @@ extern int yylineno;
 %token TK_ID
 %token TK_LI_INTEIRO
 %token TK_LI_DECIMAL
-%token TK_ER
 
 %%
 /*
@@ -209,14 +207,14 @@ expr_rel: expr_rel '<' expr_add
     | expr_add;
 
 /* Nível adição e subtração binária +, - com operadores compostos */
-expr_add: expr_add '+' expr_mul aux_atrib
-    | expr_add '-' expr_mul aux_atrib
+expr_add: expr_add '+' expr_mul
+    | expr_add '-' expr_mul
     | expr_mul;
 
 /* Nível multiplicação, divisão e resto * / % com operadores compostos */
-expr_mul: expr_mul '*' expr_unario aux_atrib
-    | expr_mul '/' expr_unario aux_atrib
-    | expr_mul '%' expr_unario aux_atrib
+expr_mul: expr_mul '*' expr_unario
+    | expr_mul '/' expr_unario
+    | expr_mul '%' expr_unario
     | expr_unario;
 
 /* Operadores unários prefixados */
@@ -233,8 +231,6 @@ expr_prim: TK_ID
     | '(' expressao ')'   /* força precedência */
     ;
 
-/* Truque para operadores compostos */
-aux_atrib: %empty | TK_ATRIB;
 
 /* Expressão principal apontando para o nível mais alto */
 expressao: expr_or;
