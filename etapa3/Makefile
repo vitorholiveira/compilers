@@ -10,9 +10,9 @@ LEX_C  = lex.yy.c
 YACC_C  = parser.tab.c
 YACC_H  = parser.tab.h
 
-OBJS = parser.tab.o lex.yy.o main.o asd.o grammar_callbacks.o
+OBJS = parser.tab.o lex.yy.o main.o asd.o
 
-TARGET = etapa2
+TARGET = etapa3
 
 all: $(TARGET)
 
@@ -33,4 +33,4 @@ clean:
 	rm -f $(TARGET) *.o lex.yy.c parser.tab.c parser.tab.h parser.output
 
 tgz:
-	tar -czvf etapa2.tgz main.c parser.y scanner.l asd.c asd.h grammar_callbacks.c grammar_callbacks.h Makefile
+	tar -czvf etapa3.tgz main.c parser.y scanner.l asd.c asd.h Makefile

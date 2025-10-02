@@ -5,7 +5,7 @@
 int yylex(void);
 void yyerror (char const *mensagem);
 extern int yylineno;
-extern asd_tree_t *tree;
+extern asd_tree_t *arvore;
 
 %}
 %define parse.trace
@@ -40,7 +40,7 @@ extern asd_tree_t *tree;
 %type <arvore> lista elemento opcao_tipo declaracao_variavel definicao_funcao parametros_funcao lista_params
 %type <arvore> comandos_simples bloco_de_comandos sequencia_comandos_simples declaracao_variavel_comando_simples
 %type <arvore> literais comando_atribuicao argumentos chamada_funcao comando_retorno
-%type <arvore> fluxo_condicional fluxo_condicional_senao fluxo_iterativo
+%type <arvore> fluxo_condicional fluxo_iterativo
 %type <arvore> expr_or expr_and expr_eq expr_rel expr_add expr_mul expr_unario expr_prim expressao
 
 %define parse.error verbose 
@@ -51,8 +51,8 @@ extern asd_tree_t *tree;
 COMMANDS
 */
 
-programa: %empty { tree = NULL; };
-programa: lista ';' { tree = $1; };
+programa: %empty { arvore = NULL; };
+programa: lista ';' { arvore = $1; };
 lista: elemento { $$ = $1; }
     | lista ',' elemento { 
     if($3 == NULL){
@@ -109,7 +109,6 @@ COMMAND BLOCK
 
 bloco_de_comandos: '[' sequencia_comandos_simples ']' { $$ = $2; }
     | '[' ']' { $$ = NULL; }
-    | sequencia_comandos_simples { $$ = $1; }
     ;
 sequencia_comandos_simples: sequencia_comandos_simples comandos_simples {
     if($1 == NULL){
@@ -183,18 +182,22 @@ comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo {
 IF ELSE
 */
 
-fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos fluxo_condicional_senao {
+fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
     $$ = asd_new("se", NULL);
     asd_add_child($$, $3);
     if($5 != NULL){
         asd_add_child($$, $5);
     }
-    if($6 != NULL){
-        asd_add_child($$, $6);
-    }
 };
-fluxo_condicional_senao: %empty { $$ = NULL; }
-    | TK_SENAO bloco_de_comandos { $$ = $2; }
+
+fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_comandos{
+    $$ = asd_new("se", NULL);
+    asd_add_child($$, $3);
+    if($5 != NULL){
+        asd_add_child($$, $5);
+    }
+    asd_add_child($$, $7);
+};
 
 /*
 WHILE
