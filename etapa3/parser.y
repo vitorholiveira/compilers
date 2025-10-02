@@ -2,10 +2,19 @@
 #include <stdio.h>
 #include "asd.h"
 #include <string.h>
+#include <stdlib.h>
 int yylex(void);
 void yyerror (char const *mensagem);
 extern int yylineno;
 extern asd_tree_t *arvore;
+
+// Função auxiliar para liberar lex_value_t
+void free_lex_value(lex_value_t* lv) {
+    if (lv) {
+        if (lv->value) free(lv->value);
+        free(lv);
+    }
+}
 
 %}
 %define parse.trace
@@ -71,24 +80,35 @@ elemento: definicao_funcao { $$ = $1; }
 opcao_tipo: TK_INTEIRO { $$ = NULL; }
     | TK_DECIMAL { $$ = NULL; };
 
-declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo { $$ = NULL; free($2->value); free($2); };
+declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo { 
+    $$ = NULL; 
+    free_lex_value($2);
+};
 
 /*
 FUNCTION DECLARATION
 */
 definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_comandos {
     $$ = asd_new($1->value, $1);
-    if($4 != NULL){ 
+    // Se há parâmetros, adicione-os (se você implementar isso no futuro)
+    // if($4 != NULL) asd_add_child($$, $4);
+    if($6 != NULL){ 
         asd_add_child($$, $6);
     }
 };
 
 parametros_funcao: %empty { $$ = NULL; }
     | TK_COM lista_params { $$ = NULL; }
-    | lista_params{ $$ = NULL; }; // sem token opcional TK_COM
+    | lista_params { $$ = NULL; }; // sem token opcional TK_COM
 
-lista_params: TK_ID TK_ATRIB opcao_tipo { free($1->value); free($1); };
-    | lista_params ',' TK_ID TK_ATRIB opcao_tipo { $$ = NULL; };
+lista_params: TK_ID TK_ATRIB opcao_tipo { 
+    $$ = NULL;
+    free_lex_value($1);
+}
+    | lista_params ',' TK_ID TK_ATRIB opcao_tipo { 
+        $$ = NULL; 
+        free_lex_value($3);
+    };
 
 /*
 SIMPLE COMMANDS
@@ -130,11 +150,18 @@ declaracao_variavel_comando_simples: declaracao_variavel {$$ = $1;};
 declaracao_variavel_comando_simples: TK_VAR TK_ID TK_ATRIB opcao_tipo TK_COM literais {
     $$ = asd_new("com", NULL);
     asd_add_child($$, asd_new($2->value, $2));
-    asd_add_child($$, $6);
+    if($6 != NULL) {
+        asd_add_child($$, $6);
+    }
 };
 
-literais : TK_LI_INTEIRO {$$ = NULL;}
-    | TK_LI_DECIMAL {$$ = NULL;};
+literais : TK_LI_INTEIRO {
+    $$ = asd_new($1->value, $1);
+}
+    | TK_LI_DECIMAL {
+        $$ = asd_new($1->value, $1);
+    };
+
 /*
 ATRIB
 */
@@ -158,9 +185,11 @@ chamada_funcao: TK_ID '(' argumentos ')' {
     $$ = asd_new(buffer, $1);
     free(buffer);
 
-    asd_add_child($$, $3);
+    if($3 != NULL) {
+        asd_add_child($$, $3);
+    }
 };
-chamada_funcao: TK_ID '('')'{
+chamada_funcao: TK_ID '(' ')' {
     // "call TK_ID" string
     int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
@@ -168,15 +197,23 @@ chamada_funcao: TK_ID '('')'{
 
     $$ = asd_new(buffer, $1);
     free(buffer);
- }; 
-argumentos: expressao ',' argumentos { asd_add_child($$, $3); $$ = $1; };
+}; 
+
+argumentos: expressao ',' argumentos { 
+    if($1 != NULL && $3 != NULL) {
+        asd_add_child($1, $3);
+    }
+    $$ = $1; 
+}
     | expressao { $$ = $1; };
 
 
 comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo { 
     $$ = asd_new("retorna", NULL); 
-    asd_add_child($$, $2);
-};; 
+    if($2 != NULL) {
+        asd_add_child($$, $2);
+    }
+}; 
 
 /*
 IF ELSE
@@ -184,7 +221,9 @@ IF ELSE
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
     $$ = asd_new("se", NULL);
-    asd_add_child($$, $3);
+    if($3 != NULL) {
+        asd_add_child($$, $3);
+    }
     if($5 != NULL){
         asd_add_child($$, $5);
     }
@@ -192,11 +231,15 @@ fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_comandos{
     $$ = asd_new("se", NULL);
-    asd_add_child($$, $3);
+    if($3 != NULL) {
+        asd_add_child($$, $3);
+    }
     if($5 != NULL){
         asd_add_child($$, $5);
     }
-    asd_add_child($$, $7);
+    if($7 != NULL) {
+        asd_add_child($$, $7);
+    }
 };
 
 /*
@@ -205,7 +248,9 @@ WHILE
 
 fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos { 
     $$ = asd_new("enquanto", NULL); 
-    asd_add_child($$, $3);
+    if($3 != NULL) {
+        asd_add_child($$, $3);
+    }
     if($5 != NULL){
         asd_add_child($$, $5);
     }
@@ -216,41 +261,102 @@ EXPRESSIONS
 */
 
 /* Nível mais alto: operador OR '|' */
-expr_or: expr_or '|' expr_and { $$ = asd_new("|", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_or: expr_or '|' expr_and { 
+    $$ = asd_new("|", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
     | expr_and { $$ = $1; };
 
 /* Nível AND '&' */
-expr_and: expr_and '&' expr_eq { $$ = asd_new("&", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_and: expr_and '&' expr_eq { 
+    $$ = asd_new("&", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
     | expr_eq { $$ = $1; };
 
 /* Nível de igualdade ==, != */
-expr_eq: expr_eq TK_OC_EQ expr_rel { $$ = asd_new("==", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_eq TK_OC_NE expr_rel { $$ = asd_new("!=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_eq: expr_eq TK_OC_EQ expr_rel { 
+    $$ = asd_new("==", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
+    | expr_eq TK_OC_NE expr_rel { 
+        $$ = asd_new("!=", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
     | expr_rel { $$ = $1; };
 
 /* Nível relacional <, >, <=, >= */
-expr_rel: expr_rel '<' expr_add { $$ = asd_new("<", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_rel '>' expr_add { $$ = asd_new(">", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_rel TK_OC_LE expr_add { $$ = asd_new("<=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_rel TK_OC_GE expr_add { $$ = asd_new(">=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_rel: expr_rel '<' expr_add { 
+    $$ = asd_new("<", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
+    | expr_rel '>' expr_add { 
+        $$ = asd_new(">", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
+    | expr_rel TK_OC_LE expr_add { 
+        $$ = asd_new("<=", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
+    | expr_rel TK_OC_GE expr_add { 
+        $$ = asd_new(">=", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
     | expr_add { $$ = $1; };
 
 /* Nível adição e subtração binária +, - com operadores compostos */
-expr_add: expr_add '+' expr_mul { $$ = asd_new("+", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_add '-' expr_mul { $$ = asd_new("-", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_add: expr_add '+' expr_mul { 
+    $$ = asd_new("+", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
+    | expr_add '-' expr_mul { 
+        $$ = asd_new("-", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
     | expr_mul { $$ = $1; };
 
 /* Nível multiplicação, divisão e resto * / % com operadores compostos */
-expr_mul: expr_mul '*' expr_unario { $$ = asd_new("*", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_mul '/' expr_unario { $$ = asd_new("/", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
-    | expr_mul '%' expr_unario { $$ = asd_new("%", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+expr_mul: expr_mul '*' expr_unario { 
+    $$ = asd_new("*", NULL);
+    if($1 != NULL) asd_add_child($$, $1);
+    if($3 != NULL) asd_add_child($$, $3);
+}
+    | expr_mul '/' expr_unario { 
+        $$ = asd_new("/", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
+    | expr_mul '%' expr_unario { 
+        $$ = asd_new("%", NULL);
+        if($1 != NULL) asd_add_child($$, $1);
+        if($3 != NULL) asd_add_child($$, $3);
+    }
     | expr_unario { $$ = $1; };
 
 /* Operadores unários prefixados */
-expr_unario: '+' expr_unario { $$ = asd_new("+", NULL); asd_add_child($$, $2);}
-    | '-' expr_unario { $$ = asd_new("-", NULL); asd_add_child($$, $2);}
-    | '!' expr_unario { $$ = asd_new("!", NULL); asd_add_child($$, $2);}
-    | expr_prim;
+expr_unario: '+' expr_unario { 
+    $$ = asd_new("+", NULL);
+    if($2 != NULL) asd_add_child($$, $2);
+}
+    | '-' expr_unario { 
+        $$ = asd_new("-", NULL);
+        if($2 != NULL) asd_add_child($$, $2);
+    }
+    | '!' expr_unario { 
+        $$ = asd_new("!", NULL);
+        if($2 != NULL) asd_add_child($$, $2);
+    }
+    | expr_prim { $$ = $1; };
 
 /* Operandos: identificadores, literais, chamada de função, parênteses */
 expr_prim: TK_ID { $$ = asd_new($1->value, $1); }

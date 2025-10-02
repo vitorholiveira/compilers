@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "asd.h"
+#define ARQUIVO_SAIDA "saida.dot"
 
 asd_tree_t *asd_new(const char *label, lex_value_t *lex_value)
 {
@@ -83,11 +84,15 @@ static void _asd_print_graphviz (FILE *foutput, asd_tree_t *tree)
 
 void asd_print_graphviz(asd_tree_t *tree)
 {
-  FILE *foutput = stdout;
+  FILE *foutput = fopen(ARQUIVO_SAIDA, "w+");
+  if(foutput == NULL){
+    printf("Erro: %s não pude abrir o arquivo [%s] para escrita.\n", __FUNCTION__, ARQUIVO_SAIDA);
+  }
   if (tree != NULL){
     fprintf(foutput, "digraph grafo {\n");
     _asd_print_graphviz(foutput, tree);
     fprintf(foutput, "}\n");
+    fclose(foutput);
   }else{
     printf("Erro: %s recebeu parâmetro tree = %p.\n", __FUNCTION__, tree);
   }

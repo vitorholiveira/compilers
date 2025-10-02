@@ -34,13 +34,15 @@ var                   { return TK_VAR; }
 :=                    { return TK_ATRIB; } 
 ->                    { return TK_SETA; }
 
-.                     { return TK_ER; }
 
     /* IDS AND LITERALS */
 [_a-z][_a-z0-9]*      { create_lex_value(ID); return TK_ID; }
 [0-9]+                { create_lex_value(LI); return TK_LI_INTEIRO; }
 [0-9]+\.[0-9]+        { create_lex_value(LI); return TK_LI_DECIMAL; }   /* 3.14 */
 \.[0-9]+              { create_lex_value(LI); return TK_LI_DECIMAL; }   /* .5 */
+
+.                     { return TK_ER; }
+
 %%
 
 void create_lex_value(int type){
