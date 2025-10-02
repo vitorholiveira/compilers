@@ -1,17 +1,17 @@
 %{
     #include "parser.tab.h"
+    #include "asd.h"
+    void create_lex_value(int type);
 %}
 
-%option noyywrap
-%option yylineno 
+%option noyywrap yylineno noinput nounput
 
+    /* IGNORE */
 %%
-[ \t\n\r]+            /* ignora espaços em branco */
+[ \t\n\r]+  // white spaces
+\/\/.*      // comments
 
-\/\/.*                /* ignora comentários de linha */
-[0-9]+                { return TK_LI_INTEIRO; }
-[0-9]+\.[0-9]+        { return TK_LI_DECIMAL; }   /* 3.14 */
-\.[0-9]+              { return TK_LI_DECIMAL; }   /* .5 */
+    /* KEYWORDS */
 tipo                  { return TK_TIPO; }
 senao                 { return TK_SENAO; }
 decimal               { return TK_DECIMAL; }
@@ -20,14 +20,32 @@ inteiro               { return TK_INTEIRO; }
 retorna               { return TK_RETORNA; }
 enquanto              { return TK_ENQUANTO; }
 com                   { return TK_COM; }
+var                   { return TK_VAR; }
+
+
+    /* 1 CHAR OPERATORS */
 [!\*\/%+\-<>\[\]\(\)=,;&|] { return (int)yytext[0]; }
+
+    /* 2 CHAR OPERATORS */
 ==                    { return TK_OC_EQ; }
 "<="                  { return TK_OC_LE; }
 ">="                  { return TK_OC_GE; }
 !=                    { return TK_OC_NE; }
 :=                    { return TK_ATRIB; } 
 ->                    { return TK_SETA; }
-var                   { return TK_VAR; }
-[_a-z][_a-z0-9]*      { return TK_ID; }
+
 .                     { return TK_ER; }
+
+    /* IDS AND LITERALS */
+[_a-z][_a-z0-9]*      { create_lex_value(ID); return TK_ID; }
+[0-9]+                { create_lex_value(LI); return TK_LI_INTEIRO; }
+[0-9]+\.[0-9]+        { create_lex_value(LI); return TK_LI_DECIMAL; }   /* 3.14 */
+\.[0-9]+              { create_lex_value(LI); return TK_LI_DECIMAL; }   /* .5 */
 %%
+
+void create_lex_value(int type){
+    yylval.valor_lexico = malloc(sizeof(lex_value_t));
+    yylval.valor_lexico->line = yylineno;
+    yylval.valor_lexico->type = type;
+    yylval.valor_lexico->value = strdup(yytext);
+}

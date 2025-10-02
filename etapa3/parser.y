@@ -1,12 +1,14 @@
 %{
 #include <stdio.h>
+#include "asd.h"
+#include <string.h>
 int yylex(void);
 void yyerror (char const *mensagem);
 extern int yylineno;
+extern asd_tree_t *tree;
 
 %}
 %define parse.trace
-%define parse.error verbose 
 %token TK_VAR
 %token TK_SENAO
 %token TK_DECIMAL
@@ -21,214 +23,238 @@ extern int yylineno;
 %token TK_OC_GE
 %token TK_OC_EQ
 %token TK_OC_NE
-%token TK_ID
-%token TK_LI_INTEIRO
-%token TK_LI_DECIMAL
+%token TK_ER
+%token TK_TIPO
+%code requires { #include "asd.h" }
 
+%union {
+    char* str;
+    lex_value_t* valor_lexico;
+    asd_tree_t* arvore;
+}
+
+%token <valor_lexico> TK_ID
+%token <valor_lexico> TK_LI_INTEIRO
+%token <valor_lexico> TK_LI_DECIMAL
+
+%type <arvore> lista elemento opcao_tipo declaracao_variavel definicao_funcao parametros_funcao lista_params
+%type <arvore> comandos_simples bloco_de_comandos sequencia_comandos_simples declaracao_variavel_comando_simples
+%type <arvore> literais comando_atribuicao argumentos chamada_funcao comando_retorno
+%type <arvore> fluxo_condicional fluxo_condicional_senao fluxo_iterativo
+%type <arvore> expr_or expr_and expr_eq expr_rel expr_add expr_mul expr_unario expr_prim expressao
+
+%define parse.error verbose 
+%start programa
 %%
-/*
-Um programa na linguagem é composto por uma
-lista opcional de elementos. Os elementos da lista
-são separados pelo operador vírgula e a lista é ter-
-minada pelo operador ponto-e-vírgula
-*/
-
-programa: %empty;
-programa: lista ';' ;
-lista: elemento | lista ',' elemento;
 
 /*
-Cada elemento dessa lista é ou uma definição 
-de função ou uma declaração de variável
+COMMANDS
 */
 
-elemento: definicao_funcao | declaracao_variavel;
+programa: %empty { tree = NULL; };
+programa: lista ';' { tree = $1; };
+lista: elemento { $$ = $1; }
+    | lista ',' elemento { 
+    if($3 == NULL){
+        $$ = $1;
+    }else {
+        if($1 != NULL){
+            asd_add_child($3, $1);
+        }
+        $$ = $3;
+    }
+};
+
+elemento: definicao_funcao { $$ = $1; }
+    | declaracao_variavel { $$ = $1; };
+
+opcao_tipo: TK_INTEIRO { $$ = NULL; }
+    | TK_DECIMAL { $$ = NULL; };
+
+declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo { $$ = NULL; free($2->value); free($2); };
 
 /*
-Aqui temos a opção de tipo, algo que se repete muito
-na gramática. Usamos ela quando se espera um token
-inteiro ou um token decimal.
+FUNCTION DECLARATION
 */
-opcao_tipo: TK_INTEIRO | TK_DECIMAL;
+definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_comandos {
+    $$ = asd_new($1->value, $1);
+    if($4 != NULL){ 
+        asd_add_child($$, $6);
+    }
+};
+
+parametros_funcao: %empty { $$ = NULL; }
+    | TK_COM lista_params { $$ = NULL; }
+    | lista_params{ $$ = NULL; }; // sem token opcional TK_COM
+
+lista_params: TK_ID TK_ATRIB opcao_tipo { free($1->value); free($1); };
+    | lista_params ',' TK_ID TK_ATRIB opcao_tipo { $$ = NULL; };
 
 /*
-Declaração variável: Consiste no token
-TK_VAR seguido do token TK_ID, que é por sua
-vez seguido do token TK_ATRIB e enfim seguido
-do tipo. O tipo pode ser ou o token TK_DECIMAL
-ou o token TK_INTEIRO.
+SIMPLE COMMANDS
 */
 
-declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo;
+comandos_simples: bloco_de_comandos {$$ = $1;}
+                | declaracao_variavel_comando_simples {$$ = $1;}
+                | comando_atribuicao {$$ = $1;}
+                | chamada_funcao {$$ = $1;}
+                | comando_retorno {$$ = $1;}
+                | fluxo_condicional {$$ = $1;}
+                | fluxo_iterativo {$$ = $1;}
+                ;
 
 /*
-Definição de Função: Ela possui um cabeçalho e
-um corpo. O cabeçalho consiste no token TK_ID
-seguido do token TK_SETA seguido ou do token
-TK_DECIMAL ou do token TK_INTEIRO, seguido
-por uma lista opcional de parâmetros seguido do
-token TK_ATRIB.
+COMMAND BLOCK
 */
 
-definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_comandos;
+bloco_de_comandos: '[' sequencia_comandos_simples ']' { $$ = $2; }
+    | '[' ']' { $$ = NULL; }
+    | sequencia_comandos_simples { $$ = $1; }
+    ;
+sequencia_comandos_simples: sequencia_comandos_simples comandos_simples {
+    if($1 == NULL){
+        $$ = $2;
+    }else {
+        if($2 != NULL){
+            asd_add_child($1, $2);
+        }
+        $$ = $1;
+    }
+};
+sequencia_comandos_simples: comandos_simples { $$ = $1; };
 
 /*
-A lista de parâmetros, quando
-presente, consiste no token opcional TK_COM se-
-guido de uma lista, separada por vírgula, de parâ-
-metros
+VARIABLE DECLARATION
 */
 
-parametros_funcao: %empty; 
-parametros_funcao: TK_COM lista_params ;
-parametros_funcao: lista_params; // sem token opcional TK_COM
+declaracao_variavel_comando_simples: declaracao_variavel {$$ = $1;};
+declaracao_variavel_comando_simples: TK_VAR TK_ID TK_ATRIB opcao_tipo TK_COM literais {
+    $$ = asd_new("com", NULL);
+    asd_add_child($$, asd_new($2->value, $2));
+    asd_add_child($$, $6);
+};
 
+literais : TK_LI_INTEIRO {$$ = NULL;}
+    | TK_LI_DECIMAL {$$ = NULL;};
 /*
-Cada parâmetro consiste no token TK_ID
-seguido do token TK_ATRIB seguido ou do to-
-ken TK_INTEIRO ou do token TK_DECIMAL
+ATRIB
 */
 
-lista_params: param | lista_params ',' param;
-param: TK_ID TK_ATRIB opcao_tipo;
-
-// Comandos simples
-/*
-Os comandos simples da linguagem podem ser:
-bloco de comandos, declaração de variável, 
-comando de atribuição, chamada de função, 
-comando de retorno, e construções de fluxo de controle.
-*/
-
-comandos_simples: bloco_de_comandos
-                | declaracao_variavel_comando_simples
-                | comando_atribuicao
-                | chamada_funcao
-                | comando_retorno
-                | fluxo_condicional
-                | fluxo_iterativo;
-
-/*
-Bloco de Comandos: Definido entre colchetes, e
-consiste em uma sequência, possivelmente vazia,
-de comandos simples. Um bloco de comandos
-é considerado como um comando único simples
-e pode ser utilizado em qualquer construção que
-aceite um comando simples.
-*/
-
-bloco_de_comandos: '[' sequencia_comandos_simples ']';
-sequencia_comandos_simples: %empty | sequencia_comandos_simples comandos_simples;
-
-/*
-Declaração de Variável: Uma variável pode ser
-opcionalmente inicializada caso sua declaração
-seja seguida do token TK_COM e de um literal. Um
-literal pode ser ou o token TK_LI_INTEIRO ou o
-token TK_LI_DECIMAL.
-*/
-
-// Outra possível inicializacao
-declaracao_variavel_comando_simples: declaracao_variavel
-                                   | TK_VAR TK_ID TK_ATRIB TK_INTEIRO TK_COM TK_LI_INTEIRO;
-                                   | TK_VAR TK_ID TK_ATRIB TK_DECIMAL TK_COM TK_LI_DECIMAL;
-
-/*
-Comando de Atribuição: O comando de atribuição 
-consiste em um token TK_ID, seguido do token 
-TK_ATRIB e enfim seguido por uma expressão.
-*/
-
-comando_atribuicao: TK_ID TK_ATRIB expressao;
+comando_atribuicao: TK_ID TK_ATRIB expressao {
+    $$ = asd_new(":=", NULL); 
+    asd_add_child($$, asd_new($1->value, $1)); 
+    asd_add_child($$, $3);
+};
 
 /* 
-Chamada de Função: Uma chamada de função
-consiste no token TK_ID, seguida de argumentos
-entre parênteses, sendo que cada argumento é 
-separado do outro por vírgula. Um argumento é
-uma expressão. Uma chamada de função pode
-existir sem argumentos.
+FUNCTION CALL
 */
 
-chamada_funcao: TK_ID '(' argumentos ')' | TK_ID '('')';
-argumentos: expressao ',' argumentos | expressao;
+chamada_funcao: TK_ID '(' argumentos ')' {
+    // "call TK_ID" string
+    int len = strlen("call ") + strlen($1->value) + 1;
+    char *buffer = malloc(len);
+    snprintf(buffer, len, "call %s", $1->value);
+
+    $$ = asd_new(buffer, $1);
+    free(buffer);
+
+    asd_add_child($$, $3);
+};
+chamada_funcao: TK_ID '('')'{
+    // "call TK_ID" string
+    int len = strlen("call ") + strlen($1->value) + 1;
+    char *buffer = malloc(len);
+    snprintf(buffer, len, "call %s", $1->value);
+
+    $$ = asd_new(buffer, $1);
+    free(buffer);
+ }; 
+argumentos: expressao ',' argumentos { asd_add_child($$, $3); $$ = $1; };
+    | expressao { $$ = $1; };
+
+
+comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo { 
+    $$ = asd_new("retorna", NULL); 
+    asd_add_child($$, $2);
+};; 
 
 /*
-Comando de Retorno: Trata-se do token
-TK_RETORNA seguido de uma expressão, se-
-guido do token TK_ATRIB e terminado ou pelo
-token TK_DECIMAL ou pelo token TK_INTEIRO.
+IF ELSE
 */
 
-comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo; 
+fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos fluxo_condicional_senao {
+    $$ = asd_new("se", NULL);
+    asd_add_child($$, $3);
+    if($5 != NULL){
+        asd_add_child($$, $5);
+    }
+    if($6 != NULL){
+        asd_add_child($$, $6);
+    }
+};
+fluxo_condicional_senao: %empty { $$ = NULL; }
+    | TK_SENAO bloco_de_comandos { $$ = $2; }
 
 /*
-A condicional consiste no token TK_SE seguido 
-de uma expressão entre parênteses e então por 
-um bloco de comandos obrigatório
+WHILE
 */
 
-fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos fluxo_condicional_senao;
-fluxo_condicional_senao: %empty | TK_SENAO bloco_de_comandos
+fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos { 
+    $$ = asd_new("enquanto", NULL); 
+    asd_add_child($$, $3);
+    if($5 != NULL){
+        asd_add_child($$, $5);
+    }
+};
 
 /*
-Temos apenas uma construção de repetição que é o 
-token TK_ENQUANTO seguido de uma expressão entre 
-parênteses e de um bloco de comandos.
-*/
-
-fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos;
-
-// EXPRESSOES
-/*
-Expressões envolvem operandos e operadores,
-sendo este opcional.
-Elas também permitem o uso de parênteses para forçar
-uma associatividade ou precedência diferente daquela 
-tradicional.
+EXPRESSIONS
 */
 
 /* Nível mais alto: operador OR '|' */
-expr_or: expr_or '|' expr_and | expr_and;
+expr_or: expr_or '|' expr_and { $$ = asd_new("|", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_and { $$ = $1; };
 
 /* Nível AND '&' */
-expr_and: expr_and '&' expr_eq | expr_eq;
+expr_and: expr_and '&' expr_eq { $$ = asd_new("&", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_eq { $$ = $1; };
 
 /* Nível de igualdade ==, != */
-expr_eq: expr_eq TK_OC_EQ expr_rel
-    | expr_eq TK_OC_NE expr_rel
-    | expr_rel;
+expr_eq: expr_eq TK_OC_EQ expr_rel { $$ = asd_new("==", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_eq TK_OC_NE expr_rel { $$ = asd_new("!=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_rel { $$ = $1; };
 
 /* Nível relacional <, >, <=, >= */
-expr_rel: expr_rel '<' expr_add
-    | expr_rel '>' expr_add
-    | expr_rel TK_OC_LE expr_add
-    | expr_rel TK_OC_GE expr_add
-    | expr_add;
+expr_rel: expr_rel '<' expr_add { $$ = asd_new("<", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_rel '>' expr_add { $$ = asd_new(">", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_rel TK_OC_LE expr_add { $$ = asd_new("<=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_rel TK_OC_GE expr_add { $$ = asd_new(">=", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_add { $$ = $1; };
 
 /* Nível adição e subtração binária +, - com operadores compostos */
-expr_add: expr_add '+' expr_mul
-    | expr_add '-' expr_mul
-    | expr_mul;
+expr_add: expr_add '+' expr_mul { $$ = asd_new("+", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_add '-' expr_mul { $$ = asd_new("-", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_mul { $$ = $1; };
 
 /* Nível multiplicação, divisão e resto * / % com operadores compostos */
-expr_mul: expr_mul '*' expr_unario
-    | expr_mul '/' expr_unario
-    | expr_mul '%' expr_unario
-    | expr_unario;
+expr_mul: expr_mul '*' expr_unario { $$ = asd_new("*", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_mul '/' expr_unario { $$ = asd_new("/", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_mul '%' expr_unario { $$ = asd_new("%", NULL), asd_add_child($$, $1); asd_add_child($$, $3); }
+    | expr_unario { $$ = $1; };
 
 /* Operadores unários prefixados */
-expr_unario: '+' expr_unario
-    | '-' expr_unario
-    | '!' expr_unario
+expr_unario: '+' expr_unario { $$ = asd_new("+", NULL); asd_add_child($$, $2);}
+    | '-' expr_unario { $$ = asd_new("-", NULL); asd_add_child($$, $2);}
+    | '!' expr_unario { $$ = asd_new("!", NULL); asd_add_child($$, $2);}
     | expr_prim;
 
 /* Operandos: identificadores, literais, chamada de função, parênteses */
-expr_prim: TK_ID
-    | TK_LI_INTEIRO
-    | TK_LI_DECIMAL
-    | chamada_funcao
-    | '(' expressao ')'   /* força precedência */
+expr_prim: TK_ID { $$ = asd_new($1->value, $1); }
+    | TK_LI_INTEIRO { $$ = asd_new($1->value, $1); }
+    | TK_LI_DECIMAL { $$ = asd_new($1->value, $1); }
+    | chamada_funcao { $$ = $1; }
+    | '(' expressao ')' { $$ = $2; }
     ;
 
 
