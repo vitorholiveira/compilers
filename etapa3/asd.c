@@ -26,8 +26,7 @@ void asd_free(asd_tree_t *tree)
     }
     free(tree->children);
     free(tree->label);
-    if (tree->lex_value != NULL) free(tree->lex_value->value);
-    free(tree->lex_value);
+    lex_free(tree->lex_value);
     free(tree);
   }else{
     printf("Erro: %s recebeu parâmetro tree = %p.\n", __FUNCTION__, tree);
@@ -96,4 +95,11 @@ void asd_print_graphviz(asd_tree_t *tree)
   }else{
     printf("Erro: %s recebeu parâmetro tree = %p.\n", __FUNCTION__, tree);
   }
+}
+
+void lex_free(lex_value_t* lv) {
+    if (lv) {
+        if (lv->value) free(lv->value);
+        free(lv);
+    }
 }

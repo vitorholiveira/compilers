@@ -43,4 +43,9 @@ void asd_print(asd_tree_t *tree);
  */
 void asd_print_graphviz (asd_tree_t *tree);
 
+/*
+ * Função lex_free, libera uma variável do tipo lex_value_t.
+ */
+void lex_free(lex_value_t* lv);
+
 #endif //_ASD_H_

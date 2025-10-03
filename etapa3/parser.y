@@ -8,14 +8,6 @@ void yyerror (char const *mensagem);
 extern int yylineno;
 extern asd_tree_t *arvore;
 
-// Função auxiliar para liberar lex_value_t
-void free_lex_value(lex_value_t* lv) {
-    if (lv) {
-        if (lv->value) free(lv->value);
-        free(lv);
-    }
-}
-
 %}
 %define parse.trace
 %token TK_VAR
@@ -37,7 +29,6 @@ void free_lex_value(lex_value_t* lv) {
 %code requires { #include "asd.h" }
 
 %union {
-    char* str;
     lex_value_t* valor_lexico;
     asd_tree_t* arvore;
 }
@@ -82,7 +73,7 @@ opcao_tipo: TK_INTEIRO { $$ = NULL; }
 
 declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo { 
     $$ = NULL; 
-    free_lex_value($2);
+    lex_free($2);
 };
 
 /*
@@ -90,7 +81,7 @@ FUNCTION DECLARATION
 */
 definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_comandos {
     $$ = asd_new($1->value, $1);
-    // Se há parâmetros, adicione-os (se você implementar isso no futuro)
+    // If there are parameters, add them (if you implement this in the future)
     // if($4 != NULL) asd_add_child($$, $4);
     if($6 != NULL){ 
         asd_add_child($$, $6);
@@ -99,15 +90,15 @@ definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_c
 
 parametros_funcao: %empty { $$ = NULL; }
     | TK_COM lista_params { $$ = NULL; }
-    | lista_params { $$ = NULL; }; // sem token opcional TK_COM
+    | lista_params { $$ = NULL; }; // without optional TK_COM token
 
 lista_params: TK_ID TK_ATRIB opcao_tipo { 
     $$ = NULL;
-    free_lex_value($1);
+    lex_free($1);
 }
     | lista_params ',' TK_ID TK_ATRIB opcao_tipo { 
         $$ = NULL; 
-        free_lex_value($3);
+        lex_free($3);
     };
 
 /*
@@ -163,7 +154,7 @@ literais : TK_LI_INTEIRO {
     };
 
 /*
-ATRIB
+ASSIGNMENT
 */
 
 comando_atribuicao: TK_ID TK_ATRIB expressao {
@@ -172,8 +163,8 @@ comando_atribuicao: TK_ID TK_ATRIB expressao {
     asd_add_child($$, $3);
 };
 
-/* 
-FUNCTION CALL
+/*
+FUNCTION CALL AND RETURN
 */
 
 chamada_funcao: TK_ID '(' argumentos ')' {
@@ -260,7 +251,7 @@ fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos {
 EXPRESSIONS
 */
 
-/* Nível mais alto: operador OR '|' */
+/* Highest level: OR operator '|' */
 expr_or: expr_or '|' expr_and { 
     $$ = asd_new("|", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -268,7 +259,7 @@ expr_or: expr_or '|' expr_and {
 }
     | expr_and { $$ = $1; };
 
-/* Nível AND '&' */
+/* AND level '&' */
 expr_and: expr_and '&' expr_eq { 
     $$ = asd_new("&", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -276,7 +267,7 @@ expr_and: expr_and '&' expr_eq {
 }
     | expr_eq { $$ = $1; };
 
-/* Nível de igualdade ==, != */
+/* Equality level ==, != */
 expr_eq: expr_eq TK_OC_EQ expr_rel { 
     $$ = asd_new("==", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -289,7 +280,7 @@ expr_eq: expr_eq TK_OC_EQ expr_rel {
     }
     | expr_rel { $$ = $1; };
 
-/* Nível relacional <, >, <=, >= */
+/* Relational level <, >, <=, >= */
 expr_rel: expr_rel '<' expr_add { 
     $$ = asd_new("<", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -312,7 +303,7 @@ expr_rel: expr_rel '<' expr_add {
     }
     | expr_add { $$ = $1; };
 
-/* Nível adição e subtração binária +, - com operadores compostos */
+/* Binary addition and subtraction level +, - */
 expr_add: expr_add '+' expr_mul { 
     $$ = asd_new("+", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -325,7 +316,7 @@ expr_add: expr_add '+' expr_mul {
     }
     | expr_mul { $$ = $1; };
 
-/* Nível multiplicação, divisão e resto * / % com operadores compostos */
+/* Multiplication, division, and remainder level * / % */
 expr_mul: expr_mul '*' expr_unario { 
     $$ = asd_new("*", NULL);
     if($1 != NULL) asd_add_child($$, $1);
@@ -343,7 +334,7 @@ expr_mul: expr_mul '*' expr_unario {
     }
     | expr_unario { $$ = $1; };
 
-/* Operadores unários prefixados */
+/* Prefixed unary operators */
 expr_unario: '+' expr_unario { 
     $$ = asd_new("+", NULL);
     if($2 != NULL) asd_add_child($$, $2);
@@ -358,7 +349,7 @@ expr_unario: '+' expr_unario {
     }
     | expr_prim { $$ = $1; };
 
-/* Operandos: identificadores, literais, chamada de função, parênteses */
+/* Operands: identifiers, literals, function call, parentheses */
 expr_prim: TK_ID { $$ = asd_new($1->value, $1); }
     | TK_LI_INTEIRO { $$ = asd_new($1->value, $1); }
     | TK_LI_DECIMAL { $$ = asd_new($1->value, $1); }
@@ -367,10 +358,10 @@ expr_prim: TK_ID { $$ = asd_new($1->value, $1); }
     ;
 
 
-/* Expressão principal apontando para o nível mais alto */
+/* Main expression pointing to the highest level */
 expressao: expr_or;
 
 %%
 void yyerror(const char *msg) {
-    fprintf(stderr, "Erro de Sintaxe na Linha %d: %s\n", yylineno, msg);
+    fprintf(stderr, "Syntax Error on Line %d: %s\n", yylineno, msg);
 }
