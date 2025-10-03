@@ -19,32 +19,32 @@ typedef struct asd_tree {
 } asd_tree_t;
 
 /*
- * Função asd_new, cria um nó sem filhos com o label informado.
+ * asd_new function, creates a node with no children with the given label.
  */
 asd_tree_t *asd_new(const char *label, lex_value_t* lez_value);
 
 /*
- * Função asd_tree, libera recursivamente o nó e seus filhos.
+ * asd_free function, recursively frees the node and its children.
  */
 void asd_free(asd_tree_t *tree);
 
 /*
- * Função asd_add_child, adiciona child como filho de tree.
+ * asd_add_child function, adds 'child' as a child of 'tree'.
  */
 void asd_add_child(asd_tree_t *tree, asd_tree_t *child);
 
 /*
- * Função asd_print, imprime recursivamente a árvore.
+ * asd_print function, recursively prints the tree.
  */
 void asd_print(asd_tree_t *tree);
 
 /*
- * Função asd_print_graphviz, idem, em formato DOT
+ * asd_print_graphviz function, same as above, but in DOT format.
  */
 void asd_print_graphviz (asd_tree_t *tree);
 
 /*
- * Função lex_free, libera uma variável do tipo lex_value_t.
+ * lex_free function, frees a variable of type lex_value_t.
  */
 void lex_free(lex_value_t* lv);
 
