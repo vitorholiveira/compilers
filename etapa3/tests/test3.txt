@@ -5,7 +5,10 @@ var c := inteiro,
 func1 -> inteiro com e1 := decimal, e2 := decimal := [
     var d := inteiro com 5
     var e := decimal com .5
-    var f := decimal com 1.5
+    e := a | b
+    enquanto (e < d) [
+        d := d + 1
+    ]
     retorna e2 := decimal
 ],
 
