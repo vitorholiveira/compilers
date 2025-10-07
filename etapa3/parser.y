@@ -54,14 +54,14 @@ COMMANDS
 programa: %empty { arvore = NULL; };
 programa: lista ';' { arvore = $1; };
 lista: elemento { $$ = $1; }
-    | lista ',' elemento { 
-    if($3 == NULL){
-        $$ = $1;
-    }else {
-        if($1 != NULL){
-            asd_add_child($3, $1);
-        }
+    | elemento ',' lista { 
+    if($1 == NULL){
         $$ = $3;
+    }else {
+        if($3 != NULL){
+            asd_add_child($1, $3);
+        }
+        $$ = $1;
     }
 };
 
@@ -95,11 +95,11 @@ parametros_funcao: %empty { $$ = NULL; }
 lista_params: TK_ID TK_ATRIB opcao_tipo { 
     $$ = NULL;
     lex_free($1);
-}
-    | lista_params ',' TK_ID TK_ATRIB opcao_tipo { 
-        $$ = NULL; 
-        lex_free($3);
-    };
+};
+lista_params: lista_params ',' TK_ID TK_ATRIB opcao_tipo { 
+    $$ = NULL; 
+    lex_free($3);
+};
 
 /*
 SIMPLE COMMANDS
@@ -121,11 +121,11 @@ COMMAND BLOCK
 bloco_de_comandos: '[' sequencia_comandos_simples ']' { $$ = $2; }
     | '[' ']' { $$ = NULL; }
     ;
-sequencia_comandos_simples: sequencia_comandos_simples comandos_simples {
-    if($1 == NULL){
+sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
+    if ($1 == NULL){
         $$ = $2;
-    }else {
-        if($2 != NULL){
+    } else {
+        if ($2 != NULL){
             asd_add_child($1, $2);
         }
         $$ = $1;
