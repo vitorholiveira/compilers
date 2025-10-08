@@ -79,8 +79,6 @@ DECLARAÇÃO DE FUNÇÃO
 */
 definicao_funcao: TK_ID TK_SETA opcao_tipo parametros_funcao TK_ATRIB bloco_de_comandos {
     $$ = asd_new($1->value, $1);
-    // Se houver parâmetros, adicioná-los (se isso for implementado no futuro)
-    // if($4 != NULL) asd_add_child($$, $4);
     if($6 != NULL) asd_add_child($$, $6);
 };
 
@@ -160,10 +158,10 @@ CHAMADA DE FUNÇÃO E RETORNO
 */
 
 chamada_funcao: TK_ID '(' argumentos ')' {
-    // String "chamada TK_ID"
-    int len = strlen("chamada ") + strlen($1->value) + 1;
+    // String "call TK_ID"
+    int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
-    snprintf(buffer, len, "chamada %s", $1->value);
+    snprintf(buffer, len, "call %s", $1->value);
 
     $$ = asd_new(buffer, $1);
     free(buffer);
@@ -171,10 +169,10 @@ chamada_funcao: TK_ID '(' argumentos ')' {
     if($3 != NULL) asd_add_child($$, $3);
 };
 chamada_funcao: TK_ID '(' ')' {
-    // String "chamada TK_ID"
-    int len = strlen("chamada ") + strlen($1->value) + 1;
+    // String "call TK_ID"
+    int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
-    snprintf(buffer, len, "chamada %s", $1->value);
+    snprintf(buffer, len, "call %s", $1->value);
 
     $$ = asd_new(buffer, $1);
     free(buffer);
