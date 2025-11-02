@@ -4,15 +4,24 @@
 #include "asd.h"
 #define OUTPUT_FILE "output.dot"
 
-asd_tree_t *asd_new(const char *label, lex_value_t *lex_value)
+asd_tree_t *asd_new(const char *label, lex_value_t *lex_value, data_type_t data_type)
 {
   asd_tree_t *ret = NULL;
   ret = calloc(1, sizeof(asd_tree_t));
-  if (ret != NULL){
-    ret->label = strdup(label);
-    ret->number_of_children = 0;
-    ret->children = NULL;
-    ret->lex_value = lex_value;
+  if (ret == NULL)
+    return NULL;
+
+  ret->label = strdup(label);
+  ret->data_type = (int)data_type;
+  ret->number_of_children = 0;
+  ret->children = NULL;
+  if (lex_value != NULL) {
+    lex_value_t *lex_copy = malloc(sizeof(lex_value_t));
+    lex_copy->value = strdup(lex_value->value);
+    lex_copy->line = lex_value->line;
+    ret->lex_value = lex_copy;
+  } else {
+      ret->lex_value = NULL;
   }
   return ret;
 }

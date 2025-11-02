@@ -1,13 +1,14 @@
 #ifndef _ASD_H_
 #define _ASD_H_
+#include <stdlib.h>
+#include <stdio.h>
 
-
-#define ID 1
-#define LI 2
+typedef enum { INTEIRO = 0, DECIMAL = 1 } data_type_t;
+typedef enum { IDENTIFIER = 0, LITERAL = 1, FUNCTION = 2 } nature_t;
 
 typedef struct lex_value {
   int line;
-  int type;
+  nature_t nature;
   char* value;
 } lex_value_t;
 
@@ -16,12 +17,18 @@ typedef struct asd_tree {
   int number_of_children;
   struct asd_tree **children;
   lex_value_t *lex_value;
+  data_type_t data_type;
 } asd_tree_t;
+
+typedef struct args {
+    asd_tree_t* args;
+    int num_args;
+} args_t;
 
 /*
  * asd_new function, creates a node with no children with the given label.
  */
-asd_tree_t *asd_new(const char *label, lex_value_t* lez_value);
+asd_tree_t *asd_new(const char *label, lex_value_t* lex_value, data_type_t data_type);
 
 /*
  * asd_free function, recursively frees the node and its children.
@@ -44,7 +51,7 @@ void asd_print(asd_tree_t *tree);
 void asd_print_graphviz (asd_tree_t *tree);
 
 /*
- * lex_free function, frees a variable of type lex_value_t.
+ * lex_free function, frees a variable of nature lex_value_t.
  */
 void lex_free(lex_value_t* lv);
 

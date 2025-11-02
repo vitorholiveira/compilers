@@ -1,36 +1,50 @@
-CC    = gcc
-LEX   = flex
-YACC  = bison
-CFLAGS = -g -fsanitize=address
+# Compiler and flags
+CC     = gcc
+LEX    = flex
+YACC   = bison
+CFLAGS = -g -fsanitize=address -Wall -Werror
 
+# Source files
 LEX_SRC  = scanner.l
 YACC_SRC = parser.y
 
+# Generated files
 LEX_C  = lex.yy.c
-YACC_C  = parser.tab.c
-YACC_H  = parser.tab.h
+YACC_C = parser.tab.c
+YACC_H = parser.tab.h
 
-OBJS = parser.tab.o lex.yy.o main.o asd.o
+# All C sources (including generated)
+SRC = main.c asd.c stack.c table.c type_infer.c errors.c $(YACC_C) $(LEX_C)
 
+# Object files
+OBJ = $(SRC:.c=.o)
+
+# Executable
 TARGET = etapa4
 
+# Default rule
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
+# Link step
+$(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ -lfl
 
+# Bison parser generation
 $(YACC_C) $(YACC_H): $(YACC_SRC)
-	$(YACC) -d $<
+	$(YACC) -d -o $(YACC_C) $(YACC_SRC)
 
+# Flex lexer generation
 $(LEX_C): $(LEX_SRC) $(YACC_H)
-	$(LEX) -o $@ $<
+	$(LEX) -o $(LEX_C) $(LEX_SRC)
 
-%.o: %.c %.h
-	$(CC) $(CFLAGS) -c $<
+# Compile C files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Limpa os arquivos 
+# Clean build files
 clean:
-	rm -f $(TARGET) *.o lex.yy.c parser.tab.c parser.tab.h parser.output
+	rm -f $(TARGET) *.o $(LEX_C) $(YACC_C) $(YACC_H) parser.output
 
+# Create a tarball
 tgz:
-	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.h Makefile
+	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.h stack.c stack.h table.c table.h type_infer.c type_infer.h Makefile

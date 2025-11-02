@@ -1,7 +1,7 @@
 %{
     #include "parser.tab.h"
     #include "asd.h"
-    void create_lex_value(int type);
+    void create_lex_value(int nature);
 %}
 
 %option noyywrap yylineno noinput nounput
@@ -34,18 +34,18 @@ var                   { return TK_VAR; }
 
 
     /* IDS E LITERAIS */
-[_a-z][_a-z0-9]*      { create_lex_value(ID); return TK_ID; }
-[0-9]+                { create_lex_value(LI); return TK_LI_INTEIRO; }
-[0-9]+\.[0-9]+        { create_lex_value(LI); return TK_LI_DECIMAL; }   /* 3.14 */
-\.[0-9]+              { create_lex_value(LI); return TK_LI_DECIMAL; }   /* .5 */
+[_a-z][_a-z0-9]*      { create_lex_value(IDENTIFIER); return TK_ID; }
+[0-9]+                { create_lex_value(LITERAL); return TK_LI_INTEIRO; }
+[0-9]+\.[0-9]+        { create_lex_value(LITERAL); return TK_LI_DECIMAL; }   /* 3.14 */
+\.[0-9]+              { create_lex_value(LITERAL); return TK_LI_DECIMAL; }   /* .5 */
 
 .                     { return TK_ER; }
 
 %%
 
-void create_lex_value(int type){
+void create_lex_value(int nature){
     yylval.valor_lexico = malloc(sizeof(lex_value_t));
     yylval.valor_lexico->line = yylineno;
-    yylval.valor_lexico->type = type;
+    yylval.valor_lexico->nature = nature;
     yylval.valor_lexico->value = strdup(yytext);
 }
