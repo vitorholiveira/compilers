@@ -1,7 +1,6 @@
 #include "type_infer.h"
 
-data_type_t infer_initialization_type(stack_t* scope_stack, lex_value_t* var_id,
-                                 data_type_t decl_type, data_type_t exp_type)
+data_type_t infer_initialization_type(stack_t* scope_stack, lex_value_t* var_id, data_type_t decl_type, data_type_t exp_type)
 {
     if (decl_type != exp_type) {
         err_print_initialization_type(var_id->line, var_id->value, decl_type, exp_type);
@@ -22,8 +21,7 @@ data_type_t infer_atribution_type(stack_t* scope_stack, lex_value_t* var_id, dat
     }
 
     if (var_decl->data_type != exp_type) {
-        err_print_atribution_type(var_id->line, var_decl->lex_value->line, var_id->value,
-                                      var_decl->data_type, exp_type);
+        err_print_atribution_type(var_id->line, var_decl->lex_value->line, var_id->value, var_decl->data_type, exp_type);
         stack_free(scope_stack);
         exit(ERR_WRONG_TYPE);
     }
@@ -31,8 +29,7 @@ data_type_t infer_atribution_type(stack_t* scope_stack, lex_value_t* var_id, dat
     return exp_type;
 }
 
-data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id,
-                                asd_tree_t* call_args, int num_args)
+data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id, asd_tree_t* call_args, int num_args)
 {
     symbol_t* function_symbol = stack_get_symbol(scope_stack, call_id->value, call_id->line);
 
@@ -48,15 +45,13 @@ data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id,
     }
 
     if (num_expected_args > num_args) {
-        err_print_missing_args(call_id->line, function_symbol->lex_value->line, call_id->value,
-                                   num_expected_args, num_args);
+        err_print_missing_args(call_id->line, function_symbol->lex_value->line, call_id->value, num_expected_args, num_args);
         stack_free(scope_stack);
         exit(ERR_MISSING_ARGS);
     }
 
     if (num_expected_args < num_args) {
-        err_print_excess_args(call_id->line, function_symbol->lex_value->line, call_id->value,
-                                  num_expected_args, num_args);
+        err_print_excess_args(call_id->line, function_symbol->lex_value->line, call_id->value, num_expected_args, num_args);
         stack_free(scope_stack);
         exit(ERR_EXCESS_ARGS);
     }
@@ -88,9 +83,7 @@ data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id,
 data_type_t infer_return_type(stack_t* scope_stack, asd_tree_t* return_expr, data_type_t declared_type)
 {
     if (return_expr->data_type != declared_type) {
-        err_print_atribution_type(return_expr->lex_value->line,
-                                      return_expr->lex_value->line, return_expr->label,
-                                      declared_type, return_expr->data_type);
+        err_print_atribution_type(return_expr->lex_value->line, return_expr->lex_value->line, return_expr->label, declared_type, return_expr->data_type);
         stack_free(scope_stack);
         exit(ERR_WRONG_TYPE);
     }
@@ -112,8 +105,7 @@ data_type_t infer_if_type(stack_t* scope_stack, data_type_t cond_type, asd_tree_
 {
     if (if_block != NULL && else_block != NULL) {
         if (if_block->data_type != else_block->data_type) {
-            err_print_if_else_type(if_block->lex_value->line, if_block->data_type,
-                                       else_block->data_type);
+            err_print_if_else_type(if_block->lex_value->line, if_block->data_type, else_block->data_type);
             stack_free(scope_stack);
             exit(ERR_WRONG_TYPE);
         }
@@ -122,12 +114,10 @@ data_type_t infer_if_type(stack_t* scope_stack, data_type_t cond_type, asd_tree_
     return cond_type;
 }
 
-data_type_t infer_exp_type(stack_t* scope_stack, const char* op, asd_tree_t* tree_left,
-                      asd_tree_t* tree_right)
+data_type_t infer_exp_type(stack_t* scope_stack, const char* op, asd_tree_t* tree_left, asd_tree_t* tree_right)
 {
     if (tree_left->data_type != tree_right->data_type) {
-        err_print_expression_type(tree_right->lex_value->line, op, tree_left->data_type,
-                                      tree_right->data_type);
+        err_print_expression_type(tree_right->lex_value->line, op, tree_left->data_type, tree_right->data_type);
         stack_free(scope_stack);
         exit(ERR_WRONG_TYPE);
     }
