@@ -37,6 +37,15 @@ extern stack_t *pilha;
     args_t* argumentos;
 }
 
+%destructor {
+  if ($<valor_lexico>$) {
+    lex_free($<valor_lexico>$);
+  }
+} <valor_lexico>
+
+/* CORREÇÃO 2: Adiciona um destructor para liberar args_t */
+%destructor { free($$); } <argumentos> 
+
 %token <valor_lexico> TK_ID
 %token <valor_lexico> TK_LI_INTEIRO
 %token <valor_lexico> TK_LI_DECIMAL
@@ -175,6 +184,7 @@ declaracao_variavel_comando_simples: TK_VAR TK_ID TK_ATRIB opcao_tipo TK_COM lit
     $$ = asd_new("com", NULL, $4);
     asd_add_child($$, asd_new($2->value, $2, $4));
     if($6 != NULL) asd_add_child($$, $6);
+    lex_free($2); /* CORREÇÃO 1: Libera TK_ID */
 };
 
 /*
@@ -186,6 +196,7 @@ comando_atribuicao: TK_ID TK_ATRIB expressao {
     $$ = asd_new(":=", NULL, data_type); 
     asd_add_child($$, asd_new($1->value, $1, data_type)); 
     asd_add_child($$, $3);
+    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
 };
 
 /*
@@ -203,6 +214,8 @@ chamada_funcao: TK_ID '(' argumentos ')' {
     free(buffer);
 
     if($3 != NULL) asd_add_child($$, $3->args);
+    /* $3 é liberado automaticamente pelo %destructor */
+    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
 };
 chamada_funcao: TK_ID '(' ')' {
     data_type_t data_type = infer_function_call_type(pilha, $1, NULL, 0);
@@ -213,14 +226,16 @@ chamada_funcao: TK_ID '(' ')' {
 
     $$ = asd_new(buffer, $1, data_type);
     free(buffer);
+    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
 }; 
 
 argumentos: expressao ',' argumentos { 
     if($1 != NULL && $3 != NULL) asd_add_child($1, $3->args);
     args_t* args = malloc(sizeof(args_t));
     args->num_args = 1 + $3->num_args;
-    args->args = $3->args;
+    args->args = $1; /* $1 se torna o início da lista de argumentos */
     $$ = args;
+    /* $3 é liberado automaticamente pelo %destructor */
 };
 argumentos: expressao { 
     args_t* args = malloc(sizeof(args_t));
@@ -400,6 +415,7 @@ Operandos: identificadores, literais, chamada de função, parênteses
 expr_prim: TK_ID { 
     data_type_t data_type = infer_var_type(pilha, $1);
     $$ = asd_new($1->value, $1, data_type);
+    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
 };
 expr_prim: literais { $$ = $1; };
 expr_prim: chamada_funcao { $$ = $1; };
