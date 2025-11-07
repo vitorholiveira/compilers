@@ -1,113 +1,127 @@
 #include "table.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 table_t* table_new(void)
 {
-    table_t* new_table = NULL;
-    new_table = calloc(1, sizeof(table_t));
-    if (new_table != NULL) {
-        new_table->num_symbols = 0;
-        new_table->symbols = NULL;
+    table_t* table = malloc(sizeof(table_t));
+    if (table) {
+        table->head = NULL;
+        table->num_symbols = 0;
     }
-    return new_table;
+    return table;
 }
 
 void table_free(table_t* table)
 {
-    if (table == NULL) {
+    if (!table) {
         printf("Error: %s received NULL symbol table = %p.\n", __FUNCTION__, table);
         return;
     }
 
-    int i;
-    for (i = 0; i < table->num_symbols; i++) {
-        symbol_free(table->symbols[i]);
+    symbol_t* current = table->head;
+    while (current) {
+        symbol_t* temp = current;
+        current = current->next;
+        symbol_free(temp);
     }
-    free(table->symbols);
     free(table);
 }
 
 symbol_t* table_add_symbol(table_t* table, symbol_t* symbol)
 {
-    if (table == NULL || symbol == NULL) {
+    if (!table || !symbol) {
         printf("Error: %s received NULL symbol table = %p / %p.\n", __FUNCTION__, table, symbol);
         return NULL;
     }
 
-    int i;
-    // Check if a symbol with the same name has already been delcared in the current scope
-    for (i = 0; i < table->num_symbols; i++) {
-        if (strcmp(table->symbols[i]->lex_value->value, symbol->lex_value->value) == 0) {
-            return table->symbols[i];
-        }
+    /* Search for duplicate symbol name */
+    symbol_t* duplicate = table_get_symbol(table, symbol->lex_value->value);
+    if (duplicate) {
+        return duplicate;
     }
+
+    /* Insert at head of list */
+    symbol->next = table->head;
+    table->head = symbol;
     table->num_symbols++;
-    table->symbols = realloc(table->symbols, table->num_symbols * sizeof(symbol_t*));
-    table->symbols[table->num_symbols - 1] = symbol;
+    
     return NULL;
 }
 
 symbol_t* table_get_symbol(table_t* table, const char* label)
 {
-    if (table == NULL) {
+    if (!table) {
         printf("Error: %s received NULL symbol table = %p.\n", __FUNCTION__, table);
         return NULL;
     }
 
-    int i;
-    // Look for a symbol declared in the table that has the given label/name
-    for (i = 0; i < table->num_symbols; i++) {
-        if (strcmp(table->symbols[i]->lex_value->value, label) == 0) {
-            return table->symbols[i];
+    symbol_t* current = table->head;
+    while (current) {
+        if (strcmp(current->lex_value->value, label) == 0) {
+            return current;
         }
+        current = current->next;
     }
+    
     return NULL;
 }
 
 symbol_t* symbol_new(nature_t nature, data_type_t data_type, lex_value_t* lex_value)
 {
-    symbol_t* symbol = NULL;
-    symbol = calloc(1, sizeof(symbol_t));
-    if (symbol != NULL) {
-        symbol->nature = nature;
-        symbol->data_type = data_type;
-        symbol->params = NULL;
-
-        lex_value_t* local_copy = malloc(sizeof(lex_value_t));
-        local_copy->value = strdup(lex_value->value);
-        local_copy->line = lex_value->line;
-        symbol->lex_value = local_copy;
+    symbol_t* symbol = calloc(1, sizeof(symbol_t));
+    if (!symbol) {
+        return NULL;
     }
+
+    symbol->nature = nature;
+    symbol->data_type = data_type;
+    symbol->param_list = NULL;
+    symbol->param_count = 0;
+    symbol->next = NULL;
+
+    /* Create local copy of lexical value */
+    symbol->lex_value = malloc(sizeof(lex_value_t));
+    if (symbol->lex_value) {
+        symbol->lex_value->value = strdup(lex_value->value);
+        symbol->lex_value->line = lex_value->line;
+    }
+
     return symbol;
 }
 
 void symbol_free(symbol_t* symbol)
 {
-    if (symbol == NULL) {
+    if (!symbol) {
         return;
     }
 
-    if (symbol->params != NULL) {
-        if (symbol->nature != FUNCTION) {
-            printf("Error: symbol of nature %d has params, but is not a FUNCTION\n",
-                   symbol->nature);
-        }
-
-        int i;
-        for (i = 0; i < symbol->params->num_params; i++) {
-            parameter_free(symbol->params->params[i]);
-        }
-        free(symbol->params->params);
-        free(symbol->params);
+    /* Validate parameter list is only on functions */
+    if (symbol->param_list && symbol->nature != FUNCTION) {
+        printf("Error: symbol of nature %d has params, but is not a FUNCTION\n",
+               symbol->nature);
     }
 
-    free(symbol->lex_value->value);
-    free(symbol->lex_value);
+    /* Free parameter chain */
+    param_node_t* current = symbol->param_list;
+    while (current) {
+        param_node_t* temp = current;
+        current = current->next;
+        parameter_free(temp);
+    }
+
+    /* Free lexical value */
+    if (symbol->lex_value) {
+        free(symbol->lex_value->value);
+        free(symbol->lex_value);
+    }
+
     free(symbol);
 }
 
-void symbol_add_parameter(symbol_t* symbol, param_t* param)
+void symbol_add_parameter(symbol_t* symbol, param_node_t* param)
 {
-    if (symbol == NULL || param == NULL) {
+    if (!symbol || !param) {
         printf("Error: %s received NULL symbol or param\n", __FUNCTION__);
         return;
     }
@@ -117,58 +131,67 @@ void symbol_add_parameter(symbol_t* symbol, param_t* param)
         return;
     }
 
-    if (symbol->params == NULL) {
-        symbol->params = calloc(1, sizeof(params_t));
-        if (symbol->params == NULL) {
-            printf("Error: failed to allocate params_t\n");
-            exit(EXIT_FAILURE);
+    /* Append to end of parameter list */
+    if (!symbol->param_list) {
+        symbol->param_list = param;
+    } else {
+        param_node_t* tail = symbol->param_list;
+        while (tail->next) {
+            tail = tail->next;
         }
+        tail->next = param;
     }
-
-    symbol->params->num_params++;
-    int num_params = symbol->params->num_params;
-
-    symbol->params->params =
-        realloc(symbol->params->params, num_params * sizeof(param_t*));
-    symbol->params->params[num_params - 1] = param;
+    
+    symbol->param_count++;
 }
 
 void symbol_table_debug_print(table_t* table)
 {
-    if (!table) {
+    if (!table || !table->head) {
         printf("  [empty symbol table]\n");
         return;
     }
 
-    for (int i = 0; i < table->num_symbols; i++) {
-        symbol_t* sym = table->symbols[i];
-        printf("  - %s (nature: %d, data_type: %d, line: %d)\n", sym->lex_value->value, (int)sym->nature,
-               (int)sym->data_type, sym->lex_value->line);
+    symbol_t* current = table->head;
+    while (current) {
+        printf("  - %s (nature: %d, data_type: %d, line: %d)\n",
+               current->lex_value->value,
+               (int)current->nature,
+               (int)current->data_type,
+               current->lex_value->line);
 
-        // If the symbol has params, err_print them
-        if (sym->params != NULL) {
+        /* Print parameters if present */
+        if (current->param_list) {
             printf("    Parameters:\n");
-            for (int j = 0; j < sym->params->num_params; j++) {
-                param_t* param = sym->params->params[j];
+            param_node_t* param = current->param_list;
+            while (param) {
                 printf("      • %s (data_type: %d)\n", param->label, (int)param->data_type);
+                param = param->next;
             }
         }
+        
+        current = current->next;
     }
 }
 
-param_t* parameter_new(const char* label, data_type_t data_type)
+param_node_t* parameter_new(const char* label, data_type_t data_type)
 {
-    param_t* param = NULL;
-    param = calloc(1, sizeof(param_t));
+    param_node_t* param = calloc(1, sizeof(param_node_t));
+    if (!param) {
+        return NULL;
+    }
+
     param->label = strdup(label);
     param->data_type = data_type;
+    param->next = NULL;
+    
     return param;
 }
 
-void parameter_free(param_t* param)
+void parameter_free(param_node_t* param)
 {
-    if (param != NULL) {
+    if (param) {
         free(param->label);
+        free(param);
     }
-    free(param);
 }

@@ -10,9 +10,7 @@
 #define ERR_EXCESS_ARGS      41 //2.5
 #define ERR_WRONG_TYPE_ARGS  42 //2.5
 
-void err_print_undeclared(const char* label, int line_number);
-void err_print_declared(const char* label, int used_line_number, int declared_line_number);
-void err_print_variable(const char* label, int used_line_number, int declared_line_number);
+void print_err(int line_number, int error_id , const char* msg);
 void err_print_function(const char* label, int used_line_number, int declared_line_number);
 void err_print_initialization_type(int init_line, const char* var_name, int declared_type, int initializer_type);
 void err_print_atribution_type(int assign_line, int decl_line, const char* var_name, int declared_type, int assigned_type);
