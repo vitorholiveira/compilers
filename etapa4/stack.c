@@ -31,13 +31,13 @@ void stack_free(stack_t* stack)
 void stack_push(stack_t* stack)
 {
     if (!stack) {
-        printf("Error: %s received NULL scope stack = %p.\n", __FUNCTION__, stack);
+        printf("Erro: %s recebeu pilha de escopo NULL = %p.\n", __FUNCTION__, stack);
         return;
     }
 
     scope_node_t* new_scope = malloc(sizeof(scope_node_t));
     if (!new_scope) {
-        printf("Error: %s failed to allocate scope node.\n", __FUNCTION__);
+        printf("Erro: %s falhou ao alocar nó de escopo.\n", __FUNCTION__);
         return;
     }
 
@@ -50,12 +50,12 @@ void stack_push(stack_t* stack)
 void stack_pop(stack_t* stack)
 {
     if (!stack) {
-        printf("Error: %s received NULL scope stack = %p.\n", __FUNCTION__, stack);
+        printf("Erro: %s recebeu pilha de escopo NULL = %p.\n", __FUNCTION__, stack);
         return;
     }
 
     if (!stack->top) {
-        printf("Error: %s called on empty stack.\n", __FUNCTION__);
+        printf("Erro: %s chamado em pilha vazia.\n", __FUNCTION__);
         return;
     }
 
@@ -70,7 +70,7 @@ void stack_pop(stack_t* stack)
 void stack_declare_symbol(stack_t* stack, nature_t nature, data_type_t data_type, lex_value_t* lex_value)
 {
     if (!stack || !stack->top) {
-        printf("Error: %s called with invalid stack or empty scope stack.\n", __FUNCTION__);
+        printf("Erro: %s chamado com pilha inválida ou pilha de escopo vazia.\n", __FUNCTION__);
         return;
     }
 
@@ -99,7 +99,7 @@ void stack_declare_function_parameter(stack_t* stack, nature_t nature, data_type
 symbol_t* stack_get_function(stack_t* stack)
 {
     if (!stack || stack->num_tables < 2) {
-        printf("Error: %s Not enough scopes to find function symbol (expected parent scope below parameters).\n",
+        printf("Erro: %s Não há escopos suficientes para encontrar símbolo de função (esperado escopo pai abaixo dos parâmetros).\n",
                __FUNCTION__);
         return NULL;
     }
@@ -111,14 +111,14 @@ symbol_t* stack_get_function(stack_t* stack)
 
     table_t* function_table = current->table;
     if (!function_table->head) {
-        printf("Error: %s expected at least one symbol in the function declaration scope.\n",
+        printf("Erro: %s esperado pelo menos um símbolo no escopo de declaração da função.\n",
                __FUNCTION__);
         return NULL;
     }
 
     symbol_t* func_symbol = function_table->head;
     if (func_symbol->nature != FUNCTION) {
-        printf("Error: %s expected last symbol in function declaration scope to be a function.\n",
+        printf("Erro: %s esperado que o último símbolo no escopo de declaração da função seja uma função.\n",
                __FUNCTION__);
         return NULL;
     }
@@ -129,7 +129,7 @@ symbol_t* stack_get_function(stack_t* stack)
 symbol_t* stack_get_symbol(stack_t* stack, const char* label, int line)
 {
     if (!stack) {
-        printf("Error: %s received NULL stack.\n", __FUNCTION__);
+        printf("Erro: %s recebeu pilha NULL.\n", __FUNCTION__);
         return NULL;
     }
 

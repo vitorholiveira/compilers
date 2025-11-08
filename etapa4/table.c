@@ -15,7 +15,7 @@ table_t* table_new(void)
 void table_free(table_t* table)
 {
     if (!table) {
-        printf("Error: %s received NULL symbol table = %p.\n", __FUNCTION__, table);
+        printf("Erro: %s recebeu tabela de símbolos NULL = %p.\n", __FUNCTION__, table);
         return;
     }
 
@@ -31,7 +31,7 @@ void table_free(table_t* table)
 symbol_t* table_add_symbol(table_t* table, symbol_t* symbol)
 {
     if (!table || !symbol) {
-        printf("Error: %s received NULL symbol table = %p / %p.\n", __FUNCTION__, table, symbol);
+        printf("Erro: %s recebeu tabela de símbolos NULL = %p / %p.\n", __FUNCTION__, table, symbol);
         return NULL;
     }
 
@@ -52,7 +52,7 @@ symbol_t* table_add_symbol(table_t* table, symbol_t* symbol)
 symbol_t* table_get_symbol(table_t* table, const char* label)
 {
     if (!table) {
-        printf("Error: %s received NULL symbol table = %p.\n", __FUNCTION__, table);
+        printf("Erro: %s recebeu tabela de símbolos NULL = %p.\n", __FUNCTION__, table);
         return NULL;
     }
 
@@ -98,7 +98,7 @@ void symbol_free(symbol_t* symbol)
 
     /* Validate parameter list is only on functions */
     if (symbol->param_list && symbol->nature != FUNCTION) {
-        printf("Error: symbol of nature %d has params, but is not a FUNCTION\n",
+        printf("Erro: símbolo de natureza %d tem parâmetros, mas não é uma FUNÇÃO\n",
                symbol->nature);
     }
 
@@ -122,12 +122,12 @@ void symbol_free(symbol_t* symbol)
 void symbol_add_parameter(symbol_t* symbol, param_node_t* param)
 {
     if (!symbol || !param) {
-        printf("Error: %s received NULL symbol or param\n", __FUNCTION__);
+        printf("Erro: %s recebeu símbolo ou parâmetro NULL\n", __FUNCTION__);
         return;
     }
 
     if (symbol->nature != FUNCTION) {
-        printf("Error: %s called on non-function (%d) symbol\n", __FUNCTION__, symbol->nature);
+        printf("Erro: %s chamado em símbolo não-função (%d)\n", __FUNCTION__, symbol->nature);
         return;
     }
 
@@ -148,13 +148,13 @@ void symbol_add_parameter(symbol_t* symbol, param_node_t* param)
 void symbol_table_debug_print(table_t* table)
 {
     if (!table || !table->head) {
-        printf("  [empty symbol table]\n");
+        printf("  [tabela de símbolos vazia]\n");
         return;
     }
 
     symbol_t* current = table->head;
     while (current) {
-        printf("  - %s (nature: %d, data_type: %d, line: %d)\n",
+        printf("  - %s (natureza: %d, tipo_dados: %d, linha: %d)\n",
                current->lex_value->value,
                (int)current->nature,
                (int)current->data_type,
@@ -162,10 +162,10 @@ void symbol_table_debug_print(table_t* table)
 
         /* Print parameters if present */
         if (current->param_list) {
-            printf("    Parameters:\n");
+            printf("    Parâmetros:\n");
             param_node_t* param = current->param_list;
             while (param) {
-                printf("      • %s (data_type: %d)\n", param->label, (int)param->data_type);
+                printf("      • %s (tipo_dados: %d)\n", param->label, (int)param->data_type);
                 param = param->next;
             }
         }
