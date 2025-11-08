@@ -1,0 +1,6 @@
+var v := inteiro,
+
+y -> inteiro := [
+    var v2 := inteiro
+    v(v2)
+];

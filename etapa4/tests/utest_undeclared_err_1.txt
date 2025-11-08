@@ -1,0 +1,5 @@
+var x := inteiro,
+
+undeclared_y -> inteiro := [
+    retorna x + y
+];

@@ -1,0 +1,4 @@
+x -> inteiro := [
+    var a := inteiro
+    a := 10.5
+];

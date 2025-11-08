@@ -80,7 +80,7 @@ void stack_declare_symbol(stack_t* stack, nature_t nature, data_type_t data_type
 
     if (declared_symbol) {
         char error_msg[100];
-        sprintf(error_msg, "Identificador '%s' já foi declarado na linha %d.", symbol->lex_value->value, symbol->lex_value->line);
+        sprintf(error_msg, "Identificador '%s' já foi declarado.", symbol->lex_value->value);
         print_err(symbol->lex_value->line, ERR_DECLARED, error_msg);
         stack_free(stack);
         exit(ERR_DECLARED);

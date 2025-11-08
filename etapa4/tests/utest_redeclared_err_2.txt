@@ -1,0 +1,6 @@
+x -> inteiro := [
+    var x := inteiro com 1
+],
+
+var x := inteiro com 2;
+

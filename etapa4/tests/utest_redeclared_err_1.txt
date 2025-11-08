@@ -1,0 +1,2 @@
+var x := inteiro,
+var x := decimal;

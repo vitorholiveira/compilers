@@ -1,0 +1,27 @@
+add_decimals -> decimal com x := decimal,y := decimal := [
+    retorna (x + y) := decimal
+],
+
+sub_decimals -> decimal com x := decimal, y := decimal := [
+    retorna (x - y) := decimal
+],
+
+main -> decimal :=  [
+    var x := decimal com 1.0
+    [
+        var y := decimal com 2.0
+        [
+            se (x >= 1.0)[
+                x :=  add_decimals(x+y,y)
+            ]senao[
+                var z := decimal com 3.0
+                retorna z := decimal
+            ]
+        ]
+        enquanto (((x) / (y)) > .0)[
+            x :=  (x - 1.0)
+        ]
+    ]
+    [[[]]]
+    retorna sub_decimals(x,x) := decimal
+];

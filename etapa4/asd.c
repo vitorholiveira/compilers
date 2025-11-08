@@ -109,17 +109,11 @@ void lex_free(lex_value_t* lv) {
   }
 }
 
-int asd_count_nodes(asd_tree_t *tree) {
-    if (tree == NULL) {
-        return 0;
+void args_free(args_t *args) {
+  if (args != NULL) {
+    if(args->args != NULL) {
+        asd_free(args->args);
     }
-    
-    int count = 1; // Count the current node
-    
-    // Recursively count all children
-    for (int i = 0; i < tree->number_of_children; i++) {
-        count += asd_count_nodes(tree->children[i]);
-    }
-    
-    return count;
+    free(args);
+  }
 }

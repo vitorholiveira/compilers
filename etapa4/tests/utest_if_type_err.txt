@@ -1,0 +1,12 @@
+y -> decimal := [
+    var z := decimal com 3.41
+    retorna z := decimal
+],
+
+x -> inteiro := [
+    se (1) [
+        y()
+    ] senao [
+        x()
+    ]
+];

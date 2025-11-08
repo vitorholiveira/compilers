@@ -1,0 +1,3 @@
+func -> decimal com x := inteiro, y := decimal, z := inteiro, b := decimal := [
+    func(1, 1.0, .2, 2.0)
+]

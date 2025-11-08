@@ -1,0 +1,7 @@
+args2 -> inteiro com x := inteiro, y := inteiro := [
+    retorna x - y := inteiro
+],
+
+args4 -> inteiro com x := inteiro, y := inteiro, z := inteiro, k := inteiro := [
+    args4((1 + 2), (3 + 1), args2(6, ((0))), 2)
+]; 

@@ -1,0 +1,3 @@
+func -> inteiro com x := inteiro, x := inteiro := [
+    retorna x := inteiro
+];

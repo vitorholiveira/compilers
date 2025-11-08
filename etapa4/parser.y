@@ -22,7 +22,7 @@ data_type_t validate_assignment_types(stack_t* scopes, lex_value_t* identifier, 
 /*
  * validate_call_and_get_type function, validates function call arguments against parameter types and counts, returning the function's return type.
  */
-data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments);
+data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments, int arg_count);
 
 /*
  * validate_return_statement function, validates that the return expression type matches the declared function return type.
@@ -78,8 +78,14 @@ data_type_t lookup_identifier_type(stack_t* scopes, lex_value_t* identifier);
 } <valor_lexico>
 
 %destructor {
-  if ($$) {
-    asd_free($$);
+  if ($<argumentos>$) {
+    args_free($<argumentos>$);
+  }
+} <argumentos>
+
+%destructor {
+  if ($<arvore>$) {
+    asd_free($<arvore>$);
   }
 } <arvore>
 
@@ -91,7 +97,8 @@ data_type_t lookup_identifier_type(stack_t* scopes, lex_value_t* identifier);
 %type <arvore> comandos_simples bloco_de_comandos sequencia_comandos_simples declaracao_variavel_comando_simples
 %type <arvore> literais comando_atribuicao chamada_funcao comando_retorno
 %type <arvore> fluxo_condicional fluxo_iterativo cabeca_funcao corpo_funcao
-%type <arvore> expr_or expr_and expr_eq expr_rel expr_add expr_mul expr_unario expr_prim expressao argumentos
+%type <arvore> expr_or expr_and expr_eq expr_rel expr_add expr_mul expr_unario expr_prim expressao
+%type <argumentos> argumentos
 %type <data_type> opcao_tipo
 
 %define parse.error verbose 
@@ -248,7 +255,7 @@ INVOCAÇÃO E RETORNO DE FUNÇÃO
 */
 
 chamada_funcao: TK_ID '(' argumentos ')' {
-    data_type_t data_type = validate_call_and_get_type(pilha, $1, $3);
+    data_type_t data_type = validate_call_and_get_type(pilha, $1, $3->args, $3->num_args);
     int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
     snprintf(buffer, len, "call %s", $1->value);
@@ -256,11 +263,14 @@ chamada_funcao: TK_ID '(' argumentos ')' {
     $$ = asd_new(buffer, $1, data_type);
     free(buffer);
 
-    if($3 != NULL) asd_add_child($$, $3);
+    if($3 != NULL) {
+        asd_add_child($$, $3->args);
+        free($3);  // Free the args_t wrapper structure
+    }
     lex_free($1);
 };
 chamada_funcao: TK_ID '(' ')' {
-    data_type_t data_type = validate_call_and_get_type(pilha, $1, NULL);
+    data_type_t data_type = validate_call_and_get_type(pilha, $1, NULL, 0);
     int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
     snprintf(buffer, len, "call %s", $1->value);
@@ -271,11 +281,18 @@ chamada_funcao: TK_ID '(' ')' {
 }; 
 
 argumentos: expressao ',' argumentos { 
-    if($1 != NULL && $3 != NULL) asd_add_child($1, $3);
-    $$ = $1;
+    if($1 != NULL && $3 != NULL) asd_add_child($1, $3->args);
+    args_t* args = malloc(sizeof(args_t));
+    args->num_args = 1 + $3->num_args;
+    args->args = $1;
+    free($3);  // Free the previous args_t wrapper
+    $$ = args;
 };
 argumentos: expressao { 
-    $$ = $1;
+    args_t* args = malloc(sizeof(args_t));
+    args->num_args = 1;
+    args->args = $1;
+    $$ = args;
 };
 
 
@@ -498,7 +515,7 @@ data_type_t validate_assignment_types(stack_t* scopes, lex_value_t* identifier, 
     return rhs_type;
 }
 
-data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments)
+data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments, int arg_count)
 {
     symbol_t* sym = stack_get_symbol(scopes, func_name->value, func_name->line);
 
@@ -512,7 +529,7 @@ data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, 
     }
 
     int params_expected = sym->param_count;
-    int arg_count = asd_count_nodes(arguments);
+
     /* Argument count validation - insufficient */
     if (params_expected > arg_count) {
         char msg[200];

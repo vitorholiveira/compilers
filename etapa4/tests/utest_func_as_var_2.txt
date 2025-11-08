@@ -1,0 +1,7 @@
+func -> inteiro := [
+    retorna 1 := inteiro
+],
+
+main -> inteiro := [
+    retorna 1 + func := inteiro
+];

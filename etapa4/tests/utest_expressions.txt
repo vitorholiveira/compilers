@@ -1,0 +1,33 @@
+var a := inteiro, var b := inteiro, var c := decimal, var d := decimal,
+
+my_function -> inteiro := [
+    a := 5 + 3
+    b := a - 2
+    c := 1.0 * 4.5
+    d := c / 2.0
+    a := a % 3
+    b := a & b
+    c := c | d
+
+    d := (d + d) * (d  + c) + (d + d)
+    d := -(c - d)
+    a := !!!!!-+--b
+
+    c := ((d + c) * (c - d) / 2.0) + ((d % c) & (c | c))
+    d := (c * d) + (d / c) - (c % c) & (d | d)
+    b := (((a + 2) * (b - 1)) / (a + 3)) % 4
+
+    d := (((c * 3.0) - (d / 2.1)) + ((c % .2) & d)) | ((d + d) - (c * d))
+
+    se (a == b) [
+        c := 1000.0 * d
+    ] senao [
+        d := d - c
+    ]
+
+    enquanto (a < 50) [
+        a := a + 1
+    ]
+
+    retorna (((a + b) * (a * b))) := inteiro 
+];

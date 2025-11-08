@@ -1,0 +1,4 @@
+declared_function -> decimal := [
+    var x := inteiro
+    undeclared_func(x)
+];

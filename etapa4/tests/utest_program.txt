@@ -1,0 +1,43 @@
+var global_var1 := decimal,
+
+div_decimals -> decimal com x := decimal, y := decimal :=[
+    se (y != 0.0) [
+        retorna (x / y) := decimal
+    ] senao [
+        retorna 0.0 := decimal
+    ]
+],
+
+// Another global variable
+var global_var2 := decimal,
+
+mul_decimals -> decimal com x := decimal, y := decimal :=[
+    // -> the multiplication of x and y
+    retorna (x * y) := decimal
+],
+
+main -> decimal := [
+    // var local variables
+    var a := decimal
+    a := global_var1
+    var b := decimal 
+    b := global_var2
+    var c := decimal com 3.0
+    
+    // Increment a by c enquanto a := less than b
+    enquanto (a < b) [
+        a := mul_decimals(a, c) // retorna the sum
+    ]
+    
+    // se a exceeds b, subtract c to adjust
+    se (a > b) [
+        a := div_decimals(a, c)
+    ]
+    
+    // Compute result by dividing a by c
+    var result := decimal 
+    result := div_decimals(a, c)
+    
+    // retorna the final computed value after multiplying by 2.0
+    retorna mul_decimals(result, 2.0) := decimal
+];

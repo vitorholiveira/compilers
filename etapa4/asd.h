@@ -56,8 +56,8 @@ void asd_print_graphviz (asd_tree_t *tree);
 void lex_free(lex_value_t* lv);
 
 /*
- * asd_count_nodes function, recursively counts all nodes in the tree.
+ * lex_free function, frees a variable of nature args_t.
  */
-int asd_count_nodes(asd_tree_t *tree);
+void args_free(args_t* args);
 
 #endif //_ASD_H_

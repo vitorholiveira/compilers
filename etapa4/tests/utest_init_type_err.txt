@@ -1,0 +1,3 @@
+x -> inteiro := [
+    var a := decimal com 100000  
+]
