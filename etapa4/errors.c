@@ -13,7 +13,7 @@ void print_err_function(const char* label, int line_number, int declared_line_nu
 
 void print_err_wrong_type(const char* label, int line_number, int type_label, int type_value) {
     char buffer[200];
-    sprintf(buffer, "Incompatibilidade de tipo em '%s'. O tipo '%s' deveria ser o mesmo de '%s'.", label, number_type_to_string(type_label), number_type_to_string(type_value));
+    sprintf(buffer, "Incompatibilidade de tipo em '%s'. O tipos '%s' e '%s' são diferentes.", label, number_type_to_string(type_label), number_type_to_string(type_value));
     print_err(line_number, ERR_WRONG_TYPE, buffer);
 }
 
