@@ -1,164 +1,155 @@
 #include "type_infer.h"
 
-data_type_t infer_initialization_type(stack_t* scope_stack, lex_value_t* var_id, data_type_t decl_type, data_type_t exp_type)
+data_type_t validate_var_init_types(stack_t* scopes, lex_value_t* identifier, data_type_t declared, data_type_t assigned)
 {
-    /* Type mismatch between declaration and initialization */
-    if (decl_type == exp_type) {
-        return decl_type;
+    /* Validates type consistency during variable initialization */
+    if (declared != assigned) {
+        print_err_wrong_type(identifier->value, identifier->line, declared, assigned);
+        stack_free(scopes);
+        exit(ERR_WRONG_TYPE);
     }
-
-    err_print_initialization_type(var_id->line, var_id->value, decl_type, exp_type);
-    stack_free(scope_stack);
-    exit(ERR_WRONG_TYPE);
+    return declared;
 }
 
-data_type_t infer_atribution_type(stack_t* scope_stack, lex_value_t* var_id, data_type_t exp_type)
+data_type_t validate_assignment_types(stack_t* scopes, lex_value_t* identifier, data_type_t rhs_type)
 {
-    symbol_t* var_symbol = stack_get_symbol(scope_stack, var_id->value, var_id->line);
+    symbol_t* sym = stack_get_symbol(scopes, identifier->value, identifier->line);
     
-    /* Verify target is a variable, not a function */
-    if (var_symbol->nature == FUNCTION) {
-        err_print_function(var_id->value, var_id->line, var_symbol->lex_value->line);
-        stack_free(scope_stack);
+    /* Functions cannot be assignment targets */
+    if (sym->nature == FUNCTION) {
+        print_err_function(identifier->value, identifier->line, sym->lex_value->line);
+        stack_free(scopes);
         exit(ERR_FUNCTION);
     }
 
-    /* Check type compatibility */
-    if (var_symbol->data_type == exp_type) {
-        return exp_type;
+    /* Type compatibility verification */
+    if (sym->data_type != rhs_type) {
+        print_err_wrong_type(identifier->value, identifier->line, sym->data_type, rhs_type);
+        stack_free(scopes);
+        exit(ERR_WRONG_TYPE);
     }
 
-    err_print_atribution_type(var_id->line, var_symbol->lex_value->line, var_id->value, 
-                              var_symbol->data_type, exp_type);
-    stack_free(scope_stack);
-    exit(ERR_WRONG_TYPE);
+    return rhs_type;
 }
 
-data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id, asd_tree_t* call_args, int num_args)
+data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments, int arg_count)
 {
-    symbol_t* func_symbol = stack_get_symbol(scope_stack, call_id->value, call_id->line);
+    symbol_t* sym = stack_get_symbol(scopes, func_name->value, func_name->line);
 
-    /* Ensure symbol is actually a function */
-    if (func_symbol->nature == IDENTIFIER) {
-        char error_msg[100];
-        sprintf(error_msg, "Identificador '%s' está sendo usado como função, mas foi declarado como variável na linha %d", call_id->value, func_symbol->lex_value->line);
-        print_err(call_id->line, ERR_VARIABLE, error_msg);
-        stack_free(scope_stack);
+    /* Verify the symbol represents a callable function */
+    if (sym->nature == IDENTIFIER) {
+        char msg[100];
+        sprintf(msg, "Identificador '%s' está sendo usado como função mas é uma variável.", func_name->value);
+        print_err(func_name->line, ERR_VARIABLE, msg);
+        stack_free(scopes);
         exit(ERR_VARIABLE);
     }
 
-    /* Count expected parameters */
-    int expected_count = func_symbol->param_count;
+    int params_expected = sym->param_count;
 
-    /* Check for too few arguments */
-    if (expected_count > num_args) {
-        err_print_missing_args(call_id->line, func_symbol->lex_value->line, call_id->value, 
-                              expected_count, num_args);
-        stack_free(scope_stack);
+    /* Argument count validation - insufficient */
+    if (params_expected > arg_count) {
+        char msg[100];
+        sprintf(msg, "A função '%s' declarada na linha %d espera %d argumentos, mas obteve apenas %d argumentos.", func_name->value, func_name->line, params_expected, arg_count);
+        print_err(func_name->line, ERR_MISSING_ARGS, msg);
+        stack_free(scopes);
         exit(ERR_MISSING_ARGS);
     }
 
-    /* Check for too many arguments */
-    if (expected_count < num_args) {
-        err_print_excess_args(call_id->line, func_symbol->lex_value->line, call_id->value, 
-                             expected_count, num_args);
-        stack_free(scope_stack);
+    /* Argument count validation - excessive */
+    if (params_expected < arg_count) {
+        char msg[100];
+        sprintf(msg, "A função '%s' declarada na linha %d espera %d argumentos, mas obteve %d argumentos.", func_name->value, func_name->line, params_expected, arg_count);
+        print_err(func_name->line, ERR_EXCESS_ARGS, msg);
+        stack_free(scopes);
         exit(ERR_EXCESS_ARGS);
     }
 
-    /* Validate each argument type against parameter list */
-    param_node_t* param_cursor = func_symbol->param_list;
-    asd_tree_t* arg_cursor = call_args;
-    int position = 1;
+    /* Type checking for each argument-parameter pair */
+    param_node_t* current_param = sym->param_list;
+    asd_tree_t* current_arg = arguments;
+    int idx = 1;
 
-    while (param_cursor && arg_cursor) {
-        data_type_t expected = param_cursor->data_type;
-        data_type_t provided = arg_cursor->data_type;
+    while (current_param != NULL && current_arg != NULL) {
+        data_type_t param_type = current_param->data_type;
+        data_type_t arg_type = current_arg->data_type;
         
-        if (expected != provided) {
-            err_print_wrong_type_args(call_id->line, func_symbol->lex_value->line, call_id->value, 
-                                     position, param_cursor->label, expected, provided);
-            stack_free(scope_stack);
+        if (param_type != arg_type) {
+            char msg[100];
+            sprintf(msg, "O tipo esperado era '%s', mas foi obtido '%s' para o argumento %d ('%s') da função '%s'.", data_type_to_string(param_type), data_type_to_string(arg_type), idx, current_arg->label, func_name->value);
+            print_err(func_name->line, ERR_WRONG_TYPE_ARGS, msg);
+            stack_free(scopes);
             exit(ERR_WRONG_TYPE_ARGS);
         }
 
-        param_cursor = param_cursor->next;
-        position++;
+        current_param = current_param->next;
+        idx++;
 
-        /* Navigate to next argument in tree */
-        if (arg_cursor->number_of_children > 0) {
-            arg_cursor = arg_cursor->children[arg_cursor->number_of_children - 1];
-        } else {
-            arg_cursor = NULL;
-        }
+        /* Advance to subsequent argument node */
+        current_arg = (current_arg->number_of_children > 0) 
+            ? current_arg->children[current_arg->number_of_children - 1] 
+            : NULL;
     }
 
-    return func_symbol->data_type;
+    return sym->data_type;
 }
 
-data_type_t infer_return_type(stack_t* scope_stack, asd_tree_t* return_expr, data_type_t declared_type)
+data_type_t validate_return_statement(stack_t* scopes, asd_tree_t* expr, data_type_t func_return_type)
 {
-    /* Check expression type matches declared return type */
-    if (return_expr->data_type != declared_type) {
-        err_print_atribution_type(return_expr->lex_value->line, return_expr->lex_value->line, 
-                                 return_expr->label, declared_type, return_expr->data_type);
-        stack_free(scope_stack);
+    /* Ensure return expression matches function signature */
+    if (expr->data_type != func_return_type) {
+        print_err_wrong_type(expr->label, expr->lex_value->line, expr->data_type, func_return_type);
+        stack_free(scopes);
         exit(ERR_WRONG_TYPE);
     }
 
-    /* Verify against function declaration */
-    symbol_t* func_symbol = stack_get_function(scope_stack);
-    if (func_symbol->data_type != declared_type) {
-        err_print_return_type(func_symbol->lex_value->line, return_expr->lex_value->line, 
-                             func_symbol->lex_value->value, func_symbol->data_type, declared_type);
-        stack_free(scope_stack);
+    /* Cross-reference with function symbol in scope */
+    symbol_t* current_func = stack_get_function(scopes);
+    if (current_func->data_type != func_return_type) {
+        print_err_wrong_type(current_func->lex_value->value, current_func->lex_value->line, current_func->data_type, func_return_type);
+        stack_free(scopes);
         exit(ERR_WRONG_TYPE);
     }
 
-    return declared_type;
+    return func_return_type;
 }
 
-data_type_t infer_if_type(stack_t* scope_stack, data_type_t cond_type, asd_tree_t* if_block,
-                          asd_tree_t* else_block)
+data_type_t validate_conditional_branches(stack_t* scopes, data_type_t condition_type, asd_tree_t* then_branch, asd_tree_t* else_branch)
 {
-    /* If both branches exist, they must have matching types */
-    int both_branches_present = (if_block && else_block);
-    
-    if (both_branches_present) {
-        if (if_block->data_type != else_block->data_type) {
-            err_print_if_else_type(if_block->lex_value->line, if_block->data_type, 
-                                  else_block->data_type);
-            stack_free(scope_stack);
+    /* When both branches exist, they must yield compatible types */
+    if (then_branch != NULL && else_branch != NULL) {
+        if (then_branch->data_type != else_branch->data_type) {
+            print_err_wrong_type("comando se - senão", then_branch->lex_value->line, then_branch->data_type, else_branch->data_type);
+            stack_free(scopes);
             exit(ERR_WRONG_TYPE);
         }
     }
 
-    return cond_type;
+    return condition_type;
 }
 
-data_type_t infer_exp_type(stack_t* scope_stack, const char* op, asd_tree_t* exp_left, asd_tree_t* exp_right)
+data_type_t deduce_binary_expr_type(stack_t* scopes, const char* operator, asd_tree_t* lhs, asd_tree_t* rhs)
 {
-    /* Binary operation requires matching operand types */
-    if (exp_left->data_type == exp_right->data_type) {
-        return exp_left->data_type;
+    /* Both operands must share the same type */
+    if (lhs->data_type != rhs->data_type) {
+        print_err_wrong_type(operator, rhs->lex_value->line, rhs->data_type, lhs->data_type);
+        stack_free(scopes);
+        exit(ERR_WRONG_TYPE);
     }
 
-    err_print_expression_type(exp_right->lex_value->line, op, exp_left->data_type, 
-                             exp_right->data_type);
-    stack_free(scope_stack);
-    exit(ERR_WRONG_TYPE);
+    return lhs->data_type;
 }
 
-data_type_t infer_var_type(stack_t* scope_stack, lex_value_t* var_id)
+data_type_t lookup_identifier_type(stack_t* scopes, lex_value_t* identifier)
 {
-    symbol_t* var_symbol = stack_get_symbol(scope_stack, var_id->value, var_id->line);
+    symbol_t* sym = stack_get_symbol(scopes, identifier->value, identifier->line);
 
-    /* Ensure we're referencing a variable, not a function */
-    if (var_symbol->nature == FUNCTION) {
-        err_print_function(var_id->value, var_id->line, var_symbol->lex_value->line);
-        stack_free(scope_stack);
+    /* Variable references only - functions require explicit calls */
+    if (sym->nature == FUNCTION) {
+        print_err_function(identifier->value, identifier->line, sym->lex_value->line);
+        stack_free(scopes);
         exit(ERR_FUNCTION);
     }
 
-    return var_symbol->data_type;
+    return sym->data_type;
 }

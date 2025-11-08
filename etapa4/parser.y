@@ -43,7 +43,6 @@ extern stack_t *pilha;
   }
 } <valor_lexico>
 
-/* CORREÇÃO 2: Adiciona um destructor para liberar args_t */
 %destructor { free($$); } <argumentos> 
 
 %token <valor_lexico> TK_ID
@@ -63,14 +62,14 @@ extern stack_t *pilha;
 %%
 
 /*
-ESCOPO
+GERENCIAMENTO DE ESCOPO
 */
 
-escopo_ini: %empty { stack_push(pilha); /* 1. Cria tabela vazia; 2. Empilha tabela; */ };
-escopo_fim: %empty { stack_pop(pilha); /* 1. Desempilha a tabela do topo; 2. Free profundo da tabela; */ };
+escopo_ini: %empty { stack_push(pilha); };
+escopo_fim: %empty { stack_pop(pilha); };
 
 /*
-LITERAIS E TIPOS
+CONSTANTES E DEFINIÇÕES DE TIPO
 */
 
 literais: TK_LI_INTEIRO {
@@ -86,7 +85,7 @@ opcao_tipo: TK_INTEIRO { $$ = INTEIRO; };
 opcao_tipo: TK_DECIMAL { $$ = DECIMAL; };
 
 /*
-COMANDOS
+ESTRUTURA PRINCIPAL
 */
 
 programa: %empty { arvore = NULL; };
@@ -111,7 +110,7 @@ declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo {
 };
 
 /*
-DECLARAÇÃO DE FUNÇÃO
+FUNÇÕES
 */
 
 definicao_funcao: cabeca_funcao escopo_ini parametros_funcao TK_ATRIB corpo_funcao escopo_fim {
@@ -130,7 +129,7 @@ corpo_funcao: '[' ']' { $$ = NULL; };
 
 parametros_funcao: %empty { $$ = NULL; }
 parametros_funcao: TK_COM lista_params { $$ = NULL; }
-parametros_funcao: lista_params { $$ = NULL; }; // sem o token opcional TK_COM
+parametros_funcao: lista_params { $$ = NULL; };
 
 lista_params: TK_ID TK_ATRIB opcao_tipo { 
     $$ = NULL;
@@ -144,7 +143,7 @@ lista_params: lista_params ',' TK_ID TK_ATRIB opcao_tipo {
 };
 
 /*
-COMANDOS SIMPLES
+INSTRUÇÕES
 */
 
 comandos_simples: bloco_de_comandos {$$ = $1;}
@@ -157,7 +156,7 @@ comandos_simples: bloco_de_comandos {$$ = $1;}
                 ;
 
 /*
-BLOCO DE COMANDOS
+BLOCOS
 */
 
 bloco_de_comandos: '[' escopo_ini sequencia_comandos_simples escopo_fim ']' { $$ = $3; }
@@ -174,38 +173,37 @@ sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
 sequencia_comandos_simples: comandos_simples { $$ = $1; };
 
 /*
-DECLARAÇÃO DE VARIÁVEL
+VARIÁVEIS LOCAIS
 */
 
 declaracao_variavel_comando_simples: declaracao_variavel {$$ = $1;};
 declaracao_variavel_comando_simples: TK_VAR TK_ID TK_ATRIB opcao_tipo TK_COM literais {
-    data_type_t data_type = infer_initialization_type(pilha, $2, $4, $6->data_type);
+    data_type_t data_type = validate_var_init_types(pilha, $2, $4, $6->data_type);
     stack_declare_symbol(pilha, IDENTIFIER, data_type, $2);
     $$ = asd_new("com", NULL, $4);
     asd_add_child($$, asd_new($2->value, $2, $4));
     if($6 != NULL) asd_add_child($$, $6);
-    lex_free($2); /* CORREÇÃO 1: Libera TK_ID */
+    lex_free($2);
 };
 
 /*
-ATRIBUIÇÃO
+OPERAÇÕES DE ATRIBUIÇÃO
 */
 
 comando_atribuicao: TK_ID TK_ATRIB expressao {
-    data_type_t data_type = infer_atribution_type(pilha, $1, $3->data_type);
+    data_type_t data_type = validate_assignment_types(pilha, $1, $3->data_type);
     $$ = asd_new(":=", NULL, data_type); 
     asd_add_child($$, asd_new($1->value, $1, data_type)); 
     asd_add_child($$, $3);
-    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
+    lex_free($1);
 };
 
 /*
-CHAMADA DE FUNÇÃO E RETORNO
+INVOCAÇÃO E RETORNO DE FUNÇÃO
 */
 
 chamada_funcao: TK_ID '(' argumentos ')' {
-    data_type_t data_type = infer_function_call_type(pilha, $1, $3->args, $3->num_args);
-    // String "call TK_ID"
+    data_type_t data_type = validate_call_and_get_type(pilha, $1, $3->args, $3->num_args);
     int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
     snprintf(buffer, len, "call %s", $1->value);
@@ -214,28 +212,25 @@ chamada_funcao: TK_ID '(' argumentos ')' {
     free(buffer);
 
     if($3 != NULL) asd_add_child($$, $3->args);
-    /* $3 é liberado automaticamente pelo %destructor */
-    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
+    lex_free($1);
 };
 chamada_funcao: TK_ID '(' ')' {
-    data_type_t data_type = infer_function_call_type(pilha, $1, NULL, 0);
-    // String "call TK_ID"
+    data_type_t data_type = validate_call_and_get_type(pilha, $1, NULL, 0);
     int len = strlen("call ") + strlen($1->value) + 1;
     char *buffer = malloc(len);
     snprintf(buffer, len, "call %s", $1->value);
 
     $$ = asd_new(buffer, $1, data_type);
     free(buffer);
-    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
+    lex_free($1);
 }; 
 
 argumentos: expressao ',' argumentos { 
     if($1 != NULL && $3 != NULL) asd_add_child($1, $3->args);
     args_t* args = malloc(sizeof(args_t));
     args->num_args = 1 + $3->num_args;
-    args->args = $1; /* $1 se torna o início da lista de argumentos */
+    args->args = $1;
     $$ = args;
-    /* $3 é liberado automaticamente pelo %destructor */
 };
 argumentos: expressao { 
     args_t* args = malloc(sizeof(args_t));
@@ -246,24 +241,24 @@ argumentos: expressao {
 
 
 comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo { 
-    data_type_t data_type = infer_return_type(pilha, $2, $4);
+    data_type_t data_type = validate_return_statement(pilha, $2, $4);
     $$ = asd_new("retorna", NULL, data_type); 
     if($2 != NULL) asd_add_child($$, $2);
 }; 
 
 /*
-SE SENÃO
+CONDICIONAIS
 */
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
-    data_type_t data_type = infer_if_type(pilha, $3->data_type, $5, NULL);
+    data_type_t data_type = validate_conditional_branches(pilha, $3->data_type, $5, NULL);
     $$ = asd_new("se", NULL, data_type);
     if($3 != NULL) asd_add_child($$, $3);
     if($5 != NULL) asd_add_child($$, $5);
 };
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_comandos{
-    data_type_t data_type = infer_if_type(pilha, $3->data_type, $5, $7);
+    data_type_t data_type = validate_conditional_branches(pilha, $3->data_type, $5, $7);
     $$ = asd_new("se", NULL, data_type);
     if($3 != NULL) asd_add_child($$, $3);
     if($5 != NULL) asd_add_child($$, $5);
@@ -271,7 +266,7 @@ fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_c
 };
 
 /*
-ENQUANTO
+LAÇOS
 */
 
 fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos { 
@@ -281,14 +276,14 @@ fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos {
 };
 
 /*
-EXPRESSÕES
+ANÁLISE DE EXPRESSÕES
 */
 
 /*
-Nível mais alto: operador OR '|'
+Disjunção lógica OR '|'
 */
 expr_or: expr_or '|' expr_and { 
-    data_type_t data_type = infer_exp_type(pilha, "|", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "|", $1, $3);
     $$ = asd_new("|", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -296,10 +291,10 @@ expr_or: expr_or '|' expr_and {
 expr_or: expr_and { $$ = $1; };
 
 /*
-Nível AND '&'
+Conjunção lógica AND '&'
 */
 expr_and: expr_and '&' expr_eq { 
-    data_type_t data_type = infer_exp_type(pilha, "&", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "&", $1, $3);
     $$ = asd_new("&", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -307,16 +302,16 @@ expr_and: expr_and '&' expr_eq {
 expr_and: expr_eq { $$ = $1; };
 
 /*
-Nível de igualdade ==, != 
+Operadores de comparação ==, != 
 */
 expr_eq: expr_eq TK_OC_EQ expr_rel {
-    data_type_t data_type = infer_exp_type(pilha, "==", $1, $3); 
+    data_type_t data_type = deduce_binary_expr_type(pilha, "==", $1, $3); 
     $$ = asd_new("==", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 }
 expr_eq: expr_eq TK_OC_NE expr_rel { 
-    data_type_t data_type = infer_exp_type(pilha, "!=", $1, $3); 
+    data_type_t data_type = deduce_binary_expr_type(pilha, "!=", $1, $3); 
     $$ = asd_new("!=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -324,28 +319,28 @@ expr_eq: expr_eq TK_OC_NE expr_rel {
 expr_eq: expr_rel { $$ = $1; };
 
 /*
-Nível relacional <, >, <=, >=
+Comparações relacionais <, >, <=, >=
 */
 expr_rel: expr_rel '<' expr_add { 
-    data_type_t data_type = infer_exp_type(pilha, "<", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "<", $1, $3);
     $$ = asd_new("<", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_rel: expr_rel '>' expr_add { 
-    data_type_t data_type = infer_exp_type(pilha, ">", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, ">", $1, $3);
     $$ = asd_new(">", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_rel: expr_rel TK_OC_LE expr_add { 
-    data_type_t data_type = infer_exp_type(pilha, "<=", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "<=", $1, $3);
     $$ = asd_new("<=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_rel: expr_rel TK_OC_GE expr_add { 
-    data_type_t data_type = infer_exp_type(pilha, ">=", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, ">=", $1, $3);
     $$ = asd_new(">=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -353,16 +348,16 @@ expr_rel: expr_rel TK_OC_GE expr_add {
 expr_rel: expr_add { $$ = $1; };
 
 /*
-Nível de adição e subtração binária +, -
+Operações aritméticas +, -
 */
 expr_add: expr_add '+' expr_mul { 
-    data_type_t data_type = infer_exp_type(pilha, "+", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "+", $1, $3);
     $$ = asd_new("+", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_add: expr_add '-' expr_mul { 
-    data_type_t data_type = infer_exp_type(pilha, "-", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "-", $1, $3);
     $$ = asd_new("-", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -370,22 +365,22 @@ expr_add: expr_add '-' expr_mul {
 expr_add: expr_mul { $$ = $1; };
 
 /*
-Nível de multiplicação, divisão e resto * / %
+Operações multiplicativas * / %
 */
 expr_mul: expr_mul '*' expr_unario { 
-    data_type_t data_type = infer_exp_type(pilha, "*", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "*", $1, $3);
     $$ = asd_new("*", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_mul: expr_mul '/' expr_unario { 
-    data_type_t data_type = infer_exp_type(pilha, "/", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "/", $1, $3);
     $$ = asd_new("/", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
 };
 expr_mul: expr_mul '%' expr_unario {
-    data_type_t data_type = infer_exp_type(pilha, "%", $1, $3);
+    data_type_t data_type = deduce_binary_expr_type(pilha, "%", $1, $3);
     $$ = asd_new("%", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
@@ -393,7 +388,7 @@ expr_mul: expr_mul '%' expr_unario {
 expr_mul: expr_unario { $$ = $1; };
 
 /*
-Operadores unários prefixados
+Operadores de prefixo
 */
 expr_unario: '+' expr_unario { 
     $$ = asd_new("+", NULL, $2->data_type);
@@ -410,12 +405,12 @@ expr_unario: '!' expr_unario {
 expr_unario: expr_prim { $$ = $1; };
 
 /*
-Operandos: identificadores, literais, chamada de função, parênteses
+Elementos primários: variáveis, constantes, invocações, parênteses
 */
 expr_prim: TK_ID { 
-    data_type_t data_type = infer_var_type(pilha, $1);
+    data_type_t data_type = lookup_identifier_type(pilha, $1);
     $$ = asd_new($1->value, $1, data_type);
-    lex_free($1); /* CORREÇÃO 1: Libera TK_ID */
+    lex_free($1);
 };
 expr_prim: literais { $$ = $1; };
 expr_prim: chamada_funcao { $$ = $1; };
@@ -423,7 +418,7 @@ expr_prim: '(' expressao ')' { $$ = $2; };
 
 
 /*
-Expressão principal apontando para o nível mais alto
+Ponto de entrada para avaliação de expressões
 */
 expressao: expr_or;
 
