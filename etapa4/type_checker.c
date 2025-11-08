@@ -1,4 +1,4 @@
-#include "type_infer.h"
+#include "type_checker.h"
 
 data_type_t validate_var_init_types(stack_t* scopes, lex_value_t* identifier, data_type_t declared, data_type_t assigned)
 {
