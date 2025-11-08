@@ -23,7 +23,7 @@ com                   { return TK_COM; }
 var                   { return TK_VAR; }
 
 
-    /* OPERADORES */
+    /* OPERATORS */
 [!\*\/%+\-<>\[\]\(\)=,;&|] { return (int)yytext[0]; }
 ==                    { return TK_OC_EQ; }
 "<="                  { return TK_OC_LE; }
@@ -33,7 +33,7 @@ var                   { return TK_VAR; }
 ->                    { return TK_SETA; }
 
 
-    /* IDS E LITERAIS */
+    /* ID'S & LI'S */
 [_a-z][_a-z0-9]*      { create_lex_value(IDENTIFIER); return TK_ID; }
 [0-9]+                { create_lex_value(LITERAL); return TK_LI_INTEIRO; }
 [0-9]+\.[0-9]+        { create_lex_value(LITERAL); return TK_LI_DECIMAL; }   /* 3.14 */

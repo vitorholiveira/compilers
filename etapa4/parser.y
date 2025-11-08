@@ -106,14 +106,14 @@ data_type_t lookup_identifier_type(stack_t* scopes, lex_value_t* identifier);
 %%
 
 /*
-GERENCIAMENTO DE ESCOPO
+SCOPE MANAGEMENT
 */
 
 escopo_ini: %empty { stack_push(pilha); };
 escopo_fim: %empty { stack_pop(pilha); };
 
 /*
-CONSTANTES E DEFINIÇÕES DE TIPO
+CONSTANTS AND TYPE DEFINITIONS
 */
 
 literais: TK_LI_INTEIRO {
@@ -129,7 +129,7 @@ opcao_tipo: TK_INTEIRO { $$ = INTEIRO; };
 opcao_tipo: TK_DECIMAL { $$ = DECIMAL; };
 
 /*
-ESTRUTURA PRINCIPAL
+MAIN STRUCTURE
 */
 
 programa: %empty { arvore = NULL; };
@@ -154,7 +154,7 @@ declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo {
 };
 
 /*
-FUNÇÕES
+FUNCTIONS
 */
 
 definicao_funcao: cabeca_funcao escopo_ini parametros_funcao TK_ATRIB corpo_funcao escopo_fim {
@@ -195,7 +195,7 @@ lista_params: lista_params ',' TK_ID TK_ATRIB opcao_tipo {
 };
 
 /*
-INSTRUÇÕES
+INSTRUCTIONS
 */
 
 comandos_simples: bloco_de_comandos {$$ = $1;}
@@ -208,7 +208,7 @@ comandos_simples: bloco_de_comandos {$$ = $1;}
                 ;
 
 /*
-BLOCOS
+BLOCKS
 */
 
 bloco_de_comandos: '[' escopo_ini sequencia_comandos_simples escopo_fim ']' { $$ = $3; }
@@ -225,7 +225,7 @@ sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
 sequencia_comandos_simples: comandos_simples { $$ = $1; };
 
 /*
-VARIÁVEIS LOCAIS
+LOCAL VARIABLES
 */
 
 declaracao_variavel_comando_simples: declaracao_variavel {$$ = $1;};
@@ -239,7 +239,7 @@ declaracao_variavel_comando_simples: TK_VAR TK_ID TK_ATRIB opcao_tipo TK_COM lit
 };
 
 /*
-OPERAÇÕES DE ATRIBUIÇÃO
+ASSIGNMENT OPERATIONS
 */
 
 comando_atribuicao: TK_ID TK_ATRIB expressao {
@@ -251,7 +251,7 @@ comando_atribuicao: TK_ID TK_ATRIB expressao {
 };
 
 /*
-INVOCAÇÃO E RETORNO DE FUNÇÃO
+FUNCTION INVOCATION AND RETURN
 */
 
 chamada_funcao: TK_ID '(' argumentos ')' {
@@ -303,7 +303,7 @@ comando_retorno: TK_RETORNA expressao TK_ATRIB opcao_tipo {
 }; 
 
 /*
-CONDICIONAIS
+CONDITIONALS
 */
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
@@ -322,7 +322,7 @@ fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_c
 };
 
 /*
-LAÇOS
+LOOPS
 */
 
 fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos { 
@@ -332,11 +332,11 @@ fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos {
 };
 
 /*
-ANÁLISE DE EXPRESSÕES
+EXPRESSION ANALYSIS
 */
 
 /*
-Disjunção lógica OR '|'
+Logical disjunction OR '|'
 */
 expr_or: expr_or '|' expr_and { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "|", $1, $3);
@@ -347,7 +347,7 @@ expr_or: expr_or '|' expr_and {
 expr_or: expr_and { $$ = $1; };
 
 /*
-Conjunção lógica AND '&'
+Logical conjunction AND '&'
 */
 expr_and: expr_and '&' expr_eq { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "&", $1, $3);
@@ -358,7 +358,7 @@ expr_and: expr_and '&' expr_eq {
 expr_and: expr_eq { $$ = $1; };
 
 /*
-Operadores de comparação ==, != 
+Comparison operators ==, != 
 */
 expr_eq: expr_eq TK_OC_EQ expr_rel {
     data_type_t data_type = deduce_binary_expr_type(pilha, "==", $1, $3); 
@@ -375,7 +375,7 @@ expr_eq: expr_eq TK_OC_NE expr_rel {
 expr_eq: expr_rel { $$ = $1; };
 
 /*
-Comparações relacionais <, >, <=, >=
+Relational comparisons <, >, <=, >=
 */
 expr_rel: expr_rel '<' expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "<", $1, $3);
@@ -404,7 +404,7 @@ expr_rel: expr_rel TK_OC_GE expr_add {
 expr_rel: expr_add { $$ = $1; };
 
 /*
-Operações aritméticas +, -
+Arithmetic operations +, -
 */
 expr_add: expr_add '+' expr_mul { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "+", $1, $3);
@@ -421,7 +421,7 @@ expr_add: expr_add '-' expr_mul {
 expr_add: expr_mul { $$ = $1; };
 
 /*
-Operações multiplicativas * / %
+Multiplicative operations * / %
 */
 expr_mul: expr_mul '*' expr_unario { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "*", $1, $3);
@@ -444,7 +444,7 @@ expr_mul: expr_mul '%' expr_unario {
 expr_mul: expr_unario { $$ = $1; };
 
 /*
-Operadores de prefixo
+Prefix operators
 */
 expr_unario: '+' expr_unario { 
     $$ = asd_new("+", NULL, $2->data_type);
@@ -461,7 +461,7 @@ expr_unario: '!' expr_unario {
 expr_unario: expr_prim { $$ = $1; };
 
 /*
-Elementos primários: variáveis, constantes, invocações, parênteses
+Primary elements: variables, constants, invocations, parentheses
 */
 expr_prim: TK_ID { 
     data_type_t data_type = lookup_identifier_type(pilha, $1);
@@ -474,7 +474,7 @@ expr_prim: '(' expressao ')' { $$ = $2; };
 
 
 /*
-Ponto de entrada para avaliação de expressões
+Entry point for expression evaluation
 */
 expressao: expr_or;
 
