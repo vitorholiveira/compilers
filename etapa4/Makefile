@@ -14,7 +14,7 @@ YACC_C = parser.tab.c
 YACC_H = parser.tab.h
 
 # All C sources (including generated)
-SRC = main.c asd.c stack.c table.c validator.c errors.c $(YACC_C) $(LEX_C)
+SRC = main.c asd.c stack.c table.c errors.c $(YACC_C) $(LEX_C)
 
 # Object files
 OBJ = $(SRC:.c=.o)
@@ -47,4 +47,4 @@ clean:
 
 # Create a tarball
 tgz:
-	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.h stack.c stack.h table.c table.h validator.c validator.h Makefile
+	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.h stack.c stack.h table.c table.h Makefile
