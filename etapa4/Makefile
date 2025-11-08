@@ -47,4 +47,4 @@ clean:
 
 # Create a tarball
 tgz:
-	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.h stack.c stack.h table.c table.h Makefile
+	tar -czvf etapa4.tgz main.c parser.y scanner.l asd.c asd.h errors.c errors.h stack.c stack.h table.c table.h Makefile
