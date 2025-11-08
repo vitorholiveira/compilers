@@ -17,8 +17,8 @@ void print_err_wrong_type(const char* label, int line_number, int type_label, in
     print_err(line_number, ERR_WRONG_TYPE, buffer);
 }
 
-const char* number_type_to_string(int nature) {
-    switch (nature) {
+const char* number_type_to_string(int data_type) {
+    switch (data_type) {
         case 0:  return "inteiro";
         case 1:  return "decimal";
         default: return "erro";

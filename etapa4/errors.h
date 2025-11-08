@@ -28,7 +28,7 @@ void print_err_wrong_type(const char* label, int line_number, int type_label, in
 /*
  * number_type_to_string function, converts a numeric data type identifier to its string representation.
  */
-const char* number_type_to_string(int nature);
+const char* number_type_to_string(int data_type);
 
 /*
  * error_to_string function, converts an error code to its corresponding error name string.
