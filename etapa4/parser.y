@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "type_checker.h"
+#include "validator.h"
 #include "stack.h"
 #include <string.h>
 #include <stdlib.h>
@@ -28,7 +28,7 @@ extern stack_t *pilha;
 %token TK_OC_NE
 %token TK_ER
 %token TK_TIPO
-%code requires { #include "type_checker.h" }
+%code requires { #include "validator.h" }
 
 %union {
     lex_value_t* valor_lexico;
