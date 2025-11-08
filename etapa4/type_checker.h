@@ -3,18 +3,18 @@
 
 #include "stack.h"
 
-data_type_t infer_initialization_type(stack_t* scope_stack, lex_value_t* var_id, data_type_t decl_type, data_type_t exp_type);
+data_type_t validate_var_init_types(stack_t* scopes, lex_value_t* identifier, data_type_t declared, data_type_t assigned);
 
-data_type_t infer_atribution_type(stack_t* scope_stack, lex_value_t* var_id, data_type_t exp_type);
+data_type_t validate_assignment_types(stack_t* scopes, lex_value_t* identifier, data_type_t rhs_type);
 
-data_type_t infer_function_call_type(stack_t* scope_stack, lex_value_t* call_id, asd_tree_t* call_args, int num_args);
+data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, asd_tree_t* arguments, int arg_count);
 
-data_type_t infer_return_type(stack_t* scope_stack, asd_tree_t* return_expr, data_type_t declared_type);
+data_type_t validate_return_statement(stack_t* scopes, asd_tree_t* expr, data_type_t func_return_type);
 
-data_type_t infer_if_type(stack_t* scope_stack, data_type_t cond_type, asd_tree_t* if_block, asd_tree_t* else_block);
+data_type_t validate_conditional_branches(stack_t* scopes, data_type_t condition_type, asd_tree_t* then_branch, asd_tree_t* else_branch);
 
-data_type_t infer_exp_type(stack_t* scope_stack, const char* op, asd_tree_t* exp_left, asd_tree_t* exp_right);
+data_type_t deduce_binary_expr_type(stack_t* scopes, const char* operator, asd_tree_t* lhs, asd_tree_t* rhs);
 
-data_type_t infer_var_type(stack_t* scope_stack, lex_value_t* var_id);
+data_type_t lookup_identifier_type(stack_t* scopes, lex_value_t* identifier);
 
 #endif  // TYPE_INFER_H

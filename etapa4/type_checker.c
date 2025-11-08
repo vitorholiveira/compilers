@@ -38,7 +38,7 @@ data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, 
 
     /* Verify the symbol represents a callable function */
     if (sym->nature == IDENTIFIER) {
-        char msg[100];
+        char msg[150];
         sprintf(msg, "Identificador '%s' está sendo usado como função mas é uma variável.", func_name->value);
         print_err(func_name->line, ERR_VARIABLE, msg);
         stack_free(scopes);
@@ -49,7 +49,7 @@ data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, 
 
     /* Argument count validation - insufficient */
     if (params_expected > arg_count) {
-        char msg[100];
+        char msg[200];
         sprintf(msg, "A função '%s' declarada na linha %d espera %d argumentos, mas obteve apenas %d argumentos.", func_name->value, func_name->line, params_expected, arg_count);
         print_err(func_name->line, ERR_MISSING_ARGS, msg);
         stack_free(scopes);
@@ -58,7 +58,7 @@ data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, 
 
     /* Argument count validation - excessive */
     if (params_expected < arg_count) {
-        char msg[100];
+        char msg[200];
         sprintf(msg, "A função '%s' declarada na linha %d espera %d argumentos, mas obteve %d argumentos.", func_name->value, func_name->line, params_expected, arg_count);
         print_err(func_name->line, ERR_EXCESS_ARGS, msg);
         stack_free(scopes);
@@ -75,8 +75,8 @@ data_type_t validate_call_and_get_type(stack_t* scopes, lex_value_t* func_name, 
         data_type_t arg_type = current_arg->data_type;
         
         if (param_type != arg_type) {
-            char msg[100];
-            sprintf(msg, "O tipo esperado era '%s', mas foi obtido '%s' para o argumento %d ('%s') da função '%s'.", data_type_to_string(param_type), data_type_to_string(arg_type), idx, current_arg->label, func_name->value);
+            char msg[200];
+            sprintf(msg, "O tipo esperado era '%s', mas foi obtido '%s' para o argumento %d ('%s') da função '%s'.", number_type_to_string(param_type), number_type_to_string(arg_type), idx, current_arg->label, func_name->value);
             print_err(func_name->line, ERR_WRONG_TYPE_ARGS, msg);
             stack_free(scopes);
             exit(ERR_WRONG_TYPE_ARGS);

@@ -4,12 +4,12 @@
 
 
 void print_err(int line_number, int error_id , const char* msg) {
-    printf("[ERR] Linha %d: Erro %s - %s.\n", line_number, error_to_string(error_id), msg);
+    printf("[ERRO] Linha: %d | Erro: %s | Mensagem: %s\n", line_number, error_to_string(error_id), msg);
 }
 
 void print_err_function(const char* label, int line_number, int declared_line_number) {
     char error_msg[100];
-    sprintf(error_msg, "Identificador '%s' está sendo usado como variável, mas foi declarado como função na linha %d", label, declared_line_number);
+    sprintf(error_msg, "Identificador '%s' está sendo usado como variável, mas foi declarado como função na linha %d.", label, declared_line_number);
     print_err(line_number, ERR_FUNCTION, error_msg);
 }
 

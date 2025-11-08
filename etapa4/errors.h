@@ -14,5 +14,6 @@ void print_err(int line_number, int error_id , const char* msg);
 void print_err_function(const char* label, int line_number, int declared_line_number);
 void print_err_wrong_type(const char* label, int line_number, int type_label, int type_value);
 const char* number_type_to_string(int nature);
+const char* error_to_string(int error);
 
 #endif
