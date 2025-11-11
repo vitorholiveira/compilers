@@ -1,0 +1,8 @@
+// Teste 6: Expressão - Divisão
+// Teste mínimo para verificar geração de código para expressão de divisão
+
+main -> inteiro := [
+    var x := inteiro
+    x := 20 / 4
+];
+

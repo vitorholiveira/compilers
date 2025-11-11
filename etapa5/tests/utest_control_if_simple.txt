@@ -1,0 +1,12 @@
+// Teste 13: Fluxo de Controle - IF Simples
+// Teste mínimo para verificar geração de código para comando if simples
+// Deve gerar cmp_* e cbr
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x < 10) [
+        x := 20
+    ]
+];
+

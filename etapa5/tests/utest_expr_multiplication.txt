@@ -1,0 +1,8 @@
+// Teste 5: Expressão - Multiplicação
+// Teste mínimo para verificar geração de código para expressão de multiplicação
+
+main -> inteiro := [
+    var x := inteiro
+    x := 6 * 7
+];
+

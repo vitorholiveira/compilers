@@ -1,0 +1,11 @@
+// Teste 12: Comando de Atribuição - Usando Variável Global
+// Teste mínimo para verificar geração de código para atribuição usando variável global
+// Deve usar loadAI com rbss para carregar variável global
+
+var global_x := inteiro,
+
+main -> inteiro := [
+    var y := inteiro
+    y := global_x
+];
+

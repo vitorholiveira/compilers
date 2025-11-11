@@ -1,0 +1,9 @@
+// Teste 16: Endereçamento - Variável Local
+// Teste mínimo para verificar endereçamento de variável local
+// Deve usar loadAI/storeAI com rfp e offset
+
+main -> inteiro := [
+    var local_var := inteiro
+    local_var := 100
+];
+

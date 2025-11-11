@@ -1,0 +1,11 @@
+// Teste 2: Rótulos e Temporários
+// Teste mínimo para verificar se rótulos e temporários estão sendo gerados
+// Deve gerar código ILOC com rótulos (L1, L2, etc) e temporários (r1, r2, etc)
+
+main -> inteiro := [
+    var x := inteiro
+    se (x < 10) [
+        x := 5
+    ]
+];
+

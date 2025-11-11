@@ -1,0 +1,20 @@
+// Teste 18: Expressão - Comparações
+// Teste mínimo para verificar geração de código para expressões de comparação
+// Deve gerar cmp_LT, cmp_GT, cmp_EQ, etc.
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < y) [
+        x := 1
+    ]
+    se (x > y) [
+        x := 2
+    ]
+    se (x == y) [
+        x := 3
+    ]
+];
+

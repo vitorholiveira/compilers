@@ -1,0 +1,9 @@
+// Teste 1: Estrutura de Dados para ILOC
+// Teste mínimo para verificar se a estrutura de dados ILOC está funcionando
+// Deve gerar pelo menos uma operação ILOC básica
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+];
+

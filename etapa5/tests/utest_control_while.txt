@@ -1,0 +1,12 @@
+// Teste 15: Fluxo de Controle - WHILE
+// Teste mínimo para verificar geração de código para comando while
+// Deve gerar rótulos para início e fim do loop, cmp_* e cbr
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    enquanto (x < 5) [
+        x := x + 1
+    ]
+];
+

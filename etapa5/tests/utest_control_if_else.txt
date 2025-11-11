@@ -1,0 +1,14 @@
+// Teste 14: Fluxo de Controle - IF/ELSE
+// Teste mínimo para verificar geração de código para comando if/else
+// Deve gerar cmp_*, cbr com dois rótulos e jumpI
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x < 10) [
+        x := 20
+    ] senao [
+        x := 30
+    ]
+];
+

@@ -1,0 +1,10 @@
+// Teste 17: Endereçamento - Variável Global
+// Teste mínimo para verificar endereçamento de variável global
+// Deve usar loadAI/storeAI com rbss e offset
+
+var global_var := inteiro,
+
+main -> inteiro := [
+    global_var := 200
+];
+
