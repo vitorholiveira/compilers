@@ -14,7 +14,7 @@ YACC_C = parser.tab.c
 YACC_H = parser.tab.h
 
 # All C sources (including generated)
-SRC = main.c asd.c stack.c table.c errors.c $(YACC_C) $(LEX_C)
+SRC = main.c asd.c stack.c table.c errors.c iloc.c $(YACC_C) $(LEX_C)
 
 # Object files
 OBJ = $(SRC:.c=.o)
