@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/* Variáveis estáticas para rastrear offsets */
+static int global_offset = 0;  // Offset para variáveis globais (relativo a rbss)
+static int local_offset = 0;   // Offset para variáveis locais (relativo a rfp)
+
 stack_t* stack_new(void)
 {
     stack_t* stack = calloc(1, sizeof(stack_t));
@@ -76,6 +80,21 @@ void stack_declare_symbol(stack_t* stack, nature_t nature, data_type_t data_type
 
     table_t* current_scope = stack->top->table;
     symbol_t* symbol = symbol_new(nature, data_type, lex_value);
+    
+    // Calcular offset baseado no escopo (apenas para variáveis, não funções)
+    if (nature == IDENTIFIER) {
+        if (stack_is_global_scope(stack)) {
+            // Variável global: offset positivo em relação a rbss
+            symbol->offset = stack_get_global_offset();
+        } else {
+            // Variável local: offset negativo em relação a rfp
+            symbol->offset = stack_get_local_offset();
+        }
+    } else {
+        // Funções não têm offset
+        symbol->offset = 0;
+    }
+    
     symbol_t* declared_symbol = table_add_symbol(current_scope, symbol);
 
     if (declared_symbol) {
@@ -146,4 +165,49 @@ symbol_t* stack_get_symbol(stack_t* stack, const char* label, int line)
     sprintf(error_msg, "Identificador '%s' não foi declarado.", label);
     print_err(line, ERR_UNDECLARED, error_msg);
     exit(ERR_UNDECLARED);
+}
+
+/* ============================================================================
+ * FUNÇÕES PARA GERENCIAMENTO DE OFFSETS
+ * ============================================================================ */
+
+void stack_reset_local_offset(void) {
+    local_offset = 0;
+}
+
+int stack_get_local_offset(void) {
+    // Offset negativo cresce para baixo na pilha
+    // Primeira variável local: -4, segunda: -8, etc.
+    int offset = -(local_offset + 4);
+    local_offset += 4;  // Assumindo que int ocupa 4 bytes
+    return offset;
+}
+
+int stack_get_global_offset(void) {
+    // Offset positivo cresce para cima no segmento de dados
+    // Primeira variável global: 0, segunda: 4, etc.
+    int offset = global_offset;
+    global_offset += 4;  // Assumindo que int ocupa 4 bytes
+    return offset;
+}
+
+int stack_is_global_scope(stack_t* stack) {
+    if (!stack || stack->num_tables == 0) {
+        return 0;
+    }
+    
+    // O escopo global é sempre o primeiro escopo criado (bottom da pilha)
+    // Se há apenas 1 escopo, é global
+    if (stack->num_tables == 1) {
+        return 1;
+    }
+    
+    // Se há múltiplos escopos, encontrar o bottom
+    scope_node_t* bottom = stack->top;
+    while (bottom && bottom->below) {
+        bottom = bottom->below;
+    }
+    
+    // O escopo atual é global se for o bottom
+    return (stack->top == bottom);
 }

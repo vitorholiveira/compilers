@@ -55,4 +55,24 @@ symbol_t* stack_get_function(stack_t* stack);
  */
 symbol_t* stack_get_symbol(stack_t* stack, const char* label, int line);
 
+/*
+ * stack_reset_local_offset function, resets the local offset counter when entering a new function scope.
+ */
+void stack_reset_local_offset(void);
+
+/*
+ * stack_get_local_offset function, gets the current local offset and increments it for the next variable.
+ */
+int stack_get_local_offset(void);
+
+/*
+ * stack_get_global_offset function, gets the current global offset and increments it for the next variable.
+ */
+int stack_get_global_offset(void);
+
+/*
+ * stack_is_global_scope function, checks if the current scope is the global scope (bottom of stack).
+ */
+int stack_is_global_scope(stack_t* stack);
+
 #endif  // STACK_H

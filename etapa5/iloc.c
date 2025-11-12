@@ -28,7 +28,6 @@ iloc_operand_t* iloc_operand_new_reg(void) {
     }
     
     operand->type = REGISTER;
-    int reg_num = get_next_register();
     
     // Alocar espaço para string "r" + número (máximo 10 dígitos)
     operand->value.str_value = (char*)malloc(12 * sizeof(char));
@@ -36,8 +35,8 @@ iloc_operand_t* iloc_operand_new_reg(void) {
         free(operand);
         return NULL;
     }
-    // Debug
-    // sprintf(operand->value.str_value, "r%d", reg_num);
+    
+    sprintf(operand->value.str_value, "r%d", get_next_register());
     return operand;
 }
 
@@ -59,7 +58,6 @@ iloc_operand_t* iloc_operand_new_label(void) {
     }
     
     operand->type = LABEL;
-    int label_num = get_next_label();
     
     // Alocar espaço para string "L" + número (máximo 10 dígitos)
     operand->value.str_value = (char*)malloc(12 * sizeof(char));
@@ -67,8 +65,8 @@ iloc_operand_t* iloc_operand_new_label(void) {
         free(operand);
         return NULL;
     }
-    // Debug
-    // sprintf(operand->value.str_value, "L%d", label_num);
+    
+    sprintf(operand->value.str_value, "L%d", get_next_label());
     return operand;
 }
 

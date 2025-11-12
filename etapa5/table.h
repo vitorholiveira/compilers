@@ -18,6 +18,7 @@ typedef struct symbol_node {
     lex_value_t* lex_value;
     param_node_t* param_list;
     int param_count;
+    int offset; // Este campo armazenará o deslocamento em relação a `rfp` (variáveis locais) ou `rbss` (variáveis globais)
     struct symbol_node* next;
 } symbol_t;
 
