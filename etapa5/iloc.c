@@ -108,6 +108,7 @@ iloc_operation_t* iloc_operation_new(const char* opcode, bool is_fluxo_controle)
     strcpy(op->opcode, opcode);
     
     op->is_fluxo_controle = is_fluxo_controle;
+    op->label = NULL;
     op->source_operands = NULL;
     op->target_operands = NULL;
     op->num_source_operands = 0;
@@ -115,6 +116,13 @@ iloc_operation_t* iloc_operation_new(const char* opcode, bool is_fluxo_controle)
     op->next = NULL;
     
     return op;
+}
+
+void iloc_operation_set_label(iloc_operation_t* op, iloc_operand_t* label) {
+    if (!op) {
+        return;
+    }
+    op->label = label;
 }
 
 void iloc_operation_add_source(iloc_operation_t* op, iloc_operand_t* operand) {
@@ -259,5 +267,110 @@ void iloc_code_free(iloc_code_t* code) {
     }
     
     free(code);
+}
+
+/* ============================================================================
+ * FUNÇÕES DE IMPRESSÃO DO CÓDIGO ILOC
+ * ============================================================================ */
+
+/* Passo 9.1: Imprime um operando ILOC */
+void iloc_print_operand(iloc_operand_t* op, FILE* out) {
+    if (!op || !out) {
+        return;
+    }
+    
+    switch (op->type) {
+        case REGISTER:
+            fprintf(out, "%s", op->value.str_value);
+            break;
+        case CONSTANT:
+            fprintf(out, "%d", op->value.int_value);
+            break;
+        case LABEL:
+            fprintf(out, "%s", op->value.str_value);
+            break;
+        default:
+            break;
+    }
+}
+
+/* Passo 9.2: Imprime uma operação ILOC */
+void iloc_print_operation(iloc_operation_t* op, FILE* out) {
+    if (!op || !out) {
+        return;
+    }
+    
+    // Imprimir rótulo se existir
+    if (op->label) {
+        iloc_print_operand(op->label, out);
+        fprintf(out, ": ");
+    }
+    
+    // Imprimir opcode
+    fprintf(out, "%s", op->opcode);
+    
+    // Imprimir operandos fonte
+    if (op->num_source_operands > 0) {
+        fprintf(out, " ");
+        for (int i = 0; i < op->num_source_operands; i++) {
+            if (i > 0) {
+                fprintf(out, ", ");
+            }
+            iloc_print_operand(op->source_operands[i], out);
+        }
+    }
+    
+    // Imprimir seta (=> ou ->)
+    if (op->num_target_operands > 0) {
+        if (op->is_fluxo_controle) {
+            fprintf(out, " -> ");
+        } else {
+            fprintf(out, " => ");
+        }
+    }
+    
+    // Imprimir operandos alvo
+    if (op->num_target_operands > 0) {
+        for (int i = 0; i < op->num_target_operands; i++) {
+            if (i > 0) {
+                fprintf(out, ", ");
+            }
+            iloc_print_operand(op->target_operands[i], out);
+        }
+    }
+}
+
+/* Passo 9.3: Imprime código ILOC completo */
+void iloc_print_code(iloc_code_t* code, FILE* out) {
+    if (!code || !out) {
+        return;
+    }
+    
+    if (code->count == 0) {
+        return;  // Código vazio, não imprime nada
+    }
+    
+    // Se há apenas uma operação, imprimir diretamente
+    if (code->count == 1) {
+        iloc_print_operation(code->first, out);
+        fprintf(out, "\n");
+        return;
+    }
+    
+    // Se há múltiplas operações, agrupar em [op1; op2; op3]
+    fprintf(out, "[");
+    iloc_operation_t* current = code->first;
+    int op_count = 0;
+    
+    while (current) {
+        if (op_count > 0) {
+            fprintf(out, "; ");
+        }
+        iloc_print_operation(current, out);
+        current = current->next;
+        op_count++;
+    }
+    
+    fprintf(out, "]\n");
 }
 

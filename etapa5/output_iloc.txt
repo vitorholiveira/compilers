@@ -1,0 +1,107 @@
+
+=================================================================
+==27352==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b63268 in iloc_code_new /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:202
+    #2 0x60ddf2b64898 in gen_literal_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:178
+    #3 0x60ddf2b6620e in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:657
+    #4 0x60ddf2b661af in generate_expression_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:639
+    #5 0x60ddf2b66ff6 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:783
+    #6 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #7 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #8 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #9 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #11 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b63268 in iloc_code_new /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:202
+    #2 0x60ddf2b642cb in gen_store_variable_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:66
+    #3 0x60ddf2b67147 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:797
+    #4 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #5 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #6 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #7 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #8 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #9 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b62983 in iloc_operand_new_const /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:44
+    #2 0x60ddf2b648f2 in gen_literal_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:194
+    #3 0x60ddf2b6620e in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:657
+    #4 0x60ddf2b661af in generate_expression_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:639
+    #5 0x60ddf2b66ff6 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:783
+    #6 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #7 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #8 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #9 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #11 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b6286f in iloc_operand_new_reg /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:25
+    #2 0x60ddf2b648b2 in gen_literal_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:184
+    #3 0x60ddf2b6620e in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:657
+    #4 0x60ddf2b661af in generate_expression_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:639
+    #5 0x60ddf2b66ff6 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:783
+    #6 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #7 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #8 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #9 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #11 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b62983 in iloc_operand_new_const /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:44
+    #2 0x60ddf2b64437 in gen_store_variable_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:84
+    #3 0x60ddf2b67147 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:797
+    #4 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #5 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #6 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #7 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #8 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #9 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b64360 in gen_store_variable_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:78
+    #2 0x60ddf2b67147 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:797
+    #3 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #4 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #5 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #6 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Indirect leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b628c7 in iloc_operand_new_reg /home/spola/ufrgs-repositories/compilers/etapa5/iloc.c:33
+    #2 0x60ddf2b648b2 in gen_literal_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:184
+    #3 0x60ddf2b6620e in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:657
+    #4 0x60ddf2b661af in generate_expression_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:639
+    #5 0x60ddf2b66ff6 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:783
+    #6 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #7 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #8 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #9 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #11 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad69f2261b in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
+    #1 0x60ddf2b643a7 in gen_store_variable_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:80
+    #2 0x60ddf2b67147 in gen_assignment_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:797
+    #3 0x60ddf2b668b1 in generate_code /home/spola/ufrgs-repositories/compilers/etapa5/codegen.c:708
+    #4 0x60ddf2b6d9ae in yyparse /home/spola/ufrgs-repositories/compilers/etapa5/parser.y:340
+    #5 0x60ddf2b5f76c in main /home/spola/ufrgs-repositories/compilers/etapa5/main.c:12
+    #6 0x77ad69a2a574 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x77ad69a2a627 in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x60ddf2b5f684 in _start (/home/spola/ufrgs-repositories/compilers/etapa5/etapa5+0x8684) (BuildId: 7a5c643e5d8e8df1a32569bdc77bd8bb1250362a)
+
+SUMMARY: AddressSanitizer: 129 byte(s) leaked in 8 allocation(s).

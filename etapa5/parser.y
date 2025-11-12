@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include "stack.h"
+#include "codegen.h"
 #include <string.h>
 #include <stdlib.h>
 int yylex(void);
@@ -110,6 +111,10 @@ SCOPE MANAGEMENT
 */
 
 escopo_ini: %empty { stack_push(pilha); };
+escopo_ini_reset: %empty { 
+    stack_push(pilha); 
+    stack_reset_local_offset();  // Resetar offset local ao entrar em nova função
+};
 escopo_fim: %empty { stack_pop(pilha); };
 
 /*
@@ -133,7 +138,11 @@ MAIN STRUCTURE
 */
 
 programa: %empty { arvore = NULL; };
-programa: escopo_ini lista escopo_fim ';' { arvore = $2; };
+programa: escopo_ini lista escopo_fim ';' { 
+    arvore = $2;
+    // O código ILOC já foi gerado e armazenado em definicao_funcao->iloc_code
+    // Então arvore->iloc_code já deve estar preenchido
+};
 lista: elemento { $$ = $1; }
     | elemento ',' lista {
     if($1 == NULL){
@@ -157,10 +166,17 @@ declaracao_variavel: TK_VAR TK_ID TK_ATRIB opcao_tipo {
 FUNCTIONS
 */
 
-definicao_funcao: cabeca_funcao escopo_ini parametros_funcao TK_ATRIB corpo_funcao escopo_fim {
+definicao_funcao: cabeca_funcao escopo_ini_reset parametros_funcao TK_ATRIB corpo_funcao escopo_fim {
     $$ = $1;
     if($3 != NULL) asd_free($3);
     if($5 != NULL) asd_add_child($$, $5);
+    // Gerar código ILOC para o corpo da função
+    // Copiar código do corpo para a função (não compartilhar ponteiro)
+    if ($5 != NULL && $5->iloc_code != NULL) {
+        $$->iloc_code = $5->iloc_code;
+        // Limpar ponteiro do corpo para evitar double-free
+        $5->iloc_code = NULL;
+    }
 };
 
 cabeca_funcao: TK_ID TK_SETA opcao_tipo {
@@ -169,7 +185,27 @@ cabeca_funcao: TK_ID TK_SETA opcao_tipo {
     lex_free($1);
 }
 
-corpo_funcao: '[' sequencia_comandos_simples ']' { $$ = $2; }
+corpo_funcao: '[' sequencia_comandos_simples ']' { 
+    $$ = $2;
+    // O código ILOC já foi gerado em sequencia_comandos_simples
+    // Se sequencia_comandos_simples já tem código, ele já está em $$->iloc_code
+    // Se não tem código mas tem filhos, concatenar códigos dos filhos
+    if ($$ != NULL && $$->iloc_code == NULL && $$->number_of_children > 0) {
+        iloc_code_t* corpo_code = iloc_code_new();
+        for (int i = 0; i < $$->number_of_children; i++) {
+            asd_tree_t* cmd = $$->children[i];
+            if (cmd && cmd->iloc_code) {
+                iloc_code_concat(corpo_code, cmd->iloc_code);
+            }
+        }
+        // Se gerou código, armazenar
+        if (corpo_code->count > 0) {
+            $$->iloc_code = corpo_code;
+        } else {
+            iloc_code_free(corpo_code);
+        }
+    }
+}
 corpo_funcao: '[' ']' { $$ = NULL; };
 
 parametros_funcao: %empty { $$ = NULL; }
@@ -211,7 +247,20 @@ comandos_simples: bloco_de_comandos {$$ = $1;}
 BLOCKS
 */
 
-bloco_de_comandos: '[' escopo_ini sequencia_comandos_simples escopo_fim ']' { $$ = $3; }
+bloco_de_comandos: '[' escopo_ini sequencia_comandos_simples escopo_fim ']' { 
+    $$ = $3;
+    // Gerar código ILOC para o bloco (concatenar códigos de todos os comandos)
+    if ($$ != NULL) {
+        iloc_code_t* block_code = iloc_code_new();
+        for (int i = 0; i < $$->number_of_children; i++) {
+            asd_tree_t* cmd = $$->children[i];
+            if (cmd && cmd->iloc_code) {
+                iloc_code_concat(block_code, cmd->iloc_code);
+            }
+        }
+        $$->iloc_code = block_code;
+    }
+}
     | '[' ']' { $$ = NULL; }
     ;
 sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
@@ -220,9 +269,29 @@ sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
     }else{
         if ($2 != NULL) asd_add_child($1, $2);
         $$ = $1;
+        // Gerar código ILOC concatenando códigos de todos os comandos
+        if ($$ != NULL) {
+            iloc_code_t* seq_code = iloc_code_new();
+            // Primeiro adicionar código do primeiro comando
+            if ($1 && $1->iloc_code) {
+                iloc_code_concat(seq_code, $1->iloc_code);
+            }
+            // Depois adicionar códigos dos filhos (que são os comandos subsequentes)
+            for (int i = 0; i < $$->number_of_children; i++) {
+                asd_tree_t* cmd = $$->children[i];
+                if (cmd && cmd->iloc_code) {
+                    iloc_code_concat(seq_code, cmd->iloc_code);
+                }
+            }
+            $$->iloc_code = seq_code;
+        }
     }
 };
-sequencia_comandos_simples: comandos_simples { $$ = $1; };
+sequencia_comandos_simples: comandos_simples { 
+    $$ = $1;
+    // Quando há apenas um comando, sequencia_comandos_simples É o próprio comando
+    // Então o código já está em $$->iloc_code (se foi gerado)
+};
 
 /*
 LOCAL VARIABLES
@@ -248,6 +317,12 @@ comando_atribuicao: TK_ID TK_ATRIB expressao {
     asd_add_child($$, asd_new($1->value, $1, data_type)); 
     asd_add_child($$, $3);
     lex_free($1);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result && result->code) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 
 /*
@@ -311,6 +386,12 @@ fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos {
     $$ = asd_new("se", NULL, data_type);
     if($3 != NULL) asd_add_child($$, $3);
     if($5 != NULL) asd_add_child($$, $5);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 
 fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_comandos{
@@ -319,6 +400,12 @@ fluxo_condicional: TK_SE '(' expressao ')' bloco_de_comandos TK_SENAO bloco_de_c
     if($3 != NULL) asd_add_child($$, $3);
     if($5 != NULL) asd_add_child($$, $5);
     if($7 != NULL) asd_add_child($$, $7);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 
 /*
@@ -329,6 +416,12 @@ fluxo_iterativo: TK_ENQUANTO '(' expressao ')' bloco_de_comandos {
     $$ = asd_new("enquanto", NULL, $3->data_type); 
     if($3 != NULL) asd_add_child($$, $3);
     if($5 != NULL) asd_add_child($$, $5);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 
 /*
@@ -343,6 +436,12 @@ expr_or: expr_or '|' expr_and {
     $$ = asd_new("|", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_or: expr_and { $$ = $1; };
 
@@ -354,6 +453,12 @@ expr_and: expr_and '&' expr_eq {
     $$ = asd_new("&", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_and: expr_eq { $$ = $1; };
 
@@ -365,12 +470,24 @@ expr_eq: expr_eq TK_OC_EQ expr_rel {
     $$ = asd_new("==", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 }
 expr_eq: expr_eq TK_OC_NE expr_rel { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "!=", $1, $3); 
     $$ = asd_new("!=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_eq: expr_rel { $$ = $1; };
 
@@ -382,24 +499,48 @@ expr_rel: expr_rel '<' expr_add {
     $$ = asd_new("<", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_rel: expr_rel '>' expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, ">", $1, $3);
     $$ = asd_new(">", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_rel: expr_rel TK_OC_LE expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "<=", $1, $3);
     $$ = asd_new("<=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_rel: expr_rel TK_OC_GE expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, ">=", $1, $3);
     $$ = asd_new(">=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_rel: expr_add { $$ = $1; };
 
@@ -411,12 +552,24 @@ expr_add: expr_add '+' expr_mul {
     $$ = asd_new("+", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_add: expr_add '-' expr_mul { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "-", $1, $3);
     $$ = asd_new("-", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_add: expr_mul { $$ = $1; };
 
@@ -428,12 +581,24 @@ expr_mul: expr_mul '*' expr_unario {
     $$ = asd_new("*", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_mul: expr_mul '/' expr_unario { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "/", $1, $3);
     $$ = asd_new("/", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 };
 expr_mul: expr_mul '%' expr_unario {
     data_type_t data_type = deduce_binary_expr_type(pilha, "%", $1, $3);
@@ -449,14 +614,32 @@ Prefix operators
 expr_unario: '+' expr_unario { 
     $$ = asd_new("+", NULL, $2->data_type);
     asd_add_child($$, $2);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 }
 expr_unario: '-' expr_unario { 
     $$ = asd_new("-", NULL, $2->data_type);
     asd_add_child($$, $2);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 }
 expr_unario: '!' expr_unario { 
     $$ = asd_new("!", NULL, $2->data_type);
     asd_add_child($$, $2);
+    // Gerar código ILOC
+    codegen_result_t* result = generate_code($$, pilha);
+    if (result) {
+        $$->iloc_code = result->code;
+        free(result);
+    }
 }
 expr_unario: expr_prim { $$ = $1; };
 

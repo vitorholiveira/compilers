@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "asd.h"
+#include "iloc.h"
 #define OUTPUT_FILE "output.dot"
 
 asd_tree_t *asd_new(const char *label, lex_value_t *lex_value, data_type_t data_type)
@@ -15,10 +16,12 @@ asd_tree_t *asd_new(const char *label, lex_value_t *lex_value, data_type_t data_
   ret->data_type = (int)data_type;
   ret->number_of_children = 0;
   ret->children = NULL;
+  ret->iloc_code = NULL;  // Inicializar código ILOC como NULL
   if (lex_value != NULL) {
     lex_value_t *lex_copy = malloc(sizeof(lex_value_t));
     lex_copy->value = strdup(lex_value->value);
     lex_copy->line = lex_value->line;
+    lex_copy->nature = lex_value->nature;  // Copiar nature também!
     ret->lex_value = lex_copy;
   } else {
       ret->lex_value = NULL;
@@ -36,6 +39,10 @@ void asd_free(asd_tree_t *tree)
     free(tree->children);
     free(tree->label);
     lex_free(tree->lex_value);
+    // Liberar código ILOC se existir
+    if (tree->iloc_code != NULL) {
+      iloc_code_free(tree->iloc_code);
+    }
     free(tree);
   }else{
     printf("Erro: %s recebeu parâmetro tree = %p.\n", __FUNCTION__, tree);
