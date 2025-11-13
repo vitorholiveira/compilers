@@ -146,15 +146,28 @@ run_test() {
         fi
     fi
     
-    # Executar simulador
+    # Executar simulador com timeout de 1 segundo
     local simulator_output
     if [ $SAVE_OUTPUT -eq 1 ]; then
-        simulator_output=$($SIMULATOR < "$output_file" 2>&1)
+        simulator_output=$(timeout 1 bash -c "$SIMULATOR < \"$output_file\" 2>&1" 2>&1)
     else
-        simulator_output=$($SIMULATOR < /tmp/test_iloc_$$.iloc 2>&1)
+        simulator_output=$(timeout 1 bash -c "$SIMULATOR < /tmp/test_iloc_$$.iloc 2>&1" 2>&1)
     fi
     
     local simulator_exit_code=$?
+    
+    # Verificar se foi timeout (exit code 124)
+    if [ $simulator_exit_code -eq 124 ]; then
+        ERROR_TESTS=$((ERROR_TESTS + 1))
+        ERROR_LIST+=("$test_name")
+        if [ $QUIET -eq 0 ]; then
+            echo -e "${RED}[TIMEOUT]${NC}"
+        fi
+        if [ $VERBOSE -eq 1 ]; then
+            echo "  ⏱ Teste excedeu 1 segundo (possível loop infinito)"
+        fi
+        return 1
+    fi
     
     # Verificar resultado
     if [ $simulator_exit_code -eq 0 ]; then

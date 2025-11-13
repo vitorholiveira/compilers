@@ -41,12 +41,17 @@ for test_file in "$TESTS_DIR"/utest_*.txt; do
     TOTAL=$((TOTAL + 1))
     test_name=$(basename "$test_file")
     
-    # Compilar e executar
-    if $COMPILER < "$test_file" 2>/dev/null | $SIMULATOR > /dev/null 2>&1; then
+    # Compilar e executar com timeout de 1 segundo
+    if timeout 1 bash -c "$COMPILER < \"$test_file\" 2>/dev/null | $SIMULATOR > /dev/null 2>&1" 2>/dev/null; then
         echo -e "${GREEN}✓${NC} $test_name"
         PASSED=$((PASSED + 1))
     else
-        echo -e "${RED}✗${NC} $test_name"
+        exit_code=$?
+        if [ $exit_code -eq 124 ]; then
+            echo -e "${RED}✗${NC} $test_name (TIMEOUT)"
+        else
+            echo -e "${RED}✗${NC} $test_name"
+        fi
         FAILED=$((FAILED + 1))
     fi
 done

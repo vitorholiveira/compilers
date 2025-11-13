@@ -187,17 +187,45 @@ cabeca_funcao: TK_ID TK_SETA opcao_tipo {
 
 corpo_funcao: '[' sequencia_comandos_simples ']' { 
     $$ = $2;
-    // O código ILOC já foi gerado em sequencia_comandos_simples
-    // Se sequencia_comandos_simples já tem código, ele já está em $$->iloc_code
-    // Se não tem código mas tem filhos, concatenar códigos dos filhos
-    if ($$ != NULL && $$->iloc_code == NULL && $$->number_of_children > 0) {
+    // Gerar código ILOC para o corpo da função
+    // Se sequencia_comandos_simples já tem código, usar ele
+    // Caso contrário, gerar código para todos os comandos (incluindo controle de fluxo)
+    if ($$ != NULL) {
         iloc_code_t* corpo_code = iloc_code_new();
+        
+        // Se sequencia_comandos_simples já tem código, usar ele
+        if ($$->iloc_code) {
+            iloc_code_concat(corpo_code, $$->iloc_code);
+            iloc_code_free($$->iloc_code);
+            $$->iloc_code = NULL;
+        }
+        
+        // Gerar código para todos os comandos (incluindo controle de fluxo)
         for (int i = 0; i < $$->number_of_children; i++) {
             asd_tree_t* cmd = $$->children[i];
-            if (cmd && cmd->iloc_code) {
+            if (!cmd) continue;
+            
+            // Se o comando já tem código e não é controle de fluxo, usar ele
+            // Para comandos de controle de fluxo, sempre gerar código (não usar código já gerado)
+            if (cmd->iloc_code && 
+                (!cmd->label || (strcmp(cmd->label, "se") != 0 && strcmp(cmd->label, "enquanto") != 0))) {
                 iloc_code_concat(corpo_code, cmd->iloc_code);
+                iloc_code_free(cmd->iloc_code);
+                cmd->iloc_code = NULL;
+            } else {
+                // Gerar código para o comando usando generate_code
+                // (sempre gerar para comandos de controle de fluxo ou comandos sem código)
+                codegen_result_t* cmd_result = generate_code(cmd, pilha);
+                if (cmd_result && cmd_result->code) {
+                    iloc_code_concat(corpo_code, cmd_result->code);
+                    iloc_code_free(cmd_result->code);
+                }
+                if (cmd_result) {
+                    free(cmd_result);
+                }
             }
         }
+        
         // Se gerou código, armazenar
         if (corpo_code->count > 0) {
             $$->iloc_code = corpo_code;
@@ -250,16 +278,10 @@ BLOCKS
 bloco_de_comandos: '[' escopo_ini sequencia_comandos_simples escopo_fim ']' { 
     $$ = $3;
     // Gerar código ILOC para o bloco (concatenar códigos de todos os comandos)
-    if ($$ != NULL) {
-        iloc_code_t* block_code = iloc_code_new();
-        for (int i = 0; i < $$->number_of_children; i++) {
-            asd_tree_t* cmd = $$->children[i];
-            if (cmd && cmd->iloc_code) {
-                iloc_code_concat(block_code, cmd->iloc_code);
-            }
-        }
-        $$->iloc_code = block_code;
-    }
+    // MAS: não gerar código aqui se o bloco é corpo de um while/if.
+    // O código será gerado por generate_block_code quando o while/if for processado.
+    // Isso evita duplicação de código.
+    // Por enquanto, não geramos código aqui - será gerado quando necessário
 }
     | '[' ']' { $$ = NULL; }
     ;
@@ -270,20 +292,34 @@ sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
         if ($2 != NULL) asd_add_child($1, $2);
         $$ = $1;
         // Gerar código ILOC concatenando códigos de todos os comandos
+        // MAS: não concatenar código de comandos de controle de fluxo (se, enquanto)
+        // que ainda não foram completamente processados, pois isso causaria duplicação
         if ($$ != NULL) {
             iloc_code_t* seq_code = iloc_code_new();
-            // Primeiro adicionar código do primeiro comando
-            if ($1 && $1->iloc_code) {
+            // Primeiro adicionar código do primeiro comando (se não for controle de fluxo)
+            if ($1 && $1->iloc_code && 
+                (!$1->label || (strcmp($1->label, "se") != 0 && strcmp($1->label, "enquanto") != 0))) {
                 iloc_code_concat(seq_code, $1->iloc_code);
+                iloc_code_free($1->iloc_code);  // Liberar código vazio após concat
+                $1->iloc_code = NULL;  // Limpar ponteiro para evitar double-free
             }
             // Depois adicionar códigos dos filhos (que são os comandos subsequentes)
+            // MAS: não concatenar código de comandos de controle de fluxo
             for (int i = 0; i < $$->number_of_children; i++) {
                 asd_tree_t* cmd = $$->children[i];
-                if (cmd && cmd->iloc_code) {
+                if (cmd && cmd->iloc_code && 
+                    (!cmd->label || (strcmp(cmd->label, "se") != 0 && strcmp(cmd->label, "enquanto") != 0))) {
                     iloc_code_concat(seq_code, cmd->iloc_code);
+                    iloc_code_free(cmd->iloc_code);  // Liberar código vazio após concat
+                    cmd->iloc_code = NULL;  // Limpar ponteiro para evitar double-free
                 }
             }
-            $$->iloc_code = seq_code;
+            // Se gerou código, armazenar
+            if (seq_code->count > 0) {
+                $$->iloc_code = seq_code;
+            } else {
+                iloc_code_free(seq_code);
+            }
         }
     }
 };

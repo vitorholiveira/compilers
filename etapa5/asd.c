@@ -44,9 +44,8 @@ void asd_free(asd_tree_t *tree)
       iloc_code_free(tree->iloc_code);
     }
     free(tree);
-  }else{
-    printf("Erro: %s recebeu parâmetro tree = %p.\n", __FUNCTION__, tree);
   }
+  // Se tree == NULL, apenas retorna silenciosamente (comportamento padrão para funções free)
 }
 
 void asd_add_child(asd_tree_t *tree, asd_tree_t *child)

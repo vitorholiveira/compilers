@@ -297,12 +297,6 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
         return NULL;
     }
     
-    // Concatenar códigos dos operandos
-    iloc_code_concat(code, left_result->code);
-    iloc_code_free(left_result->code);  // Liberar código vazio após concat
-    iloc_code_concat(code, right_result->code);
-    iloc_code_free(right_result->code);  // Liberar código vazio após concat
-    
     // Criar temporário para resultado
     iloc_operand_t* result_temp = iloc_operand_new_reg();
     if (!result_temp) {
@@ -314,24 +308,37 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
     
     // Passo 4.4: Otimização - usar versão imediata se um operando é constante
     iloc_operation_t* op_iloc = NULL;
+    int skip_right_code = 0;  // Flag para não concatenar código de right se for constante
+    int skip_left_code = 0;   // Flag para não concatenar código de left se for constante
     
     if (is_literal_constant(right)) {
         // Usar versão imediata: opI left_temp, constante => result_temp
+        // Extrair valor da constante diretamente do nó
+        int const_value = atoi(right->lex_value->value);
+        iloc_operand_t* const_op = iloc_operand_new_const(const_value);
+        
         op_iloc = iloc_operation_new(iloc_opcode_immediate, false);
         iloc_operation_add_source(op_iloc, left_result->temp);
-        iloc_operation_add_source(op_iloc, right_result->temp); // Usa a constante já carregada
+        iloc_operation_add_source(op_iloc, const_op); // Usa constante diretamente
         iloc_operation_add_target(op_iloc, result_temp);
+        
+        // Não concatenar código de loadI da constante (não precisamos dele)
+        skip_right_code = 1;
     } else if (is_literal_constant(left) && (strcmp(op, "+") == 0 || strcmp(op, "*") == 0)) {
         // Para operações comutativas, podemos usar versão imediata com left constante
+        // Extrair valor da constante diretamente do nó
+        int const_value = atoi(left->lex_value->value);
+        iloc_operand_t* const_op = iloc_operand_new_const(const_value);
+        
         if (strcmp(op, "+") == 0) {
             op_iloc = iloc_operation_new("addI", false);
             iloc_operation_add_source(op_iloc, right_result->temp);
-            iloc_operation_add_source(op_iloc, left_result->temp);
+            iloc_operation_add_source(op_iloc, const_op);
             iloc_operation_add_target(op_iloc, result_temp);
         } else if (strcmp(op, "*") == 0) {
             op_iloc = iloc_operation_new("multI", false);
             iloc_operation_add_source(op_iloc, right_result->temp);
-            iloc_operation_add_source(op_iloc, left_result->temp);
+            iloc_operation_add_source(op_iloc, const_op);
             iloc_operation_add_target(op_iloc, result_temp);
         } else {
             // Operação não-comutativa com constante à esquerda - usar versão normal
@@ -340,12 +347,30 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
             iloc_operation_add_source(op_iloc, right_result->temp);
             iloc_operation_add_target(op_iloc, result_temp);
         }
+        
+        // Não concatenar código de loadI da constante (não precisamos dele)
+        skip_left_code = 1;
     } else {
         // Usar versão normal: op left_temp, right_temp => result_temp
         op_iloc = iloc_operation_new(iloc_opcode, false);
         iloc_operation_add_source(op_iloc, left_result->temp);
         iloc_operation_add_source(op_iloc, right_result->temp);
         iloc_operation_add_target(op_iloc, result_temp);
+    }
+    
+    // Concatenar códigos dos operandos (exceto se foram pulados)
+    if (!skip_left_code) {
+        iloc_code_concat(code, left_result->code);
+        iloc_code_free(left_result->code);  // Liberar código vazio após concat
+    } else {
+        iloc_code_free(left_result->code);  // Liberar código não usado
+    }
+    
+    if (!skip_right_code) {
+        iloc_code_concat(code, right_result->code);
+        iloc_code_free(right_result->code);  // Liberar código vazio após concat
+    } else {
+        iloc_code_free(right_result->code);  // Liberar código não usado
     }
     
     // Adicionar operação ao código
@@ -834,18 +859,50 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         return NULL;
     }
     
+    // IMPORTANTE: Quando generate_block_code é chamado para gerar código de um bloco
+    // que é corpo de um while/if, ele deve SEMPRE processar os filhos diretamente,
+    // não usar código já gerado pelo parser. Isso evita duplicação de código.
+    // O código já gerado pelo parser é usado apenas quando o bloco é impresso diretamente,
+    // não quando é usado como corpo de outro comando.
+    
+    // Limpar código já gerado pelo parser no bloco antes de regenerar
+    // Isso evita duplicação quando o código é gerado novamente
+    if (block->iloc_code) {
+        iloc_code_free(block->iloc_code);
+        block->iloc_code = NULL;
+    }
+    
     // Se o bloco tem filhos, processar cada comando usando generate_code
+    // (não usar código já gerado para evitar duplicação)
     for (int i = 0; i < block->number_of_children; i++) {
         asd_tree_t* cmd = block->children[i];
         if (!cmd) continue;
         
-        // Gerar código para o comando usando generate_code
+        // Limpar código já gerado pelo parser antes de regenerar
+        // Isso é importante porque o parser pode ter concatenado código dos filhos
+        // em sequencia_comandos_simples, causando duplicação
+        if (cmd->iloc_code) {
+            iloc_code_free(cmd->iloc_code);
+            cmd->iloc_code = NULL;
+        }
+        
+        // Se o comando tem filhos (como bloco_de_comandos), limpar código recursivamente
+        // Isso garante que não há código duplicado em blocos aninhados
+        if (cmd->number_of_children > 0) {
+            for (int j = 0; j < cmd->number_of_children; j++) {
+                asd_tree_t* child = cmd->children[j];
+                if (child && child->iloc_code) {
+                    iloc_code_free(child->iloc_code);
+                    child->iloc_code = NULL;
+                }
+            }
+        }
+        
+        // Sempre gerar código para o comando usando generate_code
+        // Isso garante que o código está correto e não duplicado
         codegen_result_t* cmd_result = generate_code(cmd, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
-            // Armazenar código no nó também (mas não duplicar, usar o mesmo ponteiro)
-            // Não armazenar aqui porque o código foi movido para 'code'
-            // cmd->iloc_code = cmd_result->code;  // Comentado para evitar double-free
             iloc_code_free(cmd_result->code);  // Liberar código vazio após concat
         }
         if (cmd_result) {
@@ -989,17 +1046,19 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     // Gerar código do bloco then
     if (then_block) {
         iloc_code_t* then_code = generate_block_code(then_block, scopes);
-        if (then_code && then_code->first) {
+        if (then_code && then_code->count > 0 && then_code->first) {
             // Adicionar rótulo L_then à primeira operação do bloco then
             iloc_operation_set_label(then_code->first, L_then);
             iloc_code_concat(code, then_code);
             iloc_code_free(then_code);  // Liberar após concatenar
-        } else if (then_code) {
+        } else {
             // Se o bloco está vazio, criar nop com rótulo
+            if (then_code) {
+                iloc_code_free(then_code);
+            }
             iloc_operation_t* label_then = iloc_operation_new("nop", false);
             iloc_operation_set_label(label_then, L_then);
             iloc_code_append(code, label_then);
-            iloc_code_free(then_code);
         }
     } else {
         // Se não há bloco then, criar nop com rótulo
@@ -1016,17 +1075,19 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     // Gerar código do bloco else
     if (else_block) {
         iloc_code_t* else_code = generate_block_code(else_block, scopes);
-        if (else_code && else_code->first) {
+        if (else_code && else_code->count > 0 && else_code->first) {
             // Adicionar rótulo L_else à primeira operação do bloco else
             iloc_operation_set_label(else_code->first, L_else);
             iloc_code_concat(code, else_code);
             iloc_code_free(else_code);  // Liberar após concatenar
-        } else if (else_code) {
+        } else {
             // Se o bloco está vazio, criar nop com rótulo
+            if (else_code) {
+                iloc_code_free(else_code);
+            }
             iloc_operation_t* label_else = iloc_operation_new("nop", false);
             iloc_operation_set_label(label_else, L_else);
             iloc_code_append(code, label_else);
-            iloc_code_free(else_code);
         }
     } else {
         // Se não há bloco else, criar nop com rótulo
@@ -1111,17 +1172,19 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
     // Gerar código do corpo
     if (body) {
         iloc_code_t* body_code = generate_block_code(body, scopes);
-        if (body_code && body_code->first) {
+        if (body_code && body_code->count > 0 && body_code->first) {
             // Adicionar rótulo L_body à primeira operação do corpo
             iloc_operation_set_label(body_code->first, L_body);
             iloc_code_concat(code, body_code);
             iloc_code_free(body_code);  // Liberar após concatenar
-        } else if (body_code) {
+        } else {
             // Se o bloco está vazio, criar nop com rótulo
+            if (body_code) {
+                iloc_code_free(body_code);
+            }
             iloc_operation_t* label_body = iloc_operation_new("nop", false);
             iloc_operation_set_label(label_body, L_body);
             iloc_code_append(code, label_body);
-            iloc_code_free(body_code);
         }
     } else {
         // Se não há corpo, criar nop com rótulo

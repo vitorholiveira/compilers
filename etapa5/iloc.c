@@ -428,29 +428,17 @@ void iloc_print_code(iloc_code_t* code, FILE* out) {
         return;  // Código vazio, não imprime nada
     }
     
-    // Se há apenas uma operação, imprimir diretamente
-    if (code->count == 1) {
-        iloc_print_operation(code->first, out);
-        fprintf(out, "\n");
-        fflush(out);
-        return;
-    }
-    
-    // Se há múltiplas operações, agrupar em [op1; op2; op3]
-    fprintf(out, "[");
+    // Imprimir cada operação em uma linha separada (formato esperado pelo simulador ilocsim.py)
     iloc_operation_t* current = code->first;
     int op_count = 0;
     
     while (current && op_count < code->count) {
-        if (op_count > 0) {
-            fprintf(out, "; ");
-        }
         iloc_print_operation(current, out);
+        fprintf(out, "\n");
         current = current->next;
         op_count++;
     }
     
-    fprintf(out, "]\n");
     fflush(out);
 }
 
