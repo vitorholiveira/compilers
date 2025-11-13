@@ -1,0 +1,17 @@
+// Teste: Fluxo de Controle - Corpos Vazios
+// Teste para verificar tratamento de blocos vazios em if e while
+// Deve gerar código correto mesmo sem comandos no corpo
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x > 0) [
+    ]
+    enquanto (x > 0) [
+        x := x - 1
+    ]
+    se (x == 0) [
+    ] senao [
+    ]
+];
+

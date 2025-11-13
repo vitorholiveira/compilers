@@ -1,0 +1,17 @@
+// Teste: Integração - Soma Condicional
+// Teste integrado que soma apenas números pares usando if dentro de while
+// Combina múltiplas funcionalidades
+
+main -> inteiro := [
+    var i := inteiro
+    var sum := inteiro
+    i := 0
+    sum := 0
+    enquanto (i < 10) [
+        se ((i / 2) * 2 == i) [
+            sum := sum + i
+        ]
+        i := i + 1
+    ]
+];
+

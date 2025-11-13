@@ -1,0 +1,12 @@
+// Teste: Fluxo de Controle - WHILE com Condição Falsa Inicialmente
+// Teste para verificar que while não executa quando condição é falsa
+// Deve gerar código que pula o loop completamente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 10
+    enquanto (x < 5) [
+        x := x + 1
+    ]
+];
+

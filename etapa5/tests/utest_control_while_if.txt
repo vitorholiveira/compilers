@@ -1,0 +1,16 @@
+// Teste: Fluxo de Controle - WHILE com IF interno
+// Teste para verificar combinação de while e if
+// Deve gerar código correto para ambos os fluxos de controle
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    enquanto (x < 10) [
+        se (x < 5) [
+            x := x + 2
+        ] senao [
+            x := x + 1
+        ]
+    ]
+];
+

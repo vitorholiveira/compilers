@@ -1,0 +1,19 @@
+// Teste: Fluxo de Controle - IF Aninhados
+// Teste para verificar geração de código para IFs aninhados
+// Deve gerar rótulos únicos para cada nível de aninhamento
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < 10) [
+        se (y > 5) [
+            x := 100
+        ]
+        se (y < 5) [
+            x := 200
+        ]
+    ]
+];
+

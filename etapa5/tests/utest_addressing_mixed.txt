@@ -1,0 +1,17 @@
+// Teste: Endereçamento - Variáveis Locais e Globais Misturadas
+// Teste para verificar uso correto de rfp para locais e rbss para globais
+
+var global_x := inteiro,
+var global_y := inteiro,
+
+main -> inteiro := [
+    var local_a := inteiro
+    var local_b := inteiro
+    global_x := 50
+    global_y := 60
+    local_a := 10
+    local_b := 20
+    local_a := global_x + local_b
+    global_y := local_a * 2
+];
+

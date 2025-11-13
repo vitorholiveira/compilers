@@ -1,0 +1,15 @@
+// Teste: Fluxo de Controle - Verificação de JumpI em WHILE
+// Teste para verificar que jumpI é gerado no final do corpo do while
+// para voltar ao início do loop
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    enquanto (x < 3) [
+        x := x + 1
+    ]
+    enquanto (x < 6) [
+        x := x + 2
+    ]
+];
+

@@ -1,0 +1,19 @@
+// Teste: Temporários - Uso de Temporários em Sequência
+// Teste para verificar que temporários são gerados corretamente
+// mesmo quando há múltiplas operações em sequência
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    var d := inteiro
+    a := 1
+    b := 2
+    c := 3
+    d := 4
+    a := a + b
+    b := b + c
+    c := c + d
+    d := d + a
+];
+

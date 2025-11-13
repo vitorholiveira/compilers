@@ -177,17 +177,16 @@ void iloc_operation_free(iloc_operation_t* op) {
         free(op->opcode);
     }
     
-    // Liberar operandos fonte
+    // Não liberar rótulo aqui - ele pode ser compartilhado
+    // Não liberar operandos aqui - eles podem ser compartilhados entre operações
+    // A liberação dos operandos deve ser feita separadamente quando apropriado
+    
+    // Liberar arrays de ponteiros (mas não os operandos apontados)
     if (op->source_operands) {
-        // Nota: Não liberamos os operandos aqui porque podem ser compartilhados
-        // A liberação dos operandos deve ser feita separadamente
         free(op->source_operands);
     }
     
-    // Liberar operandos alvo
     if (op->target_operands) {
-        // Nota: Não liberamos os operandos aqui porque podem ser compartilhados
-        // A liberação dos operandos deve ser feita separadamente
         free(op->target_operands);
     }
     
@@ -258,12 +257,91 @@ void iloc_code_free(iloc_code_t* code) {
         return;
     }
     
-    // Liberar todas as operações da lista
+    // Coletar todos os operandos únicos antes de liberar operações
+    // Usar um conjunto simples (array) para rastrear operandos já liberados
+    iloc_operand_t** operand_set = NULL;
+    int operand_count = 0;
+    int operand_capacity = 0;
+    
+    // Primeiro, coletar todos os operandos únicos
     iloc_operation_t* current = code->first;
+    while (current) {
+        // Coletar rótulo
+        if (current->label) {
+            // Verificar se já está no conjunto
+            int found = 0;
+            for (int i = 0; i < operand_count; i++) {
+                if (operand_set[i] == current->label) {
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found) {
+                if (operand_count >= operand_capacity) {
+                    operand_capacity = operand_capacity == 0 ? 16 : operand_capacity * 2;
+                    operand_set = (iloc_operand_t**)realloc(operand_set, operand_capacity * sizeof(iloc_operand_t*));
+                }
+                operand_set[operand_count++] = current->label;
+            }
+        }
+        
+        // Coletar operandos fonte
+        for (int i = 0; i < current->num_source_operands; i++) {
+            if (current->source_operands[i]) {
+                int found = 0;
+                for (int j = 0; j < operand_count; j++) {
+                    if (operand_set[j] == current->source_operands[i]) {
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found) {
+                    if (operand_count >= operand_capacity) {
+                        operand_capacity = operand_capacity == 0 ? 16 : operand_capacity * 2;
+                        operand_set = (iloc_operand_t**)realloc(operand_set, operand_capacity * sizeof(iloc_operand_t*));
+                    }
+                    operand_set[operand_count++] = current->source_operands[i];
+                }
+            }
+        }
+        
+        // Coletar operandos alvo
+        for (int i = 0; i < current->num_target_operands; i++) {
+            if (current->target_operands[i]) {
+                int found = 0;
+                for (int j = 0; j < operand_count; j++) {
+                    if (operand_set[j] == current->target_operands[i]) {
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found) {
+                    if (operand_count >= operand_capacity) {
+                        operand_capacity = operand_capacity == 0 ? 16 : operand_capacity * 2;
+                        operand_set = (iloc_operand_t**)realloc(operand_set, operand_capacity * sizeof(iloc_operand_t*));
+                    }
+                    operand_set[operand_count++] = current->target_operands[i];
+                }
+            }
+        }
+        
+        current = current->next;
+    }
+    
+    // Liberar todas as operações da lista
+    current = code->first;
     while (current) {
         iloc_operation_t* next = current->next;
         iloc_operation_free(current);
         current = next;
+    }
+    
+    // Liberar todos os operandos únicos coletados
+    for (int i = 0; i < operand_count; i++) {
+        iloc_operand_free(operand_set[i]);
+    }
+    if (operand_set) {
+        free(operand_set);
     }
     
     free(code);
@@ -354,6 +432,7 @@ void iloc_print_code(iloc_code_t* code, FILE* out) {
     if (code->count == 1) {
         iloc_print_operation(code->first, out);
         fprintf(out, "\n");
+        fflush(out);
         return;
     }
     
@@ -362,7 +441,7 @@ void iloc_print_code(iloc_code_t* code, FILE* out) {
     iloc_operation_t* current = code->first;
     int op_count = 0;
     
-    while (current) {
+    while (current && op_count < code->count) {
         if (op_count > 0) {
             fprintf(out, "; ");
         }
@@ -372,5 +451,6 @@ void iloc_print_code(iloc_code_t* code, FILE* out) {
     }
     
     fprintf(out, "]\n");
+    fflush(out);
 }
 

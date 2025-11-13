@@ -1,0 +1,24 @@
+// Teste: Fluxo de Controle - IF-ELSE Aninhados
+// Teste para verificar geração de código para IF-ELSE aninhados
+// Deve gerar jumpI para saltar blocos else corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < 10) [
+        se (y > 5) [
+            x := 100
+        ] senao [
+            x := 200
+        ]
+    ] senao [
+        se (y < 5) [
+            x := 300
+        ] senao [
+            x := 400
+        ]
+    ]
+];
+

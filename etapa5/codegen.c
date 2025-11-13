@@ -266,24 +266,21 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
     // Verificar se left é literal ou precisa gerar código
     if (is_literal_constant(left)) {
         left_result = gen_literal_code(left);
+    } else if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
+        left_result = gen_identifier_code(left, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        // Por enquanto, assumir que é identificador ou expressão complexa
-        if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
-            left_result = gen_identifier_code(left, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        left_result = generate_code(left, scopes);
     }
     
     // Verificar se right é literal ou precisa gerar código
     if (is_literal_constant(right)) {
         right_result = gen_literal_code(right);
+    } else if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
+        right_result = gen_identifier_code(right, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
-            right_result = gen_identifier_code(right, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        right_result = generate_code(right, scopes);
     }
     
     if (!left_result || !right_result) {
@@ -302,7 +299,9 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
     
     // Concatenar códigos dos operandos
     iloc_code_concat(code, left_result->code);
+    iloc_code_free(left_result->code);  // Liberar código vazio após concat
     iloc_code_concat(code, right_result->code);
+    iloc_code_free(right_result->code);  // Liberar código vazio após concat
     
     // Criar temporário para resultado
     iloc_operand_t* result_temp = iloc_operand_new_reg();
@@ -373,8 +372,8 @@ codegen_result_t* gen_unary_code(const char* op, asd_tree_t* operand, stack_t* s
     } else if (operand->lex_value && operand->lex_value->nature == IDENTIFIER) {
         operand_result = gen_identifier_code(operand, scopes);
     } else {
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
-        return NULL;
+        // Chamar generate_code recursivamente para expressões complexas
+        operand_result = generate_code(operand, scopes);
     }
     
     if (!operand_result) {
@@ -390,6 +389,7 @@ codegen_result_t* gen_unary_code(const char* op, asd_tree_t* operand, stack_t* s
     
     // Concatenar código do operando
     iloc_code_concat(code, operand_result->code);
+    iloc_code_free(operand_result->code);  // Liberar código vazio após concat
     
     // Criar temporário para resultado
     iloc_operand_t* result_temp = iloc_operand_new_reg();
@@ -472,23 +472,21 @@ codegen_result_t* gen_relational_code(const char* op, asd_tree_t* left, asd_tree
     // Verificar se left é literal ou precisa gerar código
     if (is_literal_constant(left)) {
         left_result = gen_literal_code(left);
+    } else if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
+        left_result = gen_identifier_code(left, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
-            left_result = gen_identifier_code(left, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        left_result = generate_code(left, scopes);
     }
     
     // Verificar se right é literal ou precisa gerar código
     if (is_literal_constant(right)) {
         right_result = gen_literal_code(right);
+    } else if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
+        right_result = gen_identifier_code(right, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
-            right_result = gen_identifier_code(right, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        right_result = generate_code(right, scopes);
     }
     
     if (!left_result || !right_result) {
@@ -507,7 +505,9 @@ codegen_result_t* gen_relational_code(const char* op, asd_tree_t* left, asd_tree
     
     // Concatenar códigos dos operandos
     iloc_code_concat(code, left_result->code);
+    iloc_code_free(left_result->code);  // Liberar código vazio após concat
     iloc_code_concat(code, right_result->code);
+    iloc_code_free(right_result->code);  // Liberar código vazio após concat
     
     // Criar temporário para resultado booleano
     iloc_operand_t* result_temp = iloc_operand_new_reg();
@@ -563,23 +563,21 @@ codegen_result_t* gen_logical_code(const char* op, asd_tree_t* left, asd_tree_t*
     // Verificar se left é literal ou precisa gerar código
     if (is_literal_constant(left)) {
         left_result = gen_literal_code(left);
+    } else if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
+        left_result = gen_identifier_code(left, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        if (left->lex_value && left->lex_value->nature == IDENTIFIER) {
-            left_result = gen_identifier_code(left, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        left_result = generate_code(left, scopes);
     }
     
     // Verificar se right é literal ou precisa gerar código
     if (is_literal_constant(right)) {
         right_result = gen_literal_code(right);
+    } else if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
+        right_result = gen_identifier_code(right, scopes);
     } else {
-        // Chamar função genérica de geração (será implementada na Fase 8)
-        if (right->lex_value && right->lex_value->nature == IDENTIFIER) {
-            right_result = gen_identifier_code(right, scopes);
-        }
-        // TODO: Chamar generate_code recursivamente quando implementar Fase 8
+        // Chamar generate_code recursivamente para expressões complexas
+        right_result = generate_code(right, scopes);
     }
     
     if (!left_result || !right_result) {
@@ -598,7 +596,9 @@ codegen_result_t* gen_logical_code(const char* op, asd_tree_t* left, asd_tree_t*
     
     // Concatenar códigos dos operandos
     iloc_code_concat(code, left_result->code);
+    iloc_code_free(left_result->code);  // Liberar código vazio após concat
     iloc_code_concat(code, right_result->code);
+    iloc_code_free(right_result->code);  // Liberar código vazio após concat
     
     // Criar temporário para resultado
     iloc_operand_t* result_temp = iloc_operand_new_reg();
@@ -807,11 +807,13 @@ iloc_code_t* gen_assignment_code(asd_tree_t* identifier, asd_tree_t* expression,
     
     // Concatenar código da expressão
     iloc_code_concat(code, expr_result->code);
+    iloc_code_free(expr_result->code);  // Liberar código vazio após concat
     
     // Concatenar código de store
     iloc_code_concat(code, store_code);
+    iloc_code_free(store_code);  // Liberar código vazio após concat
     
-    // Liberar resultado da expressão (mas não o código/temp que foram movidos)
+    // Liberar resultado da expressão (mas não o temp que foi movido para store_code)
     free(expr_result);
     
     return code;
@@ -841,11 +843,13 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         codegen_result_t* cmd_result = generate_code(cmd, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
-            // Armazenar código no nó também
-            cmd->iloc_code = cmd_result->code;
+            // Armazenar código no nó também (mas não duplicar, usar o mesmo ponteiro)
+            // Não armazenar aqui porque o código foi movido para 'code'
+            // cmd->iloc_code = cmd_result->code;  // Comentado para evitar double-free
+            iloc_code_free(cmd_result->code);  // Liberar código vazio após concat
         }
         if (cmd_result) {
-            free(cmd_result);  // Liberar estrutura, mas não o código que foi movido
+            free(cmd_result);  // Liberar estrutura
         }
     }
     
@@ -886,6 +890,8 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
     
     // Concatenar código da condição
     iloc_code_concat(code, cond_result->code);
+    // Liberar código vazio após concat (iloc_code_concat moveu as operações, deixando code vazio)
+    iloc_code_free(cond_result->code);
     
     // Criar operação cbr (conditional branch)
     iloc_operation_t* cbr_op = iloc_operation_new("cbr", true);
@@ -898,16 +904,19 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
     iloc_code_t* then_code = NULL;
     if (then_block) {
         then_code = generate_block_code(then_block, scopes);
-        if (then_code && then_code->first) {
+        if (then_code && then_code->count > 0 && then_code->first) {
             // Adicionar rótulo L_then à primeira operação do bloco then
             iloc_operation_set_label(then_code->first, L_then);
             iloc_code_concat(code, then_code);
-        } else if (then_code) {
+            iloc_code_free(then_code);  // Liberar após concatenar
+        } else {
             // Se o bloco está vazio, criar nop com rótulo
+            if (then_code) {
+                iloc_code_free(then_code);
+            }
             iloc_operation_t* label_then = iloc_operation_new("nop", false);
             iloc_operation_set_label(label_then, L_then);
             iloc_code_append(code, label_then);
-            iloc_code_free(then_code);
         }
     } else {
         // Se não há bloco then, criar nop com rótulo
@@ -922,9 +931,10 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
     iloc_code_append(code, label_end);
     
     // Liberar recursos
-    free(cond_result);
-    iloc_operand_free(L_then);
-    iloc_operand_free(L_end);
+    // Não liberar cond_result->code porque foi concatenado em code
+    // Não liberar cond_result->temp porque está sendo usado em cbr_op
+    // Não liberar L_then e L_end porque estão sendo usados nas operações
+    free(cond_result);  // Apenas liberar a estrutura, não o código/temp
     
     return code;
 }
@@ -966,6 +976,8 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     
     // Concatenar código da condição
     iloc_code_concat(code, cond_result->code);
+    // Liberar código vazio após concat
+    iloc_code_free(cond_result->code);
     
     // Criar operação cbr
     iloc_operation_t* cbr_op = iloc_operation_new("cbr", true);
@@ -981,6 +993,7 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
             // Adicionar rótulo L_then à primeira operação do bloco then
             iloc_operation_set_label(then_code->first, L_then);
             iloc_code_concat(code, then_code);
+            iloc_code_free(then_code);  // Liberar após concatenar
         } else if (then_code) {
             // Se o bloco está vazio, criar nop com rótulo
             iloc_operation_t* label_then = iloc_operation_new("nop", false);
@@ -1007,6 +1020,7 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
             // Adicionar rótulo L_else à primeira operação do bloco else
             iloc_operation_set_label(else_code->first, L_else);
             iloc_code_concat(code, else_code);
+            iloc_code_free(else_code);  // Liberar após concatenar
         } else if (else_code) {
             // Se o bloco está vazio, criar nop com rótulo
             iloc_operation_t* label_else = iloc_operation_new("nop", false);
@@ -1027,10 +1041,10 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     iloc_code_append(code, label_end);
     
     // Liberar recursos
-    free(cond_result);
-    iloc_operand_free(L_then);
-    iloc_operand_free(L_else);
-    iloc_operand_free(L_end);
+    // Não liberar cond_result->code porque foi concatenado em code
+    // Não liberar cond_result->temp porque está sendo usado em cbr_op
+    // Não liberar L_then, L_else e L_end porque estão sendo usados nas operações
+    free(cond_result);  // Apenas liberar a estrutura, não o código/temp
     
     return code;
 }
@@ -1084,6 +1098,8 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
     
     // Concatenar código da condição
     iloc_code_concat(code, cond_result->code);
+    // Liberar código vazio após concat
+    iloc_code_free(cond_result->code);
     
     // Criar operação cbr
     iloc_operation_t* cbr_op = iloc_operation_new("cbr", true);
@@ -1099,6 +1115,7 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
             // Adicionar rótulo L_body à primeira operação do corpo
             iloc_operation_set_label(body_code->first, L_body);
             iloc_code_concat(code, body_code);
+            iloc_code_free(body_code);  // Liberar após concatenar
         } else if (body_code) {
             // Se o bloco está vazio, criar nop com rótulo
             iloc_operation_t* label_body = iloc_operation_new("nop", false);
@@ -1124,10 +1141,10 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
     iloc_code_append(code, label_end);
     
     // Liberar recursos
-    free(cond_result);
-    iloc_operand_free(L_loop);
-    iloc_operand_free(L_body);
-    iloc_operand_free(L_end);
+    // Não liberar cond_result->code porque foi concatenado em code
+    // Não liberar cond_result->temp porque está sendo usado em cbr_op
+    // Não liberar L_loop, L_body e L_end porque estão sendo usados nas operações
+    free(cond_result);  // Apenas liberar a estrutura, não o código/temp
     
     return code;
 }

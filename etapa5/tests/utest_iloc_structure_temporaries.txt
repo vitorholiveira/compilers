@@ -1,0 +1,15 @@
+// Teste: Estrutura ILOC - Temporários Corretos
+// Teste para verificar que temporários seguem a convenção r1, r2, r3, etc.
+// E que não conflitam com registradores reservados (rfp, rsp, rbss, rpc)
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    a := 1
+    b := 2
+    c := a + b
+    c := c * 2
+    c := c - 1
+];
+

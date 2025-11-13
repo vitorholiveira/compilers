@@ -1,0 +1,16 @@
+// Teste: Atribuição - Múltiplas Atribuições Sequenciais
+// Teste para verificar múltiplas atribuições em sequência
+// Deve gerar código correto para cada atribuição
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    a := 1
+    b := 2
+    c := 3
+    a := b
+    b := c
+    c := a + b
+];
+

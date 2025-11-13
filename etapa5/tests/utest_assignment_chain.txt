@@ -1,0 +1,13 @@
+// Teste: Atribuição - Cadeia de Atribuições
+// Teste para verificar atribuições em cadeia onde uma variável é usada
+// imediatamente após ser atribuída
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    x := x + 1
+    x := x + 1
+    x := x * 2
+    x := x - 1
+];
+

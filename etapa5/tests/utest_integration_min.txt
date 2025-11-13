@@ -1,0 +1,17 @@
+// Teste: Integração - Encontrar Mínimo
+// Teste integrado que encontra o mínimo entre dois valores
+// Similar ao teste de máximo mas com lógica invertida
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var min := inteiro
+    a := 30
+    b := 15
+    se (a < b) [
+        min := a
+    ] senao [
+        min := b
+    ]
+];
+

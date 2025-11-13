@@ -1,0 +1,14 @@
+// Teste: Expressão - Divisão (Casos Especiais)
+// Teste para verificar geração de código para divisão
+// Inclui divisão por constante e divisão de constante
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 20
+    y := 4
+    x := x / y
+    x := x / 2
+    x := 100 / x
+];
+

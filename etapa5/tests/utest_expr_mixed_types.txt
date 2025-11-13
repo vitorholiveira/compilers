@@ -1,0 +1,16 @@
+// Teste: Expressão - Mistura de Constantes e Variáveis
+// Teste para verificar expressões que misturam constantes e variáveis
+// Deve usar operações imediatas quando um operando é constante
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 10
+    y := x + 5
+    y := 5 + x
+    y := x * 3
+    y := 3 * x
+    y := x / 2
+    y := 20 / x
+];
+

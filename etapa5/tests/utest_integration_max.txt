@@ -1,0 +1,17 @@
+// Teste: Integração - Encontrar Máximo
+// Teste integrado que encontra o máximo entre dois valores usando if-else
+// Testa comparações e atribuições condicionais
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var max := inteiro
+    a := 10
+    b := 20
+    se (a > b) [
+        max := a
+    ] senao [
+        max := b
+    ]
+];
+

@@ -1,0 +1,17 @@
+// Teste: Integração - Soma de Números
+// Teste integrado que calcula soma de números de 1 até N
+// Testa while, atribuições e expressões aritméticas
+
+main -> inteiro := [
+    var n := inteiro
+    var sum := inteiro
+    var i := inteiro
+    n := 10
+    sum := 0
+    i := 1
+    enquanto (i <= n) [
+        sum := sum + i
+        i := i + 1
+    ]
+];
+

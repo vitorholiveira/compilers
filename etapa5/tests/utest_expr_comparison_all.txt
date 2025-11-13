@@ -1,0 +1,29 @@
+// Teste: Expressão - Todas as Comparações
+// Teste para verificar todas as operações de comparação: <, <=, >, >=, ==, !=
+// Deve gerar cmp_LT, cmp_LE, cmp_GT, cmp_GE, cmp_EQ, cmp_NE
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < y) [
+        x := 1
+    ]
+    se (x <= y) [
+        x := 2
+    ]
+    se (x > y) [
+        x := 3
+    ]
+    se (x >= y) [
+        x := 4
+    ]
+    se (x == y) [
+        x := 5
+    ]
+    se (x != y) [
+        x := 6
+    ]
+];
+

@@ -1,0 +1,20 @@
+// Teste: Fluxo de Controle - Sequência de Comandos de Controle
+// Teste para verificar múltiplos comandos de controle em sequência
+// Deve gerar código correto para cada um
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    se (x == 0) [
+        x := 1
+    ]
+    enquanto (x < 5) [
+        x := x + 1
+    ]
+    se (x == 5) [
+        x := 10
+    ] senao [
+        x := 20
+    ]
+];
+

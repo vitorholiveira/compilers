@@ -1,0 +1,13 @@
+// Teste: Expressão - Expressões com Constantes
+// Teste para verificar geração de código quando ambos operandos são constantes
+// Deve gerar loadI com o resultado ou otimizar quando possível
+
+main -> inteiro := [
+    var x := inteiro
+    x := 2 + 3
+    x := 10 - 4
+    x := 5 * 6
+    x := 20 / 4
+    x := (2 + 3) * (10 - 2)
+];
+

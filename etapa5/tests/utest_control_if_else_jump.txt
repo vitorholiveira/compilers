@@ -1,0 +1,19 @@
+// Teste: Fluxo de Controle - Verificação de JumpI em IF-ELSE
+// Teste para verificar que jumpI é gerado após o bloco then
+// para pular o bloco else
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x > 0) [
+        x := 10
+    ] senao [
+        x := 20
+    ]
+    se (x < 15) [
+        x := 30
+    ] senao [
+        x := 40
+    ]
+];
+

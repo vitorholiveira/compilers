@@ -1,0 +1,13 @@
+// Teste: Expressão - Otimização com Constantes Imediatas
+// Teste para verificar uso de operações imediatas (addI, subI, multI, divI)
+// quando um operando é constante
+
+main -> inteiro := [
+    var x := inteiro
+    x := 10
+    x := x + 5
+    x := x - 3
+    x := x * 2
+    x := x / 4
+];
+

@@ -1,0 +1,11 @@
+// Teste: Expressão - Operador Unário de Mais
+// Teste para verificar geração de código para operador unário de mais (+)
+// Deve apenas retornar o valor sem operação adicional
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := +x
+];
+

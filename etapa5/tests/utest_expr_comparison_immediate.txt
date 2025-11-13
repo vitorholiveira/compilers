@@ -1,0 +1,21 @@
+// Teste: Expressão - Comparações com Constantes
+// Teste para verificar comparações onde um ou ambos operandos são constantes
+// Deve gerar cmp_* corretamente mesmo com constantes
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x < 10) [
+        x := 1
+    ]
+    se (5 < x) [
+        x := 2
+    ]
+    se (x == 5) [
+        x := 3
+    ]
+    se (10 == x) [
+        x := 4
+    ]
+];
+

@@ -1,0 +1,20 @@
+// Teste: Fluxo de Controle - Múltiplos Loops While Sequenciais
+// Teste para verificar múltiplos loops while em sequência
+// Cada loop deve ter seus próprios rótulos
+
+main -> inteiro := [
+    var i := inteiro
+    var j := inteiro
+    i := 0
+    enquanto (i < 3) [
+        i := i + 1
+    ]
+    j := 0
+    enquanto (j < 3) [
+        j := j + 1
+    ]
+    enquanto (i + j < 10) [
+        i := i + 1
+    ]
+];
+

@@ -1,0 +1,18 @@
+// Teste: Fluxo de Controle - IF-ELSE-IF
+// Teste para verificar múltiplos if-else encadeados
+// Cada condição deve ser testada sequencialmente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x < 3) [
+        x := 1
+    ] senao [
+        se (x < 6) [
+            x := 2
+        ] senao [
+            x := 3
+        ]
+    ]
+];
+
