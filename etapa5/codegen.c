@@ -872,34 +872,47 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         block->iloc_code = NULL;
     }
     
-    // Se o bloco tem filhos, processar cada comando usando generate_code
-    // (não usar código já gerado para evitar duplicação)
+    // CASO ESPECIAL: Se o bloco é na verdade um comando (como atribuição, se, enquanto),
+    // não processar seus filhos como comandos separados. Em vez disso, gerar código para
+    // o próprio nó como um comando completo.
+    // Isso acontece quando há apenas um comando no bloco e sequencia_comandos_simples
+    // retorna o próprio comando ao invés de criar um nó intermediário.
+    if (block->label && (
+        strcmp(block->label, ":=") == 0 ||
+        strcmp(block->label, "se") == 0 ||
+        strcmp(block->label, "enquanto") == 0 ||
+        strcmp(block->label, "retorna") == 0
+    )) {
+        // Limpar código pré-existente
+        if (block->iloc_code) {
+            iloc_code_free(block->iloc_code);
+            block->iloc_code = NULL;
+        }
+        // Gerar código para o comando completo
+        codegen_result_t* cmd_result = generate_code(block, scopes);
+        if (cmd_result && cmd_result->code) {
+            iloc_code_concat(code, cmd_result->code);
+            iloc_code_free(cmd_result->code);
+        }
+        if (cmd_result) {
+            free(cmd_result);
+        }
+        return code;
+    }
+    
+    // Se o bloco tem filhos, processar cada comando
     for (int i = 0; i < block->number_of_children; i++) {
         asd_tree_t* cmd = block->children[i];
         if (!cmd) continue;
         
-        // Limpar código já gerado pelo parser antes de regenerar
-        // Isso é importante porque o parser pode ter concatenado código dos filhos
-        // em sequencia_comandos_simples, causando duplicação
+        // Limpar código já gerado pelo parser no comando antes de regenerar
+        // Isso garante que sempre geramos código completo e correto
         if (cmd->iloc_code) {
             iloc_code_free(cmd->iloc_code);
             cmd->iloc_code = NULL;
         }
         
-        // Se o comando tem filhos (como bloco_de_comandos), limpar código recursivamente
-        // Isso garante que não há código duplicado em blocos aninhados
-        if (cmd->number_of_children > 0) {
-            for (int j = 0; j < cmd->number_of_children; j++) {
-                asd_tree_t* child = cmd->children[j];
-                if (child && child->iloc_code) {
-                    iloc_code_free(child->iloc_code);
-                    child->iloc_code = NULL;
-                }
-            }
-        }
-        
-        // Sempre gerar código para o comando usando generate_code
-        // Isso garante que o código está correto e não duplicado
+        // Sempre gerar código novo para garantir que está completo
         codegen_result_t* cmd_result = generate_code(cmd, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
@@ -1074,13 +1087,22 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     
     // Gerar código do bloco else
     if (else_block) {
+        fprintf(stderr, "[DEBUG gen_if_else] Gerando código do bloco else, label=%s\n", 
+                else_block->label ? else_block->label : "NULL");
         iloc_code_t* else_code = generate_block_code(else_block, scopes);
+        if (else_code) {
+            fprintf(stderr, "[DEBUG gen_if_else] else_code gerado: count=%d\n", else_code->count);
+        } else {
+            fprintf(stderr, "[DEBUG gen_if_else] else_code é NULL!\n");
+        }
         if (else_code && else_code->count > 0 && else_code->first) {
+            fprintf(stderr, "[DEBUG gen_if_else] Concatenando código do else (count=%d)\n", else_code->count);
             // Adicionar rótulo L_else à primeira operação do bloco else
             iloc_operation_set_label(else_code->first, L_else);
             iloc_code_concat(code, else_code);
             iloc_code_free(else_code);  // Liberar após concatenar
         } else {
+            fprintf(stderr, "[DEBUG gen_if_else] else_code vazio ou inválido, criando nop\n");
             // Se o bloco está vazio, criar nop com rótulo
             if (else_code) {
                 iloc_code_free(else_code);
@@ -1090,6 +1112,7 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
             iloc_code_append(code, label_else);
         }
     } else {
+        fprintf(stderr, "[DEBUG gen_if_else] Não há bloco else, criando nop\n");
         // Se não há bloco else, criar nop com rótulo
         iloc_operation_t* label_else = iloc_operation_new("nop", false);
         iloc_operation_set_label(label_else, L_else);
@@ -1211,3 +1234,4 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
     
     return code;
 }
+
