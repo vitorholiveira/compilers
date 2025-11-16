@@ -731,6 +731,7 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         codegen_result_t* cmd_result = generate_code(block, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
+            // Após concatenar, cmd_result->code está vazio, mas ainda precisa ser liberado
             iloc_code_free(cmd_result->code);
         }
         if (cmd_result) {
@@ -751,6 +752,7 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         codegen_result_t* cmd_result = generate_code(cmd, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
+            // Após concatenar, cmd_result->code está vazio, mas ainda precisa ser liberado
             iloc_code_free(cmd_result->code);
         }
         if (cmd_result) {

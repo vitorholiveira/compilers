@@ -300,18 +300,25 @@ sequencia_comandos_simples: comandos_simples sequencia_comandos_simples {
             if ($1 && $1->iloc_code && 
                 (!$1->label || (strcmp($1->label, "se") != 0 && strcmp($1->label, "enquanto") != 0))) {
                 iloc_code_concat(seq_code, $1->iloc_code);
-                iloc_code_free($1->iloc_code);  // Liberar código vazio após concat
-                $1->iloc_code = NULL;  // Limpar ponteiro para evitar double-free
+                iloc_code_free($1->iloc_code);
+                $1->iloc_code = NULL;
+            } else if ($1 && $1->iloc_code) {
+                // Liberar código de controle de fluxo não usado
+                iloc_code_free($1->iloc_code);
+                $1->iloc_code = NULL;
             }
             // Depois adicionar códigos dos filhos (que são os comandos subsequentes)
-            // MAS: não concatenar código de comandos de controle de fluxo
             for (int i = 0; i < $$->number_of_children; i++) {
                 asd_tree_t* cmd = $$->children[i];
                 if (cmd && cmd->iloc_code && 
                     (!cmd->label || (strcmp(cmd->label, "se") != 0 && strcmp(cmd->label, "enquanto") != 0))) {
                     iloc_code_concat(seq_code, cmd->iloc_code);
-                    iloc_code_free(cmd->iloc_code);  // Liberar código vazio após concat
-                    cmd->iloc_code = NULL;  // Limpar ponteiro para evitar double-free
+                    iloc_code_free(cmd->iloc_code);
+                    cmd->iloc_code = NULL;
+                } else if (cmd && cmd->iloc_code) {
+                    // Liberar código de controle de fluxo não usado
+                    iloc_code_free(cmd->iloc_code);
+                    cmd->iloc_code = NULL;
                 }
             }
             // Se gerou código, armazenar

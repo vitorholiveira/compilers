@@ -257,6 +257,12 @@ void iloc_code_free(iloc_code_t* code) {
         return;
     }
     
+    // Se o código está vazio (sem operações), apenas liberar a estrutura
+    if (code->count == 0) {
+        free(code);
+        return;
+    }
+    
     // Coletar todos os operandos únicos antes de liberar operações
     // Usar um conjunto simples (array) para rastrear operandos já liberados
     iloc_operand_t** operand_set = NULL;
