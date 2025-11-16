@@ -1,4 +1,0 @@
-main -> inteiro := [
-    var x := inteiro
-    x := 42
-];
