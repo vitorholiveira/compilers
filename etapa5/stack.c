@@ -176,9 +176,9 @@ void stack_reset_local_offset(void) {
 }
 
 int stack_get_local_offset(void) {
-    // Offset negativo cresce para baixo na pilha
-    // Primeira variável local: -4, segunda: -8, etc.
-    int offset = -(local_offset + 4);
+    // Offset positivo cresce para cima no frame
+    // Primeira variável local: 0, segunda: 4, etc.
+    int offset = local_offset;
     local_offset += 4;  // Assumindo que int ocupa 4 bytes
     return offset;
 }

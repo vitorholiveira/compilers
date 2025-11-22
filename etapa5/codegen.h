@@ -10,8 +10,8 @@
  * FUNÇÕES PARA GERAÇÃO DE CÓDIGO DE ACESSO A VARIÁVEIS
  * ============================================================================ */
 
-iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_temp);
-iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_temp);
+iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_temp, stack_t* scopes);
+iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_temp, stack_t* scopes);
 iloc_code_t* gen_variable_address_code(symbol_t* symbol, iloc_operand_t** result_temp);
 
 /* ============================================================================
@@ -58,6 +58,8 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
 iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd_tree_t* else_block, stack_t* scopes);
 
 iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* scopes);
+
+iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes);
 
 /* ============================================================================
  * FUNÇÃO GENÉRICA DE GERAÇÃO DE CÓDIGO

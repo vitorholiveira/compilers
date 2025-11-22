@@ -10,11 +10,18 @@ int label_counter = 0;
  * ============================================================================ */
 
 int get_next_register(void) {
-    return ++register_counter;
+    register_counter++;
+    return register_counter - 1;  // Retorna 0 para o primeiro, 1 para o segundo, etc.
 }
 
 int get_next_label(void) {
-    return ++label_counter;
+    label_counter++;
+    return label_counter - 1;  // Retorna 0 para o primeiro, 1 para o segundo, etc.
+}
+
+void iloc_reset_counters(void) {
+    register_counter = 0;
+    label_counter = 0;
 }
 
 /* ============================================================================

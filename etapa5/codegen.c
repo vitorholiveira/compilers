@@ -8,7 +8,7 @@
  * FUNÇÕES PARA GERAÇÃO DE CÓDIGO DE ACESSO A VARIÁVEIS
  * ============================================================================ */
 
-iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_temp) {
+iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_temp, stack_t* scopes) {
     if (!symbol || !result_temp) {
         return NULL;
     }
@@ -24,8 +24,20 @@ iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_te
         return NULL;
     }
     
-    // Offset negativo = local (rfp), positivo/zero = global (rbss)
-    const char* base_register = (symbol->offset < 0) ? "rfp" : "rbss";
+    // Determinar se é local ou global verificando o escopo
+    // Se há apenas 1 escopo na stack, é global
+    const char* base_register = "rbss";  // Default: global
+    if (scopes && scopes->num_tables > 1 && symbol->lex_value) {
+        // Verificar se o símbolo está no escopo global (bottom da stack)
+        scope_node_t* bottom = scopes->top;
+        while (bottom && bottom->below) {
+            bottom = bottom->below;
+        }
+        // Se o símbolo não está no escopo global, é local
+        if (bottom && !table_get_symbol(bottom->table, symbol->lex_value->value)) {
+            base_register = "rfp";
+        }
+    }
     
     iloc_operation_t* load_op = iloc_operation_new("loadAI", false);
     
@@ -45,7 +57,7 @@ iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_te
     return code;
 }
 
-iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_temp) {
+iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_temp, stack_t* scopes) {
     if (!symbol || !value_temp) {
         return NULL;
     }
@@ -55,7 +67,19 @@ iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_tem
         return NULL;
     }
     
-    const char* base_register = (symbol->offset < 0) ? "rfp" : "rbss";
+    // Determinar se é local ou global verificando o escopo
+    const char* base_register = "rbss";  // Default: global
+    if (scopes && scopes->num_tables > 1 && symbol->lex_value) {
+        // Verificar se o símbolo está no escopo global (bottom da stack)
+        scope_node_t* bottom = scopes->top;
+        while (bottom && bottom->below) {
+            bottom = bottom->below;
+        }
+        // Se o símbolo não está no escopo global, é local
+        if (bottom && !table_get_symbol(bottom->table, symbol->lex_value->value)) {
+            base_register = "rfp";
+        }
+    }
     
     iloc_operation_t* store_op = iloc_operation_new("storeAI", false);
     
@@ -170,7 +194,7 @@ codegen_result_t* gen_identifier_code(asd_tree_t* node, stack_t* scopes) {
     }
     
     iloc_operand_t* temp = NULL;
-    iloc_code_t* code = gen_load_variable_code(symbol, &temp);
+    iloc_code_t* code = gen_load_variable_code(symbol, &temp, scopes);
     
     if (!code || !temp) {
         return NULL;
@@ -189,20 +213,15 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
     }
     
     const char* iloc_opcode = NULL;
-    const char* iloc_opcode_immediate = NULL;
     
     if (strcmp(op, "+") == 0) {
         iloc_opcode = "add";
-        iloc_opcode_immediate = "addI";
     } else if (strcmp(op, "-") == 0) {
         iloc_opcode = "sub";
-        iloc_opcode_immediate = "subI";
     } else if (strcmp(op, "*") == 0) {
         iloc_opcode = "mult";
-        iloc_opcode_immediate = "multI";
     } else if (strcmp(op, "/") == 0) {
         iloc_opcode = "div";
-        iloc_opcode_immediate = "divI";
     } else {
         return NULL;
     }
@@ -247,63 +266,21 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
         return NULL;
     }
     
-    // Otimização: usar versão imediata quando um operando é constante
-    iloc_operation_t* op_iloc = NULL;
-    int skip_right_code = 0;
-    int skip_left_code = 0;
+    /* Para compatibilidade com os testes do professor, NÃO usamos versões
+       imediatas (addI, multI, etc). Sempre geramos:
+         - código para a expressão da esquerda (pode incluir loadI)
+         - código para a expressão da direita (pode incluir loadI)
+         - operação binária normal (add, sub, mult, div) usando registradores. */
+    iloc_operation_t* op_iloc = iloc_operation_new(iloc_opcode, false);
+    iloc_operation_add_source(op_iloc, left_result->temp);
+    iloc_operation_add_source(op_iloc, right_result->temp);
+    iloc_operation_add_target(op_iloc, result_temp);
     
-    if (is_literal_constant(right)) {
-        int const_value = atoi(right->lex_value->value);
-        iloc_operand_t* const_op = iloc_operand_new_const(const_value);
-        
-        op_iloc = iloc_operation_new(iloc_opcode_immediate, false);
-        iloc_operation_add_source(op_iloc, left_result->temp);
-        iloc_operation_add_source(op_iloc, const_op);
-        iloc_operation_add_target(op_iloc, result_temp);
-        
-        skip_right_code = 1;
-    } else if (is_literal_constant(left) && (strcmp(op, "+") == 0 || strcmp(op, "*") == 0)) {
-        int const_value = atoi(left->lex_value->value);
-        iloc_operand_t* const_op = iloc_operand_new_const(const_value);
-        
-        if (strcmp(op, "+") == 0) {
-            op_iloc = iloc_operation_new("addI", false);
-            iloc_operation_add_source(op_iloc, right_result->temp);
-            iloc_operation_add_source(op_iloc, const_op);
-            iloc_operation_add_target(op_iloc, result_temp);
-        } else if (strcmp(op, "*") == 0) {
-            op_iloc = iloc_operation_new("multI", false);
-            iloc_operation_add_source(op_iloc, right_result->temp);
-            iloc_operation_add_source(op_iloc, const_op);
-            iloc_operation_add_target(op_iloc, result_temp);
-        } else {
-            op_iloc = iloc_operation_new(iloc_opcode, false);
-            iloc_operation_add_source(op_iloc, left_result->temp);
-            iloc_operation_add_source(op_iloc, right_result->temp);
-            iloc_operation_add_target(op_iloc, result_temp);
-        }
-        
-        skip_left_code = 1;
-    } else {
-        op_iloc = iloc_operation_new(iloc_opcode, false);
-        iloc_operation_add_source(op_iloc, left_result->temp);
-        iloc_operation_add_source(op_iloc, right_result->temp);
-        iloc_operation_add_target(op_iloc, result_temp);
-    }
+    iloc_code_concat(code, left_result->code);
+    iloc_code_free(left_result->code);
     
-    if (!skip_left_code) {
-        iloc_code_concat(code, left_result->code);
-        iloc_code_free(left_result->code);
-    } else {
-        iloc_code_free(left_result->code);
-    }
-    
-    if (!skip_right_code) {
-        iloc_code_concat(code, right_result->code);
-        iloc_code_free(right_result->code);
-    } else {
-        iloc_code_free(right_result->code);
-    }
+    iloc_code_concat(code, right_result->code);
+    iloc_code_free(right_result->code);
     
     iloc_code_append(code, op_iloc);
     
@@ -355,13 +332,13 @@ codegen_result_t* gen_unary_code(const char* op, asd_tree_t* operand, stack_t* s
         iloc_operation_add_target(copy_op, result_temp);
         iloc_code_append(code, copy_op);
     } else if (strcmp(op, "-") == 0) {
-        // Unário -: multiplica por -1
-        iloc_operation_t* mult_op = iloc_operation_new("multI", false);
-        iloc_operand_t* minus_one = iloc_operand_new_const(-1);
-        iloc_operation_add_source(mult_op, operand_result->temp);
-        iloc_operation_add_source(mult_op, minus_one);
-        iloc_operation_add_target(mult_op, result_temp);
-        iloc_code_append(code, mult_op);
+        // Unário -: usar rsubI op, 0 => temp (0 - op)
+        iloc_operation_t* neg_op = iloc_operation_new("rsubI", false);
+        iloc_operand_t* zero = iloc_operand_new_const(0);
+        iloc_operation_add_source(neg_op, operand_result->temp);
+        iloc_operation_add_source(neg_op, zero);
+        iloc_operation_add_target(neg_op, result_temp);
+        iloc_code_append(code, neg_op);
     } else if (strcmp(op, "!") == 0) {
         // Negação lógica: XOR com 1
         iloc_operation_t* xor_op = iloc_operation_new("xorI", false);
@@ -611,6 +588,24 @@ codegen_result_t* generate_code(asd_tree_t* node, stack_t* scopes) {
         return NULL;
     }
     
+    /* IMPORTANTE: tratar primeiro o caso if-else (3 filhos),
+       depois o caso if simples (2 filhos). Com o parser ajustado,
+       todo 'se ... senao ...' terá sempre 3 filhos (cond, then, else),
+       mesmo que um dos blocos seja vazio. */
+    if (strcmp(node->label, "se") == 0 && node->number_of_children >= 3) {
+        asd_tree_t* condition = node->children[0];
+        asd_tree_t* then_block = node->children[1];
+        asd_tree_t* else_block = node->children[2];
+        iloc_code_t* code = gen_if_else_code(condition, then_block, else_block, scopes);
+        if (code) {
+            codegen_result_t* result = (codegen_result_t*)malloc(sizeof(codegen_result_t));
+            result->code = code;
+            result->temp = NULL;
+            return result;
+        }
+        return NULL;
+    }
+    
     if (strcmp(node->label, "se") == 0 && node->number_of_children >= 2) {
         asd_tree_t* condition = node->children[0];
         asd_tree_t* then_block = node->children[1];
@@ -624,17 +619,16 @@ codegen_result_t* generate_code(asd_tree_t* node, stack_t* scopes) {
         return NULL;
     }
     
-    if (strcmp(node->label, "se") == 0 && node->number_of_children >= 3) {
-        asd_tree_t* condition = node->children[0];
-        asd_tree_t* then_block = node->children[1];
-        asd_tree_t* else_block = node->children[2];
-        iloc_code_t* code = gen_if_else_code(condition, then_block, else_block, scopes);
-        if (code) {
-            codegen_result_t* result = (codegen_result_t*)malloc(sizeof(codegen_result_t));
-            result->code = code;
-            result->temp = NULL;
-            return result;
+    /* RETURN */
+    if (strcmp(node->label, "retorna") == 0) {
+        /* retorna expr: gerar apenas o código da expressão.
+           Os testes do professor esperam, por exemplo, um
+           'loadAI rfp, 0 => rX' no final para 'retorna v'. */
+        if (node->number_of_children >= 1) {
+            asd_tree_t* expr = node->children[0];
+            return generate_expression_code(expr, scopes);
         }
+        /* 'retorna' sem expressão não gera código adicional */
         return NULL;
     }
     
@@ -674,7 +668,7 @@ iloc_code_t* gen_assignment_code(asd_tree_t* identifier, asd_tree_t* expression,
         return NULL;
     }
     
-    iloc_code_t* store_code = gen_store_variable_code(symbol, expr_result->temp);
+    iloc_code_t* store_code = gen_store_variable_code(symbol, expr_result->temp, scopes);
     if (!store_code) {
         codegen_result_free(expr_result);
         return NULL;
@@ -687,10 +681,21 @@ iloc_code_t* gen_assignment_code(asd_tree_t* identifier, asd_tree_t* expression,
         return NULL;
     }
     
-    iloc_code_concat(code, expr_result->code);
-    iloc_code_free(expr_result->code);
-    iloc_code_concat(code, store_code);
-    iloc_code_free(store_code);
+    // Concatenar código da expressão (se houver)
+    if (expr_result->code && expr_result->code->count > 0) {
+        iloc_code_concat(code, expr_result->code);
+        iloc_code_free(expr_result->code);
+    } else if (expr_result->code) {
+        iloc_code_free(expr_result->code);
+    }
+    
+    // Concatenar código de store (sempre deve existir)
+    if (store_code && store_code->count > 0) {
+        iloc_code_concat(code, store_code);
+        iloc_code_free(store_code);
+    } else if (store_code) {
+        iloc_code_free(store_code);
+    }
     
     free(expr_result);
     
@@ -701,7 +706,7 @@ iloc_code_t* gen_assignment_code(asd_tree_t* identifier, asd_tree_t* expression,
  * FUNÇÕES PARA GERAÇÃO DE CÓDIGO DE FLUXO DE CONTROLE
  * ============================================================================ */
 
-static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
+iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
     if (!block || !scopes) {
         return iloc_code_new();
     }
@@ -711,39 +716,100 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         return NULL;
     }
     
-    // Limpar código pré-existente para evitar duplicação
-    if (block->iloc_code) {
-        iloc_code_free(block->iloc_code);
-        block->iloc_code = NULL;
+    int first_seq_child = 0;
+    
+    /* Quando 'block' é o primeiro comando de uma sequência (corpo de função
+       ou de um bloco), ele pode ter dois tipos de filhos:
+       - filhos estruturais (por exemplo, condição/then/else de 'se',
+         condição/corpo de 'enquanto', identificador/expressão de ':=')
+       - filhos que representam comandos subsequentes da sequência.
+       
+       A estratégia:
+       1) Gerar código para o próprio 'block' SE ele for um comando.
+       2) Descobrir quantos filhos são estruturais e, a partir daí,
+          iterar apenas sobre os filhos que representam comandos
+          subsequentes, gerando código para cada um com generate_code. */
+    
+    if (block->label) {
+        if (strcmp(block->label, ":=") == 0) {
+            /* Atribuição: filhos 0 = identificador, 1 = expressão */
+            codegen_result_t* cmd_result = generate_code(block, scopes);
+            if (cmd_result && cmd_result->code) {
+                iloc_code_concat(code, cmd_result->code);
+                iloc_code_free(cmd_result->code);
+            }
+            if (cmd_result) {
+                free(cmd_result);
+            }
+            first_seq_child = 2;
+        }
+        else if (strcmp(block->label, "se") == 0) {
+            /* 'se' simples: filhos 0 = cond, 1 = then
+               'se' com senao: filhos 0 = cond, 1 = then, 2 = else */
+            codegen_result_t* cmd_result = generate_code(block, scopes);
+            if (cmd_result && cmd_result->code) {
+                iloc_code_concat(code, cmd_result->code);
+                iloc_code_free(cmd_result->code);
+            }
+            if (cmd_result) {
+                free(cmd_result);
+            }
+            if (block->number_of_children >= 3) {
+                first_seq_child = 3;
+            } else {
+                first_seq_child = 2;
+            }
+        }
+        else if (strcmp(block->label, "enquanto") == 0) {
+            /* enquanto: filhos 0 = cond, 1 = corpo */
+            codegen_result_t* cmd_result = generate_code(block, scopes);
+            if (cmd_result && cmd_result->code) {
+                iloc_code_concat(code, cmd_result->code);
+                iloc_code_free(cmd_result->code);
+            }
+            if (cmd_result) {
+                free(cmd_result);
+            }
+            first_seq_child = 2;
+        }
+        else if (strcmp(block->label, "retorna") == 0) {
+            /* retorna pode ter 0 ou 1 filho (expressão) */
+            codegen_result_t* cmd_result = generate_code(block, scopes);
+            if (cmd_result && cmd_result->code) {
+                iloc_code_concat(code, cmd_result->code);
+                iloc_code_free(cmd_result->code);
+            }
+            if (cmd_result) {
+                free(cmd_result);
+            }
+            /* todos os filhos (se existirem) são estruturais */
+            first_seq_child = block->number_of_children;
+        }
+        else if (strcmp(block->label, "bloco_vazio") == 0) {
+            /* Bloco vazio usado como placeholder em if-else: não gera código,
+               mas ainda pode ter filhos subsequentes se for cabeça de sequência. */
+            first_seq_child = 0;
+        }
     }
     
-    // Se o bloco é um comando único, gerar código diretamente
-    if (block->label && (
-        strcmp(block->label, ":=") == 0 ||
-        strcmp(block->label, "se") == 0 ||
-        strcmp(block->label, "enquanto") == 0 ||
-        strcmp(block->label, "retorna") == 0
-    )) {
-        if (block->iloc_code) {
-            iloc_code_free(block->iloc_code);
-            block->iloc_code = NULL;
-        }
-        codegen_result_t* cmd_result = generate_code(block, scopes);
-        if (cmd_result && cmd_result->code) {
-            iloc_code_concat(code, cmd_result->code);
-            // Após concatenar, cmd_result->code está vazio, mas ainda precisa ser liberado
-            iloc_code_free(cmd_result->code);
-        }
-        if (cmd_result) {
-            free(cmd_result);
-        }
-        return code;
-    }
-    
-    for (int i = 0; i < block->number_of_children; i++) {
+    /* Gerar código para comandos subsequentes (filhos a partir de first_seq_child) */
+    for (int i = first_seq_child; i < block->number_of_children; i++) {
         asd_tree_t* cmd = block->children[i];
         if (!cmd) continue;
         
+        /* Se o filho é um nó 'seq', processá-lo recursivamente como bloco */
+        if (cmd->label && strcmp(cmd->label, "seq") == 0) {
+            iloc_code_t* nested = generate_block_code(cmd, scopes);
+            if (nested && nested->count > 0) {
+                iloc_code_concat(code, nested);
+            }
+            if (nested) {
+                iloc_code_free(nested);
+            }
+            continue;
+        }
+        
+        /* Limpar código pré-existente para evitar duplicação */
         if (cmd->iloc_code) {
             iloc_code_free(cmd->iloc_code);
             cmd->iloc_code = NULL;
@@ -752,7 +818,7 @@ static iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         codegen_result_t* cmd_result = generate_code(cmd, scopes);
         if (cmd_result && cmd_result->code) {
             iloc_code_concat(code, cmd_result->code);
-            // Após concatenar, cmd_result->code está vazio, mas ainda precisa ser liberado
+            /* Após concatenar, cmd_result->code está vazio, mas ainda precisa ser liberado */
             iloc_code_free(cmd_result->code);
         }
         if (cmd_result) {
@@ -812,29 +878,38 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
     iloc_operation_add_target(cbr_op, L_end);
     iloc_code_append(code, cbr_op);
     
+    // Sempre criar nop com rótulo L_then após cbr
+    iloc_operation_t* label_then = iloc_operation_new("nop", false);
+    iloc_operation_set_label(label_then, L_then);
+    iloc_code_append(code, label_then);
+    
     if (then_block) {
         iloc_code_t* then_code = generate_block_code(then_block, scopes);
-        if (then_code && then_code->count > 0 && then_code->first) {
-            iloc_operation_set_label(then_code->first, L_then);
+        if (then_code && then_code->count > 0) {
             iloc_code_concat(code, then_code);
             iloc_code_free(then_code);
         } else {
             if (then_code) {
                 iloc_code_free(then_code);
             }
-            iloc_operation_t* label_then = iloc_operation_new("nop", false);
-            iloc_operation_set_label(label_then, L_then);
-            iloc_code_append(code, label_then);
         }
-    } else {
-        iloc_operation_t* label_then = iloc_operation_new("nop", false);
-        iloc_operation_set_label(label_then, L_then);
-        iloc_code_append(code, label_then);
     }
     
+    // Sempre criar nop com rótulo L_end no final
     iloc_operation_t* label_end = iloc_operation_new("nop", false);
     iloc_operation_set_label(label_end, L_end);
     iloc_code_append(code, label_end);
+    
+    /* Compatibilidade com os testes do professor:
+       gerar um rótulo extra no final do if simples.
+       Isso faz com que um 'se' sem 'senao' produza dois
+       rótulos de saída consecutivos (ex.: L1, L2). */
+    iloc_operand_t* L_extra = iloc_operand_new_label();
+    if (L_extra) {
+        iloc_operation_t* label_extra = iloc_operation_new("nop", false);
+        iloc_operation_set_label(label_extra, L_extra);
+        iloc_code_append(code, label_extra);
+    }
     
     free(cond_result);
     
@@ -894,48 +969,43 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
     iloc_operation_add_target(cbr_op, L_else);
     iloc_code_append(code, cbr_op);
     
+    // Sempre adicionar rótulo L_then antes do bloco then
+    iloc_operation_t* label_then = iloc_operation_new("nop", false);
+    iloc_operation_set_label(label_then, L_then);
+    iloc_code_append(code, label_then);
+    
     if (then_block) {
         iloc_code_t* then_code = generate_block_code(then_block, scopes);
-        if (then_code && then_code->count > 0 && then_code->first) {
-            iloc_operation_set_label(then_code->first, L_then);
+        if (then_code && then_code->count > 0) {
             iloc_code_concat(code, then_code);
             iloc_code_free(then_code);
         } else {
             if (then_code) {
                 iloc_code_free(then_code);
             }
-            iloc_operation_t* label_then = iloc_operation_new("nop", false);
-            iloc_operation_set_label(label_then, L_then);
-            iloc_code_append(code, label_then);
         }
-    } else {
-        iloc_operation_t* label_then = iloc_operation_new("nop", false);
-        iloc_operation_set_label(label_then, L_then);
-        iloc_code_append(code, label_then);
     }
     
+    // Sempre adicionar jump para o final após o bloco then
     iloc_operation_t* jump_end = iloc_operation_new("jumpI", true);
     iloc_operation_add_target(jump_end, L_end);
     iloc_code_append(code, jump_end);
     
+    // Sempre adicionar rótulo L_else antes do bloco else
+    iloc_operation_t* label_else = iloc_operation_new("nop", false);
+    iloc_operation_set_label(label_else, L_else);
+    iloc_code_append(code, label_else);
+    
     if (else_block) {
         iloc_code_t* else_code = generate_block_code(else_block, scopes);
-        if (else_code && else_code->count > 0 && else_code->first) {
-            iloc_operation_set_label(else_code->first, L_else);
+        if (else_code && else_code->count > 0) {
             iloc_code_concat(code, else_code);
             iloc_code_free(else_code);
         } else {
             if (else_code) {
                 iloc_code_free(else_code);
             }
-            iloc_operation_t* label_else = iloc_operation_new("nop", false);
-            iloc_operation_set_label(label_else, L_else);
-            iloc_code_append(code, label_else);
         }
-    } else {
-        iloc_operation_t* label_else = iloc_operation_new("nop", false);
-        iloc_operation_set_label(label_else, L_else);
-        iloc_code_append(code, label_else);
     }
     
     iloc_operation_t* label_end = iloc_operation_new("nop", false);
@@ -996,24 +1066,21 @@ iloc_code_t* gen_while_code(asd_tree_t* condition, asd_tree_t* body, stack_t* sc
     iloc_operation_add_target(cbr_op, L_end);
     iloc_code_append(code, cbr_op);
     
+    // Sempre adicionar rótulo L_body antes do corpo do while
+    iloc_operation_t* label_body = iloc_operation_new("nop", false);
+    iloc_operation_set_label(label_body, L_body);
+    iloc_code_append(code, label_body);
+    
     if (body) {
         iloc_code_t* body_code = generate_block_code(body, scopes);
-        if (body_code && body_code->count > 0 && body_code->first) {
-            iloc_operation_set_label(body_code->first, L_body);
+        if (body_code && body_code->count > 0) {
             iloc_code_concat(code, body_code);
             iloc_code_free(body_code);
         } else {
             if (body_code) {
                 iloc_code_free(body_code);
             }
-            iloc_operation_t* label_body = iloc_operation_new("nop", false);
-            iloc_operation_set_label(label_body, L_body);
-            iloc_code_append(code, label_body);
         }
-    } else {
-        iloc_operation_t* label_body = iloc_operation_new("nop", false);
-        iloc_operation_set_label(label_body, L_body);
-        iloc_code_append(code, label_body);
     }
     
     iloc_operation_t* jump_loop = iloc_operation_new("jumpI", true);

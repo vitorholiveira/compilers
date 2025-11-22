@@ -64,6 +64,7 @@ void iloc_operand_free(iloc_operand_t* operand);
 /* Funções auxiliares para contadores */
 int get_next_register(void);  // Incrementa e retorna próximo número de registrador
 int get_next_label(void);     // Incrementa e retorna próximo número de rótulo
+void iloc_reset_counters(void);  // Reseta contadores de registradores e rótulos
 
 /* ============================================================================
  * FUNÇÕES DE IMPRESSÃO DO CÓDIGO ILOC
