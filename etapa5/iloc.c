@@ -357,7 +357,6 @@ void iloc_code_free(iloc_code_t* code) {
  * FUNÇÕES DE IMPRESSÃO DO CÓDIGO ILOC
  * ============================================================================ */
 
-/* Passo 9.1: Imprime um operando ILOC */
 void iloc_print_operand(iloc_operand_t* op, FILE* out) {
     if (!op || !out) {
         return;
@@ -378,7 +377,6 @@ void iloc_print_operand(iloc_operand_t* op, FILE* out) {
     }
 }
 
-/* Passo 9.2: Imprime uma operação ILOC */
 void iloc_print_operation(iloc_operation_t* op, FILE* out) {
     if (!op || !out) {
         return;
@@ -424,7 +422,7 @@ void iloc_print_operation(iloc_operation_t* op, FILE* out) {
     }
 }
 
-/* Passo 9.3: Imprime código ILOC completo */
+
 void iloc_print_code(iloc_code_t* code, FILE* out) {
     if (!code || !out) {
         return;
