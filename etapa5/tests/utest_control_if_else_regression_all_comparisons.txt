@@ -1,0 +1,42 @@
+// Teste de Regressão: IF-ELSE com todos os operadores de comparação
+// Teste para garantir que todos os operadores funcionam corretamente em IF-ELSE após correções
+// Deve gerar cmp_* e jumpI corretos para cada operador
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // Testar todos os operadores de comparação em IF-ELSE
+    se (x < y) [
+        x := 1
+    ] senao [
+        x := 2
+    ]
+    se (x <= y) [
+        x := 3
+    ] senao [
+        x := 4
+    ]
+    se (x == y) [
+        x := 5
+    ] senao [
+        x := 6
+    ]
+    se (x >= y) [
+        x := 7
+    ] senao [
+        x := 8
+    ]
+    se (x > y) [
+        x := 9
+    ] senao [
+        x := 10
+    ]
+    se (x != y) [
+        x := 11
+    ] senao [
+        x := 12
+    ]
+];
+

@@ -1,0 +1,21 @@
+// Teste: IFs sequenciais múltiplos
+// Teste para verificar que múltiplos IFs sequenciais funcionam corretamente
+// Cada IF deve ser independente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (x > 0) [
+        x := x + 1
+    ]
+    se (x > 5) [
+        x := x + 2
+    ]
+    se (x > 7) [
+        x := x + 3
+    ]
+    se (x > 10) [
+        x := x + 4
+    ]
+];
+

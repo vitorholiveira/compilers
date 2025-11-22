@@ -1,0 +1,23 @@
+// Teste de Regressão: IF com condição que pode gerar código NULL
+// Teste para garantir que verificações de NULL para cond_result->code funcionam
+// Deve funcionar mesmo quando cond_result->code é NULL ou vazio
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // IF com comparação simples (sempre gera código)
+    se (x < y) [
+        x := 1
+    ]
+    // IF com expressão aritmética na condição
+    se (x + y > 10) [
+        x := 2
+    ]
+    // IF com comparação de variáveis
+    se (x != y) [
+        x := 3
+    ]
+];
+

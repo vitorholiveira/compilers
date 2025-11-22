@@ -791,8 +791,20 @@ iloc_code_t* gen_if_code(asd_tree_t* condition, asd_tree_t* then_block, stack_t*
         return NULL;
     }
     
-    iloc_code_concat(code, cond_result->code);
-    iloc_code_free(cond_result->code);
+    // Concatenar código da condição (se houver)
+    if (cond_result->code) {
+        iloc_code_concat(code, cond_result->code);
+        iloc_code_free(cond_result->code);
+    }
+    
+    // Verificar se temp existe (deve existir para expressões válidas)
+    if (!cond_result->temp) {
+        iloc_code_free(code);
+        iloc_operand_free(L_then);
+        iloc_operand_free(L_end);
+        free(cond_result);
+        return NULL;
+    }
     
     iloc_operation_t* cbr_op = iloc_operation_new("cbr", true);
     iloc_operation_add_source(cbr_op, cond_result->temp);
@@ -860,8 +872,21 @@ iloc_code_t* gen_if_else_code(asd_tree_t* condition, asd_tree_t* then_block, asd
         return NULL;
     }
     
-    iloc_code_concat(code, cond_result->code);
-    iloc_code_free(cond_result->code);
+    // Concatenar código da condição (se houver)
+    if (cond_result->code) {
+        iloc_code_concat(code, cond_result->code);
+        iloc_code_free(cond_result->code);
+    }
+    
+    // Verificar se temp existe (deve existir para expressões válidas)
+    if (!cond_result->temp) {
+        iloc_code_free(code);
+        iloc_operand_free(L_then);
+        iloc_operand_free(L_else);
+        iloc_operand_free(L_end);
+        free(cond_result);
+        return NULL;
+    }
     
     iloc_operation_t* cbr_op = iloc_operation_new("cbr", true);
     iloc_operation_add_source(cbr_op, cond_result->temp);

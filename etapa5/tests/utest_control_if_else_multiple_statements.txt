@@ -1,0 +1,21 @@
+// Teste: IF-ELSE com múltiplos comandos em ambos os blocos
+// Teste para verificar que múltiplos comandos funcionam em ambos os blocos
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 0
+    se (x < 10) [
+        x := x + 1
+        y := y + 2
+        z := x + y
+    ] senao [
+        x := x - 1
+        y := y - 2
+        z := x - y
+    ]
+];
+

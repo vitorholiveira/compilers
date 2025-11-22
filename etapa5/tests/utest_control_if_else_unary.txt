@@ -1,0 +1,23 @@
+// Teste: IF-ELSE com operadores unários na condição
+// Teste para verificar que IF-ELSE funciona com operadores unários
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (-x < 0) [
+        x := 10
+    ] senao [
+        x := 20
+    ]
+    se (+x > 0) [
+        x := 30
+    ] senao [
+        x := 40
+    ]
+    se (!(x == 0)) [
+        x := 50
+    ] senao [
+        x := 60
+    ]
+];
+

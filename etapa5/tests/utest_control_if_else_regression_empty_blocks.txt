@@ -1,0 +1,23 @@
+// Teste de Regressão: IF-ELSE com blocos vazios
+// Teste para garantir que IF-ELSE funciona corretamente mesmo com blocos vazios
+// Deve gerar nop com rótulos apropriados quando blocos estão vazios
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    // IF-ELSE com then vazio
+    se (x < 10) [
+    ] senao [
+        x := 10
+    ]
+    // IF-ELSE com else vazio
+    se (x > 0) [
+        x := 20
+    ] senao [
+    ]
+    // IF-ELSE com ambos vazios
+    se (x == 5) [
+    ] senao [
+    ]
+];
+

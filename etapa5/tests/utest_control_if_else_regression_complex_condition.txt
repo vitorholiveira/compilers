@@ -1,0 +1,31 @@
+// Teste de Regressão: IF-ELSE com condições complexas que geram código
+// Teste para garantir que IF-ELSE funciona com condições complexas
+// Deve gerar código completo mesmo com expressões aninhadas
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 15
+    // IF-ELSE com expressão aritmética complexa na condição
+    se (x + y * 2 > z) [
+        x := 100
+    ] senao [
+        x := 200
+    ]
+    // IF-ELSE com múltiplas operações na condição
+    se ((x + y) * 2 < z * 3) [
+        x := 300
+    ] senao [
+        x := 400
+    ]
+    // IF-ELSE com operadores lógicos na condição
+    se (x > 0 & y > 0 & z > 0) [
+        x := 500
+    ] senao [
+        x := 600
+    ]
+];
+

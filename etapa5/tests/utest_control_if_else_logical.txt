@@ -1,0 +1,25 @@
+// Teste: IF-ELSE com operadores lógicos na condição
+// Teste para verificar que IF-ELSE funciona com operadores lógicos
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x > 0 & y > 0) [
+        x := 100
+    ] senao [
+        x := 200
+    ]
+    se (x < 10 | y > 20) [
+        x := 300
+    ] senao [
+        x := 400
+    ]
+    se (x > 0 & y < 20) [
+        x := 500
+    ] senao [
+        x := 600
+    ]
+];
+

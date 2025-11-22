@@ -1,0 +1,16 @@
+// Teste de Regressão: IF com bloco then vazio
+// Teste para garantir que IF funciona corretamente mesmo com bloco then vazio
+// Deve gerar nop com rótulo L_then quando o bloco está vazio
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    // IF com bloco then vazio (não deve crashar)
+    se (x < 10) [
+    ]
+    // IF normal após bloco vazio
+    se (x > 0) [
+        x := 10
+    ]
+];
+
