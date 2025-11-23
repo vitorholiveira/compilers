@@ -182,10 +182,10 @@ cabeca_funcao: TK_ID TK_SETA opcao_tipo {
 
 corpo_funcao: '[' sequencia_comandos_simples ']' { 
     $$ = $2;
-    // Resetar contadores antes de gerar código para esta função
-    iloc_reset_counters();
-    // Gerar código ILOC para o corpo da função usando generate_block_code
-    // Isso garante que todos os comandos sejam processados corretamente
+    // Gerar código ILOC para o corpo da função usando generate_block_code.
+    // Os contadores de registrador/rótulo são agora globais ao programa
+    // (resetados apenas uma vez no início da execução em main.c),
+    // o que mantém a numeração contínua entre múltiplas funções.
     if ($$ != NULL) {
         iloc_code_t* corpo_code = generate_block_code($$, pilha);
         if (corpo_code) {
@@ -254,8 +254,8 @@ sequencia_comandos_simples: comandos_simples {
         asd_add_child($$, $1);
         /* Garantir que não há código ILOC pré-gerado neste nó/comandos */
         if ($1->iloc_code) {
-            iloc_code_free($1->iloc_code);
-            $1->iloc_code = NULL;
+                iloc_code_free($1->iloc_code);
+                $1->iloc_code = NULL;
         }
     }
 };
@@ -290,11 +290,11 @@ sequencia_comandos_simples: sequencia_comandos_simples comandos_simples {
         $$->iloc_code = NULL;
     }
     if ($$ != NULL) {
-        for (int i = 0; i < $$->number_of_children; i++) {
-            asd_tree_t* cmd = $$->children[i];
+            for (int i = 0; i < $$->number_of_children; i++) {
+                asd_tree_t* cmd = $$->children[i];
             if (cmd && cmd->iloc_code) {
-                iloc_code_free(cmd->iloc_code);
-                cmd->iloc_code = NULL;
+                    iloc_code_free(cmd->iloc_code);
+                    cmd->iloc_code = NULL;
             }
         }
     }
@@ -450,12 +450,8 @@ expr_or: expr_or '|' expr_and {
     $$ = asd_new("|", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. O código para esta expressão
+       será gerado posteriormente por generate_code / generate_block_code. */
 };
 expr_or: expr_and { $$ = $1; };
 
@@ -467,12 +463,7 @@ expr_and: expr_and '&' expr_eq {
     $$ = asd_new("&", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_and: expr_eq { $$ = $1; };
 
@@ -484,24 +475,14 @@ expr_eq: expr_eq TK_OC_EQ expr_rel {
     $$ = asd_new("==", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 }
 expr_eq: expr_eq TK_OC_NE expr_rel { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "!=", $1, $3); 
     $$ = asd_new("!=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_eq: expr_rel { $$ = $1; };
 
@@ -513,48 +494,28 @@ expr_rel: expr_rel '<' expr_add {
     $$ = asd_new("<", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_rel: expr_rel '>' expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, ">", $1, $3);
     $$ = asd_new(">", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_rel: expr_rel TK_OC_LE expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "<=", $1, $3);
     $$ = asd_new("<=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_rel: expr_rel TK_OC_GE expr_add { 
     data_type_t data_type = deduce_binary_expr_type(pilha, ">=", $1, $3);
     $$ = asd_new(">=", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_rel: expr_add { $$ = $1; };
 
@@ -566,24 +527,14 @@ expr_add: expr_add '+' expr_mul {
     $$ = asd_new("+", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_add: expr_add '-' expr_mul { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "-", $1, $3);
     $$ = asd_new("-", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_add: expr_mul { $$ = $1; };
 
@@ -595,24 +546,14 @@ expr_mul: expr_mul '*' expr_unario {
     $$ = asd_new("*", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_mul: expr_mul '/' expr_unario { 
     data_type_t data_type = deduce_binary_expr_type(pilha, "/", $1, $3);
     $$ = asd_new("/", NULL, data_type);
     if($1 != NULL) asd_add_child($$, $1);
     if($3 != NULL) asd_add_child($$, $3);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 };
 expr_mul: expr_mul '%' expr_unario {
     data_type_t data_type = deduce_binary_expr_type(pilha, "%", $1, $3);
@@ -628,32 +569,17 @@ Prefix operators
 expr_unario: '+' expr_unario { 
     $$ = asd_new("+", NULL, $2->data_type);
     asd_add_child($$, $2);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 }
 expr_unario: '-' expr_unario { 
     $$ = asd_new("-", NULL, $2->data_type);
     asd_add_child($$, $2);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 }
 expr_unario: '!' expr_unario { 
     $$ = asd_new("!", NULL, $2->data_type);
     asd_add_child($$, $2);
-    // Gerar código ILOC
-    codegen_result_t* result = generate_code($$, pilha);
-    if (result) {
-        $$->iloc_code = result->code;
-        free(result);
-    }
+    /* Não gerar código ILOC aqui. */
 }
 expr_unario: expr_prim { $$ = $1; };
 

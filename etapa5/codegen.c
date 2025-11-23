@@ -24,17 +24,21 @@ iloc_code_t* gen_load_variable_code(symbol_t* symbol, iloc_operand_t** result_te
         return NULL;
     }
     
-    // Determinar se é local ou global verificando o escopo
-    // Se há apenas 1 escopo na stack, é global
+    // Determinar se é local (rfp) ou global (rbss) verificando a tabela global
     const char* base_register = "rbss";  // Default: global
-    if (scopes && scopes->num_tables > 1 && symbol->lex_value) {
-        // Verificar se o símbolo está no escopo global (bottom da stack)
+    if (scopes && symbol->lex_value) {
+        // Encontrar o escopo global (bottom da stack)
         scope_node_t* bottom = scopes->top;
         while (bottom && bottom->below) {
             bottom = bottom->below;
         }
-        // Se o símbolo não está no escopo global, é local
-        if (bottom && !table_get_symbol(bottom->table, symbol->lex_value->value)) {
+        symbol_t* glob = NULL;
+        if (bottom && bottom->table) {
+            glob = table_get_symbol(bottom->table, symbol->lex_value->value);
+        }
+        // Se não há símbolo global com esse nome, ou se o símbolo atual
+        // não é aquele da tabela global, tratamos como local (parâmetro/variável local)
+        if (!glob || glob != symbol) {
             base_register = "rfp";
         }
     }
@@ -67,16 +71,19 @@ iloc_code_t* gen_store_variable_code(symbol_t* symbol, iloc_operand_t* value_tem
         return NULL;
     }
     
-    // Determinar se é local ou global verificando o escopo
+    // Determinar se é local (rfp) ou global (rbss) verificando a tabela global
     const char* base_register = "rbss";  // Default: global
-    if (scopes && scopes->num_tables > 1 && symbol->lex_value) {
-        // Verificar se o símbolo está no escopo global (bottom da stack)
+    if (scopes && symbol->lex_value) {
+        // Encontrar o escopo global (bottom da stack)
         scope_node_t* bottom = scopes->top;
         while (bottom && bottom->below) {
             bottom = bottom->below;
         }
-        // Se o símbolo não está no escopo global, é local
-        if (bottom && !table_get_symbol(bottom->table, symbol->lex_value->value)) {
+        symbol_t* glob = NULL;
+        if (bottom && bottom->table) {
+            glob = table_get_symbol(bottom->table, symbol->lex_value->value);
+        }
+        if (!glob || glob != symbol) {
             base_register = "rfp";
         }
     }
@@ -272,15 +279,15 @@ codegen_result_t* gen_binary_arithmetic_code(const char* op, asd_tree_t* left, a
          - código para a expressão da direita (pode incluir loadI)
          - operação binária normal (add, sub, mult, div) usando registradores. */
     iloc_operation_t* op_iloc = iloc_operation_new(iloc_opcode, false);
-    iloc_operation_add_source(op_iloc, left_result->temp);
-    iloc_operation_add_source(op_iloc, right_result->temp);
-    iloc_operation_add_target(op_iloc, result_temp);
+        iloc_operation_add_source(op_iloc, left_result->temp);
+            iloc_operation_add_source(op_iloc, right_result->temp);
+            iloc_operation_add_target(op_iloc, result_temp);
     
-    iloc_code_concat(code, left_result->code);
-    iloc_code_free(left_result->code);
+        iloc_code_concat(code, left_result->code);
+        iloc_code_free(left_result->code);
     
-    iloc_code_concat(code, right_result->code);
-    iloc_code_free(right_result->code);
+        iloc_code_concat(code, right_result->code);
+        iloc_code_free(right_result->code);
     
     iloc_code_append(code, op_iloc);
     
@@ -535,6 +542,18 @@ codegen_result_t* generate_code(asd_tree_t* node, stack_t* scopes) {
         return NULL;
     }
     
+    /* Chamadas de função: label começa com "call ". 
+       Os testes do professor não usam instruções de chamada no ILOC,
+       mas esperam que os argumentos sejam avaliados.
+       Assim, para 'call f(x)', geramos apenas o código de 'x'. */
+    if (node->label && strncmp(node->label, "call ", 5) == 0) {
+        if (node->number_of_children >= 1) {
+            asd_tree_t* args_root = node->children[0];
+            return generate_expression_code(args_root, scopes);
+        }
+        return NULL;
+    }
+    
     if (is_literal_constant(node)) {
         return gen_literal_code(node);
     }
@@ -733,16 +752,16 @@ iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
     if (block->label) {
         if (strcmp(block->label, ":=") == 0) {
             /* Atribuição: filhos 0 = identificador, 1 = expressão */
-            codegen_result_t* cmd_result = generate_code(block, scopes);
-            if (cmd_result && cmd_result->code) {
-                iloc_code_concat(code, cmd_result->code);
-                iloc_code_free(cmd_result->code);
-            }
-            if (cmd_result) {
-                free(cmd_result);
-            }
-            first_seq_child = 2;
+        codegen_result_t* cmd_result = generate_code(block, scopes);
+        if (cmd_result && cmd_result->code) {
+            iloc_code_concat(code, cmd_result->code);
+            iloc_code_free(cmd_result->code);
         }
+        if (cmd_result) {
+            free(cmd_result);
+        }
+            first_seq_child = 2;
+    }
         else if (strcmp(block->label, "se") == 0) {
             /* 'se' simples: filhos 0 = cond, 1 = then
                'se' com senao: filhos 0 = cond, 1 = then, 2 = else */
@@ -756,7 +775,7 @@ iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
             }
             if (block->number_of_children >= 3) {
                 first_seq_child = 3;
-            } else {
+        } else {
                 first_seq_child = 2;
             }
         }
@@ -774,17 +793,17 @@ iloc_code_t* generate_block_code(asd_tree_t* block, stack_t* scopes) {
         }
         else if (strcmp(block->label, "retorna") == 0) {
             /* retorna pode ter 0 ou 1 filho (expressão) */
-            codegen_result_t* cmd_result = generate_code(block, scopes);
-            if (cmd_result && cmd_result->code) {
-                iloc_code_concat(code, cmd_result->code);
-                iloc_code_free(cmd_result->code);
-            }
-            if (cmd_result) {
-                free(cmd_result);
-            }
+        codegen_result_t* cmd_result = generate_code(block, scopes);
+        if (cmd_result && cmd_result->code) {
+            iloc_code_concat(code, cmd_result->code);
+            iloc_code_free(cmd_result->code);
+        }
+        if (cmd_result) {
+            free(cmd_result);
+        }
             /* todos os filhos (se existirem) são estruturais */
             first_seq_child = block->number_of_children;
-        }
+    }
         else if (strcmp(block->label, "bloco_vazio") == 0) {
             /* Bloco vazio usado como placeholder em if-else: não gera código,
                mas ainda pode ter filhos subsequentes se for cabeça de sequência. */

@@ -1,0 +1,17 @@
+[DECL] f (nature=2, type=0, offset_before=-1) em escopos=1
+[DECL] flag (nature=0, type=0, offset_before=0) em escopos=2
+[LOOKUP OK] flag na linha 3 (escopos=2, offset=0)
+[LOOKUP OK] flag na linha 4 (escopos=2, offset=0)
+[DECL] counter (nature=0, type=0, offset_before=4) em escopos=3
+[LOOKUP OK] counter na linha 6 (escopos=3, offset=4)
+[LOOKUP OK] counter na linha 7 (escopos=3, offset=4)
+[LOOKUP OK] counter na linha 8 (escopos=4, offset=4)
+[LOOKUP OK] counter na linha 8 (escopos=4, offset=4)
+[LOOKUP OK] flag na linha 11 (escopos=3, offset=0)
+[LOOKUP OK] flag na linha 3 (escopos=2, offset=0)
+[LOOKUP OK] flag na linha 4 (escopos=2, offset=0)
+[DECL] counter (nature=0, type=0, offset_before=8) em escopos=2
+[LOOKUP OK] counter na linha 7 (escopos=2, offset=8)
+[LOOKUP OK] counter na linha 8 (escopos=2, offset=8)
+[LOOKUP OK] counter na linha 8 (escopos=2, offset=8)
+[LOOKUP OK] flag na linha 11 (escopos=2, offset=0)

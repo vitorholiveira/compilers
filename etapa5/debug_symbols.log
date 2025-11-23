@@ -1,0 +1,4303 @@
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[DECL] counter (nature=0, type=0, offset=4)
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP FAIL] counter na linha 6
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[DECL] counter (nature=0, type=0, offset=4)
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[DECL] counter (nature=0, type=0, offset=4)
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 3
+[LOOKUP OK] b na linha 3
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 6
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 6
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] flag na linha 5
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 8
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] flag na linha 5
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 8
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 9
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] snapshot (nature=0, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] snapshot na linha 6
+[LOOKUP OK] glob na linha 7
+[LOOKUP OK] glob na linha 8
+[LOOKUP OK] snapshot na linha 8
+[LOOKUP OK] snapshot na linha 9
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 12
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] snapshot na linha 6
+[LOOKUP OK] glob na linha 7
+[LOOKUP OK] glob na linha 8
+[LOOKUP OK] snapshot na linha 8
+[LOOKUP OK] snapshot na linha 9
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] inner na linha 5
+[LOOKUP OK] outer na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] inner na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] inner na linha 5
+[LOOKUP OK] outer na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] inner na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 10
+[DECL] status (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] limit (nature=0, type=0, offset=0)
+[DECL] flips (nature=0, type=0, offset=4)
+[LOOKUP OK] status na linha 6
+[LOOKUP OK] limit na linha 7
+[LOOKUP OK] flips na linha 8
+[LOOKUP OK] limit na linha 9
+[LOOKUP OK] status na linha 10
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] flips na linha 18
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] flips na linha 19
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] status na linha 6
+[LOOKUP OK] limit na linha 7
+[LOOKUP OK] flips na linha 8
+[LOOKUP OK] limit na linha 9
+[LOOKUP OK] status na linha 10
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] flips na linha 18
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] flips na linha 19
+[LOOKUP OK] status na linha 19
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 2
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] f na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 2
+[LOOKUP OK] f na linha 2
+[LOOKUP OK] a na linha 2
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 3
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 3
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 5
+[DECL] g (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 10
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[DECL] counter (nature=0, type=0, offset=4)
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] global na linha 3
+[LOOKUP OK] global na linha 4
+[LOOKUP OK] global na linha 3
+[LOOKUP OK] global na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 4
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 4
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 9
+[DECL] aux (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] cond (nature=0, type=0, offset=0)
+[LOOKUP OK] cond na linha 6
+[LOOKUP OK] cond na linha 7
+[LOOKUP OK] aux na linha 8
+[LOOKUP OK] cond na linha 10
+[LOOKUP OK] cond na linha 6
+[LOOKUP OK] cond na linha 7
+[LOOKUP OK] cond na linha 10
+[DECL] total (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] total na linha 3
+[DECL] i (nature=0, type=0, offset=0)
+[LOOKUP OK] total na linha 5
+[LOOKUP OK] i na linha 5
+[LOOKUP OK] i na linha 6
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] total na linha 3
+[LOOKUP OK] total na linha 5
+[LOOKUP OK] i na linha 5
+[LOOKUP OK] i na linha 6
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] i na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] n (nature=0, type=0, offset=0)
+[LOOKUP OK] n na linha 3
+[LOOKUP OK] n na linha 4
+[LOOKUP OK] n na linha 5
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 8
+[LOOKUP OK] n na linha 3
+[LOOKUP OK] n na linha 4
+[LOOKUP OK] n na linha 5
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 8
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] init (nature=2, type=0, offset=0)
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] init na linha 6
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 7
+[DECL] ping (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] count (nature=0, type=0, offset=0)
+[LOOKUP OK] count na linha 6
+[LOOKUP OK] count na linha 7
+[LOOKUP OK] ping na linha 8
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 6
+[LOOKUP OK] count na linha 7
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] v (nature=0, type=0, offset=0)
+[LOOKUP OK] v na linha 3
+[LOOKUP OK] v na linha 4
+[LOOKUP OK] v na linha 5
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 8
+[LOOKUP OK] v na linha 11
+[LOOKUP OK] v na linha 3
+[LOOKUP OK] v na linha 4
+[LOOKUP OK] v na linha 5
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 8
+[LOOKUP OK] v na linha 11
+[DECL] producer (nature=2, type=0, offset=0)
+[DECL] consumer (nature=2, type=0, offset=0)
+[LOOKUP OK] producer na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] consumer na linha 8
+[DECL] counter (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 11
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 11
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] a na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] a na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP FAIL] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP FAIL] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 6
+[LOOKUP OK] b na linha 6
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 11
+[LOOKUP OK] b na linha 11
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 3
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 4
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] g na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] g na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] f na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] f na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=0)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=1, offset=0)
+[DECL] y (nature=0, type=1, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] a na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] a na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[LOOKUP OK] b na linha 9
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] g (nature=2, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] g na linha 6
+[LOOKUP OK] f na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing75 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing80 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing85 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing90 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing95 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 3
+[LOOKUP OK] b na linha 3
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 6
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 6
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 5
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] flag na linha 5
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 8
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] flag na linha 5
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] flag na linha 8
+[LOOKUP OK] flag na linha 9
+[LOOKUP OK] flag na linha 9
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] snapshot (nature=0, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] snapshot na linha 6
+[LOOKUP OK] glob na linha 7
+[LOOKUP OK] glob na linha 8
+[LOOKUP OK] snapshot na linha 8
+[LOOKUP OK] snapshot na linha 9
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 12
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] snapshot na linha 6
+[LOOKUP OK] glob na linha 7
+[LOOKUP OK] glob na linha 8
+[LOOKUP OK] snapshot na linha 8
+[LOOKUP OK] snapshot na linha 9
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 10
+[LOOKUP OK] glob na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] inner na linha 5
+[LOOKUP OK] outer na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] inner na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] inner na linha 5
+[LOOKUP OK] outer na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] inner na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 10
+[LOOKUP OK] outer na linha 10
+[DECL] status (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] limit (nature=0, type=0, offset=0)
+[DECL] flips (nature=0, type=0, offset=4)
+[LOOKUP OK] status na linha 6
+[LOOKUP OK] limit na linha 7
+[LOOKUP OK] flips na linha 8
+[LOOKUP OK] limit na linha 9
+[LOOKUP OK] status na linha 10
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] flips na linha 18
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] flips na linha 19
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] status na linha 6
+[LOOKUP OK] limit na linha 7
+[LOOKUP OK] flips na linha 8
+[LOOKUP OK] limit na linha 9
+[LOOKUP OK] status na linha 10
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 11
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] status na linha 13
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] flips na linha 15
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] limit na linha 16
+[LOOKUP OK] flips na linha 18
+[LOOKUP OK] status na linha 19
+[LOOKUP OK] flips na linha 19
+[LOOKUP OK] status na linha 19
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 2
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP OK] f na linha 4
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 2
+[LOOKUP OK] f na linha 2
+[LOOKUP OK] a na linha 2
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 3
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 3
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 5
+[DECL] g (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 10
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 6
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 8
+[LOOKUP OK] c na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[DECL] counter (nature=0, type=0, offset=4)
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[LOOKUP OK] flag na linha 3
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] flag na linha 11
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] global na linha 3
+[LOOKUP OK] global na linha 4
+[LOOKUP OK] global na linha 3
+[LOOKUP OK] global na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 4
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 4
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 9
+[LOOKUP OK] x na linha 9
+[DECL] aux (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] cond (nature=0, type=0, offset=0)
+[LOOKUP OK] cond na linha 6
+[LOOKUP OK] cond na linha 7
+[LOOKUP OK] aux na linha 8
+[LOOKUP OK] cond na linha 10
+[LOOKUP OK] cond na linha 6
+[LOOKUP OK] cond na linha 7
+[LOOKUP OK] cond na linha 10
+[DECL] total (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] total na linha 3
+[DECL] i (nature=0, type=0, offset=0)
+[LOOKUP OK] total na linha 5
+[LOOKUP OK] i na linha 5
+[LOOKUP OK] i na linha 6
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] total na linha 3
+[LOOKUP OK] total na linha 5
+[LOOKUP OK] i na linha 5
+[LOOKUP OK] i na linha 6
+[LOOKUP OK] i na linha 7
+[LOOKUP OK] i na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] n (nature=0, type=0, offset=0)
+[LOOKUP OK] n na linha 3
+[LOOKUP OK] n na linha 4
+[LOOKUP OK] n na linha 5
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 8
+[LOOKUP OK] n na linha 3
+[LOOKUP OK] n na linha 4
+[LOOKUP OK] n na linha 5
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 6
+[LOOKUP OK] n na linha 8
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] init (nature=2, type=0, offset=0)
+[LOOKUP OK] x na linha 3
+[LOOKUP OK] x na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] init na linha 6
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 7
+[LOOKUP OK] x na linha 8
+[LOOKUP OK] x na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 3
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 7
+[LOOKUP OK] a na linha 7
+[DECL] ping (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] count (nature=0, type=0, offset=0)
+[LOOKUP OK] count na linha 6
+[LOOKUP OK] count na linha 7
+[LOOKUP OK] ping na linha 8
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 6
+[LOOKUP OK] count na linha 7
+[LOOKUP OK] count na linha 9
+[LOOKUP OK] count na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] v (nature=0, type=0, offset=0)
+[LOOKUP OK] v na linha 3
+[LOOKUP OK] v na linha 4
+[LOOKUP OK] v na linha 5
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 8
+[LOOKUP OK] v na linha 11
+[LOOKUP OK] v na linha 3
+[LOOKUP OK] v na linha 4
+[LOOKUP OK] v na linha 5
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 6
+[LOOKUP OK] v na linha 8
+[LOOKUP OK] v na linha 11
+[DECL] producer (nature=2, type=0, offset=0)
+[DECL] consumer (nature=2, type=0, offset=0)
+[LOOKUP OK] producer na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] consumer na linha 8
+[DECL] counter (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 11
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 6
+[LOOKUP OK] counter na linha 8
+[LOOKUP OK] counter na linha 11
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] first (nature=0, type=0, offset=0)
+[DECL] second (nature=0, type=0, offset=4)
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[LOOKUP OK] first na linha 4
+[LOOKUP OK] second na linha 5
+[LOOKUP OK] first na linha 6
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] first na linha 7
+[LOOKUP OK] second na linha 9
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 10
+[LOOKUP OK] second na linha 12
+[DECL] store (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] loops (nature=0, type=0, offset=0)
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[LOOKUP OK] store na linha 5
+[LOOKUP OK] loops na linha 6
+[LOOKUP OK] loops na linha 7
+[LOOKUP OK] store na linha 8
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 9
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] store na linha 11
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] loops na linha 13
+[LOOKUP OK] store na linha 15
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] counter (nature=0, type=0, offset=0)
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[LOOKUP OK] counter na linha 3
+[LOOKUP OK] counter na linha 4
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 5
+[LOOKUP OK] counter na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] flag (nature=0, type=0, offset=0)
+[DECL] result (nature=0, type=0, offset=4)
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[LOOKUP OK] flag na linha 4
+[LOOKUP OK] result na linha 5
+[LOOKUP OK] flag na linha 6
+[LOOKUP OK] flag na linha 7
+[LOOKUP OK] result na linha 7
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 9
+[LOOKUP OK] result na linha 11
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] result na linha 12
+[LOOKUP OK] flag na linha 14
+[DECL] global (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] local (nature=0, type=0, offset=0)
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[LOOKUP OK] global na linha 5
+[LOOKUP OK] global na linha 6
+[LOOKUP OK] local na linha 6
+[LOOKUP OK] local na linha 7
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] local na linha 8
+[LOOKUP OK] global na linha 10
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] outer (nature=0, type=0, offset=0)
+[DECL] inner (nature=0, type=0, offset=4)
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[LOOKUP OK] outer na linha 4
+[LOOKUP OK] outer na linha 5
+[LOOKUP OK] inner na linha 6
+[LOOKUP OK] inner na linha 7
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] outer na linha 8
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] inner na linha 9
+[LOOKUP OK] outer na linha 12
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] a na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] a na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[LOOKUP FAIL] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP FAIL] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 6
+[LOOKUP OK] b na linha 6
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] c na linha 4
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 7
+[LOOKUP OK] b na linha 7
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 11
+[LOOKUP OK] b na linha 11
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 4
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] f na linha 3
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] g na linha 4
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] g na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] g na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP OK] h na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] f na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] f na linha 4
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=0)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] b (nature=0, type=0, offset=0)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] b (nature=0, type=0, offset=4)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=1, offset=0)
+[DECL] y (nature=0, type=1, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[LOOKUP OK] x na linha 5
+[LOOKUP OK] h na linha 5
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] h (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] x (nature=0, type=0, offset=0)
+[DECL] y (nature=0, type=0, offset=4)
+[LOOKUP OK] x na linha 6
+[LOOKUP OK] y na linha 6
+[LOOKUP OK] h na linha 6
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[LOOKUP OK] a na linha 4
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] a na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] b na linha 5
+[LOOKUP OK] a na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] a (nature=0, type=0, offset=0)
+[DECL] b (nature=0, type=1, offset=4)
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] a na linha 5
+[LOOKUP OK] b na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[LOOKUP OK] b na linha 9
+[LOOKUP OK] b na linha 9
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 4
+[DECL] a (nature=0, type=0, offset=4)
+[LOOKUP OK] a na linha 6
+[DECL] b (nature=0, type=1, offset=8)
+[LOOKUP OK] b na linha 9
+[DECL] g (nature=2, type=1, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] c (nature=0, type=0, offset=0)
+[LOOKUP OK] c na linha 5
+[LOOKUP OK] g na linha 6
+[LOOKUP OK] f na linha 8
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing75 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing80 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing85 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing90 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
+[DECL] f (nature=2, type=0, offset=0)
+[LOOKUP FAIL] missing95 na linha 3
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] shadow (nature=0, type=0, offset=0)
+[DECL] f (nature=2, type=0, offset=0)
+[DECL] number (nature=0, type=0, offset=0)
+[LOOKUP OK] number na linha 4
+[DECL] f (nature=2, type=1, offset=0)
+[DECL] base (nature=0, type=1, offset=0)
+[DECL] glob (nature=0, type=0, offset=0)
+[DECL] g (nature=2, type=0, offset=0)
+[LOOKUP OK] glob na linha 5
+[LOOKUP OK] glob na linha 5
