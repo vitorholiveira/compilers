@@ -195,7 +195,13 @@ codegen_result_t* gen_identifier_code(asd_tree_t* node, stack_t* scopes) {
         return NULL;
     }
     
-    symbol_t* symbol = stack_get_symbol(scopes, node->lex_value->value, node->lex_value->line);
+    /* Sempre que possível, usar o símbolo já associado ao nó da AST
+       durante a análise semântica. Isso garante que usamos o símbolo
+       correto mesmo após o fechamento de escopos de bloco. */
+    symbol_t* symbol = node->symbol;
+    if (!symbol) {
+        symbol = stack_get_symbol(scopes, node->lex_value->value, node->lex_value->line);
+    }
     if (!symbol) {
         return NULL;
     }
@@ -681,7 +687,12 @@ iloc_code_t* gen_assignment_code(asd_tree_t* identifier, asd_tree_t* expression,
         return NULL;
     }
     
-    symbol_t* symbol = stack_get_symbol(scopes, identifier->lex_value->value, identifier->lex_value->line);
+    /* Preferir o símbolo já associado ao nó de identificador na AST,
+       caindo para uma busca na pilha apenas se ele não estiver definido. */
+    symbol_t* symbol = identifier->symbol;
+    if (!symbol) {
+        symbol = stack_get_symbol(scopes, identifier->lex_value->value, identifier->lex_value->line);
+    }
     if (!symbol) {
         codegen_result_free(expr_result);
         return NULL;

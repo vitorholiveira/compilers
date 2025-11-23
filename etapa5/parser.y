@@ -321,7 +321,13 @@ ASSIGNMENT OPERATIONS
 comando_atribuicao: TK_ID TK_ATRIB expressao {
     data_type_t data_type = validate_assignment_types(pilha, $1, $3->data_type);
     $$ = asd_new(":=", NULL, data_type); 
-    asd_add_child($$, asd_new($1->value, $1, data_type)); 
+    /* Criar nó de identificador já associado ao símbolo correto.
+       Isso evita depender da pilha de escopos durante a geração
+       de código (quando escopos de bloco já foram fechados). */
+    symbol_t* sym = stack_get_symbol(pilha, $1->value, $1->line);
+    asd_tree_t* id_node = asd_new($1->value, $1, data_type);
+    id_node->symbol = sym;
+    asd_add_child($$, id_node); 
     asd_add_child($$, $3);
     lex_free($1);
     // Não gerar código aqui - será gerado por generate_block_code
@@ -588,7 +594,12 @@ Primary elements: variables, constants, invocations, parentheses
 */
 expr_prim: TK_ID { 
     data_type_t data_type = lookup_identifier_type(pilha, $1);
+    /* Associar o nó de identificador diretamente ao símbolo resolvido
+       na tabela de símbolos. Isso permite que a geração de código use
+       o símbolo correto mesmo após o fechamento de escopos de bloco. */
+    symbol_t* sym = stack_get_symbol(pilha, $1->value, $1->line);
     $$ = asd_new($1->value, $1, data_type);
+    $$->symbol = sym;
     lex_free($1);
 };
 expr_prim: literais { $$ = $1; };

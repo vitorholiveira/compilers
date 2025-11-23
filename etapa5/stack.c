@@ -11,6 +11,7 @@ stack_t* stack_new(void)
     stack_t* stack = calloc(1, sizeof(stack_t));
     if (stack) {
         stack->top = NULL;
+        stack->archived = NULL;
         stack->num_tables = 0;
     }
     return stack;
@@ -29,6 +30,18 @@ void stack_free(stack_t* stack)
         table_free(temp->table);
         free(temp);
     }
+
+    /* Liberar também escopos arquivados (por exemplo, blocos internos
+       cujo tempo de vida foi estendido até o final da compilação para
+       permitir geração de código). */
+    current = stack->archived;
+    while (current) {
+        scope_node_t* temp = current;
+        current = current->below;
+        table_free(temp->table);
+        free(temp);
+    }
+
     free(stack);
 }
 
@@ -66,9 +79,14 @@ void stack_pop(stack_t* stack)
     scope_node_t* popped = stack->top;
     stack->top = popped->below;
     stack->num_tables--;
-    
-    table_free(popped->table);
-    free(popped);
+
+    /* Não liberamos imediatamente a tabela de símbolos ao fazer pop,
+       pois informações de variáveis locais de blocos internos ainda
+       podem ser necessárias durante a geração de código. Em vez disso,
+       movemos o escopo para uma lista de arquivados, que será liberada
+       apenas em stack_free. */
+    popped->below = stack->archived;
+    stack->archived = popped;
 }
 
 void stack_declare_symbol(stack_t* stack, nature_t nature, data_type_t data_type, lex_value_t* lex_value)

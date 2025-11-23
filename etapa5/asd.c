@@ -17,6 +17,7 @@ asd_tree_t *asd_new(const char *label, lex_value_t *lex_value, data_type_t data_
   ret->number_of_children = 0;
   ret->children = NULL;
   ret->iloc_code = NULL;  // Inicializar código ILOC como NULL
+  ret->symbol = NULL;     // Nenhum símbolo associado por padrão
   if (lex_value != NULL) {
     lex_value_t *lex_copy = malloc(sizeof(lex_value_t));
     lex_copy->value = strdup(lex_value->value);

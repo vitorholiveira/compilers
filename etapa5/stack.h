@@ -12,6 +12,11 @@ typedef struct scope_node {
 
 typedef struct {
     scope_node_t* top;
+    /* Escopos que já foram "desempilhados" (blocos internos),
+       mas cujas tabelas ainda não foram liberadas. Usado para
+       postergar a liberação até stack_free, permitindo que a
+       geração de código ainda acesse informações de símbolos. */
+    scope_node_t* archived;
     int num_tables;
 } stack_t;
 

@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// Forward declaration para evitar dependência circular
+// Forward declarations para evitar dependência circular
 typedef struct iloc_code iloc_code_t;
+typedef struct symbol_node symbol_t;
 
 typedef enum { INTEIRO = 0, DECIMAL = 1 } data_type_t;
 typedef enum { IDENTIFIER = 0, LITERAL = 1, FUNCTION = 2 } nature_t;
@@ -22,6 +23,7 @@ typedef struct asd_tree {
   lex_value_t *lex_value;
   data_type_t data_type;
   iloc_code_t* iloc_code;  // Código ILOC gerado para este nó (NULL se ainda não foi gerado)
+  symbol_t* symbol;        // Símbolo associado (para identificadores), ou NULL caso não aplicável
 } asd_tree_t;
 
 typedef struct args {
