@@ -1,0 +1,6 @@
+var g := inteiro
+
+main -> inteiro := [
+    g := 3
+    retorna g := inteiro
+];

@@ -1,0 +1,11 @@
+// Teste 11: Comando de Atribuição - Usando Variável Local
+// Teste mínimo para verificar geração de código para atribuição usando variável local
+// Deve usar loadAI com rfp para carregar variável local
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 10
+    y := x
+];
+

@@ -1,0 +1,15 @@
+// Teste: Integração - Troca de Valores
+// Teste integrado que troca valores de duas variáveis usando variável temporária
+// Testa múltiplas atribuições e uso de variáveis
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var temp := inteiro
+    a := 10
+    b := 20
+    temp := a
+    a := b
+    b := temp
+];
+

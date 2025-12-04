@@ -1,0 +1,5 @@
+main -> inteiro := [
+    var x := inteiro
+    x := (1 + 2) - 5
+    retorna x := inteiro
+];

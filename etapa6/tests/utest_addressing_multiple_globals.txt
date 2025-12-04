@@ -1,0 +1,15 @@
+// Teste: Endereçamento - Múltiplas Variáveis Globais
+// Teste para verificar cálculo correto de offsets para múltiplas variáveis globais
+// Cada variável deve ter offset diferente em relação a rbss
+
+var g1 := inteiro,
+var g2 := inteiro,
+var g3 := inteiro,
+
+main -> inteiro := [
+    g1 := 100
+    g2 := 200
+    g3 := 300
+    g1 := g2 + g3
+];
+

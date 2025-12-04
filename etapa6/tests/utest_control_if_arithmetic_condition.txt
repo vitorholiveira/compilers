@@ -1,0 +1,23 @@
+// Teste: IF com expressões aritméticas na condição
+// Teste para verificar que expressões aritméticas funcionam em condições de IF
+// Deve gerar código para calcular expressão antes de comparar
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 10
+    y := 5
+    se (x + y > 10) [
+        x := 100
+    ]
+    se (x - y < 10) [
+        x := 200
+    ]
+    se (x * 2 == 20) [
+        x := 300
+    ]
+    se (x / 2 > 5) [
+        x := 400
+    ]
+];
+

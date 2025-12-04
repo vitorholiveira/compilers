@@ -1,0 +1,8 @@
+// Teste 10: Comando de Atribuição - Atribuição Simples
+// Teste mínimo para verificar geração de código para atribuição simples
+
+main -> inteiro := [
+    var x := inteiro
+    x := 42
+];
+

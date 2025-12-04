@@ -1,0 +1,25 @@
+// Teste: IF-ELSE com expressões aritméticas
+// Teste para verificar que IF-ELSE funciona com expressões aritméticas na condição
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 10
+    y := 5
+    se (x + y > 15) [
+        x := 100
+    ] senao [
+        x := 200
+    ]
+    se (x - y < 10) [
+        x := 300
+    ] senao [
+        x := 400
+    ]
+    se (x * 2 == 600) [
+        x := 500
+    ] senao [
+        x := 600
+    ]
+];
+

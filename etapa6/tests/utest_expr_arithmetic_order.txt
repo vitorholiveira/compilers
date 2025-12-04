@@ -1,0 +1,13 @@
+// Teste: Expressão - Ordem de Avaliação
+// Teste para verificar que operações são avaliadas na ordem correta
+// Mesmo com mesma precedência, deve avaliar da esquerda para direita
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 10
+    y := 5
+    x := x - y - 2
+    x := x / y * 2
+];
+

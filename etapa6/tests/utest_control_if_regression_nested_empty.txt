@@ -1,0 +1,22 @@
+// Teste de Regressão: IF aninhado com blocos vazios
+// Teste para garantir que IFs aninhados funcionam mesmo com blocos vazios
+// Deve gerar rótulos corretos para cada nível
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // IF aninhado com bloco then vazio no nível externo
+    se (x < 10) [
+        se (y > 5) [
+            x := 100
+        ]
+    ]
+    // IF aninhado com bloco then vazio no nível interno
+    se (x > 0) [
+        se (y < 20) [
+        ]
+    ]
+];
+

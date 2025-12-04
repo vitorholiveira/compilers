@@ -1,0 +1,15 @@
+// Teste: Expressão - Parênteses e Precedência
+// Teste para verificar que parênteses alteram a ordem de avaliação
+// Expressões com parênteses devem ser avaliadas primeiro
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 2 + 3 * 4
+    y := (2 + 3) * 4
+    x := 10 - 2 * 3
+    y := (10 - 2) * 3
+    x := 20 / 2 + 3
+    y := 20 / (2 + 3)
+];
+

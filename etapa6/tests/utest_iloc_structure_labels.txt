@@ -1,0 +1,15 @@
+// Teste: Estrutura ILOC - Rótulos Corretos
+// Teste para verificar que rótulos seguem a convenção L1, L2, L3, etc.
+// E que são usados corretamente em cbr e jumpI
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    se (x == 0) [
+        x := 1
+    ]
+    enquanto (x < 5) [
+        x := x + 1
+    ]
+];
+

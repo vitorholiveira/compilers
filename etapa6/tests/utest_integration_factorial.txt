@@ -1,0 +1,17 @@
+// Teste: Integração - Cálculo de Fatorial Simplificado
+// Teste integrado que simula cálculo de fatorial usando while
+// Testa múltiplas funcionalidades trabalhando juntas
+
+main -> inteiro := [
+    var n := inteiro
+    var fact := inteiro
+    var i := inteiro
+    n := 5
+    fact := 1
+    i := 1
+    enquanto (i <= n) [
+        fact := fact * i
+        i := i + 1
+    ]
+];
+

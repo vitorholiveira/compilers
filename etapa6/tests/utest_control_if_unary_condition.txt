@@ -1,0 +1,17 @@
+// Teste: IF com operadores unários na condição
+// Teste para verificar que operadores unários funcionam em condições de IF
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (-x < 0) [
+        x := 10
+    ]
+    se (+x > 0) [
+        x := 20
+    ]
+    se (!(x == 0)) [
+        x := 30
+    ]
+];
+

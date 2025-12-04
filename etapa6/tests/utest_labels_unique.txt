@@ -1,0 +1,21 @@
+// Teste: Rótulos - Verificação de Rótulos Únicos
+// Teste para verificar que múltiplos fluxos de controle geram rótulos únicos
+// Não deve haver conflito de rótulos
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    se (x < 5) [
+        x := 1
+    ]
+    se (x < 10) [
+        x := 2
+    ]
+    enquanto (x < 5) [
+        x := x + 1
+    ]
+    enquanto (x < 10) [
+        x := x + 1
+    ]
+];
+

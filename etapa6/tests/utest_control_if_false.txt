@@ -1,0 +1,15 @@
+// Teste: Fluxo de Controle - IF com Condição Falsa
+// Teste para verificar que if não executa quando condição é falsa
+// Deve gerar código que pula o bloco then
+
+main -> inteiro := [
+    var x := inteiro
+    x := 10
+    se (x < 5) [
+        x := 20
+    ]
+    se (x > 20) [
+        x := 30
+    ]
+];
+

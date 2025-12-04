@@ -1,0 +1,24 @@
+// Teste: IF-ELSE com ELSE aninhado dentro de ELSE
+// Teste para verificar que IF-ELSE aninhado dentro de ELSE funciona corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x > 10) [
+        x := 100
+    ] senao [
+        se (y > 5) [
+            x := 200
+        ] senao [
+            x := 300
+        ]
+        se (y < 15) [
+            x := 400
+        ] senao [
+            x := 500
+        ]
+    ]
+];
+

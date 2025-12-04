@@ -1,0 +1,13 @@
+// Teste: Expressão - Precedência de Operadores
+// Teste para verificar que a precedência de operadores está sendo respeitada
+// Multiplicação e divisão devem ter precedência sobre adição e subtração
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 2 + 3 * 4
+    y := 10 - 6 / 2
+    x := (2 + 3) * 4
+    y := (10 - 6) / 2
+];
+

@@ -1,0 +1,14 @@
+// Teste: Expressão - Números Grandes
+// Teste para verificar tratamento de números grandes
+// Deve gerar loadI corretamente mesmo com valores grandes
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 1000
+    y := 2000
+    x := x + y
+    x := x * 2
+    x := x / 10
+];
+

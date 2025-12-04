@@ -1,0 +1,6 @@
+var global_var := inteiro,
+
+main -> inteiro := [
+    global_var := 200
+    retorna global_var := inteiro
+];

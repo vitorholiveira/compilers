@@ -1,0 +1,6 @@
+main -> inteiro := [
+    var r := inteiro
+
+    r := (1 > 2) | (3 == 3)
+    retorna r := inteiro
+];

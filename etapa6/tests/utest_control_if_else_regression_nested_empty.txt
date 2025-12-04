@@ -1,0 +1,23 @@
+// Teste de Regressão: IF-ELSE aninhado com blocos vazios
+// Teste para garantir que IF-ELSEs aninhados funcionam mesmo com blocos vazios
+// Deve gerar jumpI e rótulos corretos para cada nível
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // IF-ELSE aninhado com blocos vazios
+    se (x < 10) [
+        se (y > 5) [
+            x := 100
+        ] senao [
+        ]
+    ] senao [
+        se (y < 5) [
+        ] senao [
+            x := 200
+        ]
+    ]
+];
+

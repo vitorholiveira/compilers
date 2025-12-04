@@ -1,0 +1,14 @@
+main -> inteiro := [
+    var i := inteiro
+    var s := inteiro
+
+    i := 1
+    s := 0
+
+    enquanto (i <= 4) [
+        s := s + i
+        i := i + 1
+    ]
+
+    retorna s := inteiro
+];

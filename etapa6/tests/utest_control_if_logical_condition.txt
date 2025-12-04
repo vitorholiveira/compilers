@@ -1,0 +1,20 @@
+// Teste: IF com operadores lógicos na condição
+// Teste para verificar que operadores lógicos funcionam em condições de IF
+// Deve gerar código para operações lógicas antes de comparar
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x > 0 & y > 0) [
+        x := 100
+    ]
+    se (x < 10 | y > 20) [
+        x := 200
+    ]
+    se (x > 0 & y < 20) [
+        x := 300
+    ]
+];
+

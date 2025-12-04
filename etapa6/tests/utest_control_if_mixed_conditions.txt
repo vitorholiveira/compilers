@@ -1,0 +1,24 @@
+// Teste: IF com condições mistas (aritméticas, lógicas, comparações)
+// Teste para verificar que condições complexas mistas funcionam corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 15
+    se (x + y > z) [
+        x := 100
+    ]
+    se (x * 2 < y + z) [
+        x := 200
+    ]
+    se (x > 0 & y > 0 & z > 0) [
+        x := 300
+    ]
+    se (x < 10 | y > 20 | z < 5) [
+        x := 400
+    ]
+];
+

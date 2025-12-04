@@ -1,0 +1,17 @@
+// Teste: Integração - Contador com Condição
+// Teste integrado que incrementa contador enquanto condição é verdadeira
+// Combina while, if e expressões aritméticas
+
+main -> inteiro := [
+    var count := inteiro
+    var limit := inteiro
+    count := 0
+    limit := 10
+    enquanto (count < limit) [
+        count := count + 1
+        se (count == 5) [
+            limit := limit + 5
+        ]
+    ]
+];
+

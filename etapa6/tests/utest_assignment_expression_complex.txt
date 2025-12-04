@@ -1,0 +1,13 @@
+// Teste: Atribuição - Atribuição com Expressão Muito Complexa
+// Teste para verificar atribuição com expressão que envolve múltiplas operações
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 2
+    y := 3
+    z := 4
+    x := (x + y) * (z - 1) + (y * z) / 2 - (x + 1)
+];
+

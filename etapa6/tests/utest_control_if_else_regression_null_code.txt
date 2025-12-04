@@ -1,0 +1,29 @@
+// Teste de Regressão: IF-ELSE com condição que pode gerar código NULL
+// Teste para garantir que verificações de NULL para cond_result->code funcionam em IF-ELSE
+// Deve funcionar mesmo quando cond_result->code é NULL ou vazio
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // IF-ELSE com comparação simples
+    se (x < y) [
+        x := 1
+    ] senao [
+        x := 2
+    ]
+    // IF-ELSE com expressão aritmética na condição
+    se (x + y > 10) [
+        x := 3
+    ] senao [
+        x := 4
+    ]
+    // IF-ELSE com comparação de variáveis
+    se (x != y) [
+        x := 5
+    ] senao [
+        x := 6
+    ]
+];
+

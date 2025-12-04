@@ -1,0 +1,29 @@
+// Teste: IF-ELSE com aninhamento profundo
+// Teste para verificar que IF-ELSE profundamente aninhados funcionam corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 15
+    se (x < 10) [
+        se (y > 5) [
+            se (z < 20) [
+                x := 100
+            ] senao [
+                x := 200
+            ]
+        ] senao [
+            x := 300
+        ]
+    ] senao [
+        se (y < 5) [
+            x := 400
+        ] senao [
+            x := 500
+        ]
+    ]
+];
+

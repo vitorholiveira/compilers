@@ -1,0 +1,30 @@
+// Teste de Regressão: IF com todos os operadores de comparação
+// Teste para garantir que todos os operadores funcionam corretamente após correções
+// Deve gerar cmp_* correto para cada operador
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    // Testar todos os operadores de comparação
+    se (x < y) [
+        x := 1
+    ]
+    se (x <= y) [
+        x := 2
+    ]
+    se (x == y) [
+        x := 3
+    ]
+    se (x >= y) [
+        x := 4
+    ]
+    se (x > y) [
+        x := 5
+    ]
+    se (x != y) [
+        x := 6
+    ]
+];
+

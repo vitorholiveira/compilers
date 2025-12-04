@@ -1,0 +1,18 @@
+// Teste: Fluxo de Controle - WHILE Aninhados
+// Teste para verificar geração de código para loops while aninhados
+// Deve gerar rótulos únicos para cada loop
+
+main -> inteiro := [
+    var i := inteiro
+    var j := inteiro
+    i := 0
+    j := 0
+    enquanto (i < 3) [
+        j := 0
+        enquanto (j < 2) [
+            j := j + 1
+        ]
+        i := i + 1
+    ]
+];
+

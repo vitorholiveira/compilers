@@ -1,0 +1,20 @@
+// Teste: Integração - Sequência de Fibonacci Simplificada
+// Teste integrado que calcula alguns termos da sequência de Fibonacci
+// Testa múltiplas variáveis, atribuições e while
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var temp := inteiro
+    var count := inteiro
+    a := 0
+    b := 1
+    count := 0
+    enquanto (count < 5) [
+        temp := a + b
+        a := b
+        b := temp
+        count := count + 1
+    ]
+];
+

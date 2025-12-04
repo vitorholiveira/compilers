@@ -1,0 +1,17 @@
+// Teste: Endereçamento - Múltiplas Variáveis Locais
+// Teste para verificar cálculo correto de offsets para múltiplas variáveis locais
+// Cada variável deve ter offset diferente em relação a rfp
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    var d := inteiro
+    a := 10
+    b := 20
+    c := 30
+    d := 40
+    a := b + c
+    d := a * 2
+];
+

@@ -1,0 +1,18 @@
+// Teste: Expressão - Todas Operações Aritméticas
+// Teste para verificar todas as operações aritméticas: +, -, *, /
+// Deve gerar add, sub, mult, div
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    var d := inteiro
+    a := 10
+    b := 3
+    c := a + b
+    c := a - b
+    c := a * b
+    c := a / b
+    d := (a + b) * (a - b) / (b + 1)
+];
+

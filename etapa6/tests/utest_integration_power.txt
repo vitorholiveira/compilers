@@ -1,0 +1,19 @@
+// Teste: Integração - Cálculo de Potência Simplificado
+// Teste integrado que calcula base^expoente usando while
+// Testa múltiplas operações e controle de fluxo
+
+main -> inteiro := [
+    var base := inteiro
+    var exp := inteiro
+    var result := inteiro
+    var i := inteiro
+    base := 2
+    exp := 3
+    result := 1
+    i := 0
+    enquanto (i < exp) [
+        result := result * base
+        i := i + 1
+    ]
+];
+

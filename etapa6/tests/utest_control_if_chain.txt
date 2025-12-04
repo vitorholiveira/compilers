@@ -1,0 +1,23 @@
+// Teste: Cadeia de IFs sequenciais com dependências
+// Teste para verificar que IFs sequenciais que modificam variáveis funcionam corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    se (x < 5) [
+        x := x + 1
+    ]
+    se (x < 5) [
+        x := x + 1
+    ]
+    se (x < 5) [
+        x := x + 1
+    ]
+    se (x < 5) [
+        x := x + 1
+    ]
+    se (x < 5) [
+        x := x + 1
+    ]
+];
+

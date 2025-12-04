@@ -1,0 +1,17 @@
+main -> inteiro := [
+    var x := inteiro
+
+    x := 0
+
+    se (1 > 2) [
+        x := 1
+    ] senao [
+        se (2 > 3) [
+            x := 2
+        ] senao [
+            x := 3
+        ]
+    ]
+
+    retorna x := inteiro
+];

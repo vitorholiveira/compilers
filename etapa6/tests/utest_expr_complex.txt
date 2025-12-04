@@ -1,0 +1,8 @@
+// Teste 9: Expressão - Expressão Complexa
+// Teste mínimo para verificar geração de código para expressão complexa com múltiplas operações
+
+main -> inteiro := [
+    var x := inteiro
+    x := (5 + 3) * 2
+];
+

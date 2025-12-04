@@ -1,0 +1,11 @@
+// Teste: Expressão - Operador Unário de Negação
+// Teste para verificar geração de código para operador unário de negação (-)
+// Deve gerar multI com -1 ou subI
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := -x
+];
+

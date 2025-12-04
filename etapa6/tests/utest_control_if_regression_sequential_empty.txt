@@ -1,0 +1,20 @@
+// Teste de Regressão: IFs sequenciais com blocos vazios
+// Teste para garantir que múltiplos IFs sequenciais funcionam mesmo com blocos vazios
+// Deve gerar código correto para cada IF independentemente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    // Sequência de IFs, alguns com blocos vazios
+    se (x < 10) [
+    ]
+    se (x > 0) [
+        x := 10
+    ]
+    se (x == 10) [
+    ]
+    se (x != 0) [
+        x := 20
+    ]
+];
+

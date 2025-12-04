@@ -1,0 +1,21 @@
+// Teste: IF com condições constantes
+// Teste para verificar que condições constantes são tratadas corretamente
+// Deve gerar código otimizado para constantes
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5
+    se (5 > 3) [
+        x := 10
+    ]
+    se (2 < 1) [
+        x := 20
+    ]
+    se (10 == 10) [
+        x := 30
+    ]
+    se (5 != 5) [
+        x := 40
+    ]
+];
+

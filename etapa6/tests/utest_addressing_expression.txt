@@ -1,0 +1,15 @@
+// Teste: Endereçamento - Expressões com Variáveis
+// Teste para verificar que variáveis são carregadas antes de serem usadas
+// em expressões complexas
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    a := 10
+    b := 20
+    c := a + b
+    c := (a + b) * c
+    a := c - a
+];
+

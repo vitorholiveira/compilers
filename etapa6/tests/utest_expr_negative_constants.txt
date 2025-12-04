@@ -1,0 +1,14 @@
+// Teste: Expressão - Constantes Negativas
+// Teste para verificar tratamento de constantes negativas
+// Deve gerar loadI com valores negativos corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := -5
+    y := -10
+    x := x + y
+    x := x - (-3)
+    x := -x
+];
+

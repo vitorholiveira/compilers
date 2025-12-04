@@ -1,0 +1,5 @@
+main -> inteiro := [
+    var a := inteiro
+    a := 6
+    retorna a := inteiro
+];

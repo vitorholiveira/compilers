@@ -1,0 +1,17 @@
+// Teste: IF com múltiplos comandos no bloco
+// Teste para verificar que múltiplos comandos são executados sequencialmente no bloco IF
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 0
+    se (x < 10) [
+        x := x + 1
+        y := y + 2
+        z := x + y
+    ]
+];
+

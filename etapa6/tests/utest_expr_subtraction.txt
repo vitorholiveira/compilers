@@ -1,0 +1,8 @@
+// Teste 4: Expressão - Subtração
+// Teste mínimo para verificar geração de código para expressão de subtração
+
+main -> inteiro := [
+    var x := inteiro
+    x := 10 - 4
+];
+

@@ -1,0 +1,8 @@
+// Teste 7: Expressão - Operação Lógica AND
+// Teste mínimo para verificar geração de código para expressão lógica AND
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5 & 3
+];
+

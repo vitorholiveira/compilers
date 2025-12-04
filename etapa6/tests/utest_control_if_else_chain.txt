@@ -1,0 +1,23 @@
+// Teste: Cadeia de IF-ELSEs sequenciais com dependências
+// Teste para verificar que IF-ELSEs sequenciais que modificam variáveis funcionam corretamente
+
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+    se (x < 2) [
+        x := x + 1
+    ] senao [
+        x := x + 2
+    ]
+    se (x < 4) [
+        x := x + 1
+    ] senao [
+        x := x + 2
+    ]
+    se (x < 6) [
+        x := x + 1
+    ] senao [
+        x := x + 2
+    ]
+];
+

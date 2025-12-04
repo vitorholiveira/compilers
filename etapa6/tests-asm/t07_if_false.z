@@ -1,0 +1,10 @@
+main -> inteiro := [
+    var x := inteiro
+    x := 0
+
+    se (2 < 1) [
+        x := 10
+    ]
+
+    retorna x := inteiro
+];

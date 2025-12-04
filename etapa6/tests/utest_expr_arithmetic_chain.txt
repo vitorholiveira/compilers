@@ -1,0 +1,10 @@
+// Teste: Expressão - Cadeia de Operações Aritméticas
+// Teste para verificar múltiplas operações aritméticas em sequência
+// Sem parênteses, deve respeitar precedência
+
+main -> inteiro := [
+    var x := inteiro
+    x := 2 + 3 * 4 - 5 / 1
+    x := x + 1 - 2 * 3
+];
+

@@ -1,0 +1,12 @@
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+
+    a := 5
+    b := 10
+    c := a + b
+    c := c + 15
+
+    retorna c := inteiro
+];

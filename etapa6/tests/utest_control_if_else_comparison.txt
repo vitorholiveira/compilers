@@ -1,0 +1,40 @@
+// Teste: IF-ELSE com diferentes operadores de comparação
+// Teste para verificar que IF-ELSE funciona com todos os operadores de comparação
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < y) [
+        x := 1
+    ] senao [
+        x := 2
+    ]
+    se (x <= y) [
+        x := 3
+    ] senao [
+        x := 4
+    ]
+    se (x == y) [
+        x := 5
+    ] senao [
+        x := 6
+    ]
+    se (x >= y) [
+        x := 7
+    ] senao [
+        x := 8
+    ]
+    se (x > y) [
+        x := 9
+    ] senao [
+        x := 10
+    ]
+    se (x != y) [
+        x := 11
+    ] senao [
+        x := 12
+    ]
+];
+

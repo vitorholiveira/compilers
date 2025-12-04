@@ -1,0 +1,8 @@
+// Teste 3: Expressão - Adição
+// Teste mínimo para verificar geração de código para expressão de adição
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5 + 3
+];
+

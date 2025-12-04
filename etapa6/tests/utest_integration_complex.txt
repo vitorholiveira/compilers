@@ -1,0 +1,27 @@
+// Teste: Integração - Programa Complexo Completo
+// Teste integrado com múltiplas funcionalidades combinadas
+// Expressões, atribuições, fluxo de controle, variáveis locais e globais
+
+var counter := inteiro,
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var result := inteiro
+    counter := 0
+    x := 10
+    y := 5
+    result := (x + y) * 2
+    se (result > 20) [
+        counter := counter + 1
+        enquanto (x > 0) [
+            x := x - 1
+            se (x == 5) [
+                y := y * 2
+            ]
+        ]
+    ] senao [
+        result := result + 10
+    ]
+];
+

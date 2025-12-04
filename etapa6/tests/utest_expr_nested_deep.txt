@@ -1,0 +1,14 @@
+// Teste: Expressão - Expressão Profundamente Aninhada
+// Teste para verificar geração de código para expressões muito aninhadas
+// Deve gerar código correto respeitando precedência de operadores
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 1
+    y := 2
+    z := 3
+    x := (x + y) * (z - 1) / (y + 1)
+];
+

@@ -1,0 +1,16 @@
+// Teste: Endereçamento - Múltiplas Operações Load/Store
+// Teste para verificar múltiplas operações de carga e armazenamento
+// Deve usar loadAI/storeAI corretamente
+
+main -> inteiro := [
+    var a := inteiro
+    var b := inteiro
+    var c := inteiro
+    a := 1
+    b := 2
+    c := a
+    a := b
+    b := c
+    c := a + b + c
+];
+

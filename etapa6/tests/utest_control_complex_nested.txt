@@ -1,0 +1,24 @@
+// Teste: Fluxo de Controle - Aninhamento Complexo
+// Teste com múltiplos níveis de aninhamento de diferentes tipos
+// IF dentro de WHILE dentro de IF, etc.
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 0
+    y := 10
+    enquanto (x < 5) [
+        se (y > 5) [
+            enquanto (y > 0) [
+                se (x < 3) [
+                    x := x + 1
+                ] senao [
+                    y := y - 2
+                ]
+            ]
+        ] senao [
+            x := x + 1
+        ]
+    ]
+];
+

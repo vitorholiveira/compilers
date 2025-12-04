@@ -1,0 +1,15 @@
+// Teste: IF com expressões complexas no bloco
+// Teste para verificar que expressões complexas funcionam dentro do bloco IF
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 5
+    y := 10
+    se (x < 10) [
+        x := x + y * 2
+        y := (x + y) / 3
+        x := x - y + 5
+    ]
+];
+

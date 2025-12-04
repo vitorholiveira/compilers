@@ -1,0 +1,8 @@
+// Teste 8: Expressão - Operação Lógica OR
+// Teste mínimo para verificar geração de código para expressão lógica OR
+
+main -> inteiro := [
+    var x := inteiro
+    x := 5 | 3
+];
+

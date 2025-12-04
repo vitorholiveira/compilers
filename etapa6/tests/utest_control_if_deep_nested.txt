@@ -1,0 +1,20 @@
+// Teste: IF com aninhamento profundo (3 níveis)
+// Teste para verificar que IFs profundamente aninhados funcionam corretamente
+// Deve gerar rótulos únicos para cada nível
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    var z := inteiro
+    x := 5
+    y := 10
+    z := 15
+    se (x < 10) [
+        se (y > 5) [
+            se (z < 20) [
+                x := 100
+            ]
+        ]
+    ]
+];
+

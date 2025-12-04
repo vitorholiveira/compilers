@@ -1,0 +1,11 @@
+main -> inteiro := [
+    var x := inteiro
+
+    se (3 == 3) [
+        x := 20
+    ] senao [
+        x := 5
+    ]
+
+    retorna x := inteiro
+];

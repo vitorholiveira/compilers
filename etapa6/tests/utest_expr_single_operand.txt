@@ -1,0 +1,12 @@
+// Teste: Expressão - Expressões com Operando Único
+// Teste para verificar expressões que são apenas uma variável ou constante
+// Deve gerar código mínimo necessário
+
+main -> inteiro := [
+    var x := inteiro
+    var y := inteiro
+    x := 42
+    y := x
+    x := 100
+];
+
